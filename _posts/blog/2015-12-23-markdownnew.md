@@ -1,3 +1,10 @@
+---     
+layout: post
+title: markdown语法规范实例讲解
+description: 简单小示例，1小时搞定markdown书写规范，让你爱上记笔记
+category: blog
+---  
+
 ## 配置和使用GitHub
 
 ## 1、标题设置
