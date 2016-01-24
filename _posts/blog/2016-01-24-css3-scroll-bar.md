@@ -6,13 +6,14 @@ category: blog
 ---
 
 ## 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸
-```css  
-::-webkit-scrollbar  
-{  
-    width: 0px;  
-    height: 0px;  
-    background-color: #F5F5F5;  
-}  
+```  
+  ::-webkit-scrollbar  
+  {  
+      width: 0px;  
+      height: 0px;  
+      background-color: #F5F5F5;  
+  }  
+
 ```
   
 ## 定义滚动条轨道 内阴影+圆角
