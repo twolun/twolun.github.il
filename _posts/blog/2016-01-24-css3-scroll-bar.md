@@ -6,7 +6,7 @@ category: blog
 ---
 
 ## 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸
-  ```  
+```css  
 ::-webkit-scrollbar  
 {  
     width: 0px;  
@@ -16,7 +16,7 @@ category: blog
 ```
   
 ## 定义滚动条轨道 内阴影+圆角
-```
+```html
 ::-webkit-scrollbar-track  
 {  
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  
