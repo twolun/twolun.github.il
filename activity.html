@@ -1,0 +1,38 @@
+---
+layout: profile
+title: Personal experiences
+---
+<div>
+
+<ul class="timeline">
+{% for item in site.categories.activities %}
+{% if item.icon == "check-square" %}
+    <li>
+{% else %}
+    <li class="timeline-inverted">
+{% endif %}
+	<div class="timeline-badge"><i class="fa fa-{{item.icon}}"></i></div>
+	<div class="timeline-panel">
+                <div class="timeline-heading">
+                    <h4 class="timeline-title">{{item.title}}</h4>
+
+                    <p>
+                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{item.date | date: "%Y-%m"}}
+                        </small>
+                    </p>
+                </div>
+                <div class="timeline-body">
+		{% if item.figures %}
+		<figure>
+		{% for img in item.figures %}<img src="{{img.src}}" class="img-with-shadow" style="{% if img.height %}height:{{img.height}}px {% endif %};max-width:{{100 | divided_by:forloop.length}}%;" />{% endfor %}
+		</figure><br>
+		{% endif %}
+		<article>
+		{{item.content}}
+		</article>
+                </div>
+	</div>
+    </li>
+{% endfor %}
+</ul>
+</div>

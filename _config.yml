@@ -1,19 +1,57 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-title: 双轮行博客
-email: 2237993760@qq.com
-description: > # this means to ignore newlines until "baseurl:"
-    一个人，双轮行！  
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "twolun.github.io" # the base hostname & protocol for your site
-twitter_username: twolun
-github_username:  twolun
-
-# Build settings
 markdown: kramdown
+kramdown:
+  extensions: ["fenced_code_blocks", "autolink", "tables", "strikethrough"]
+highlighter: rouge
+redcarpet:
+  extensions:
+    - fenced_code_blocks
+    - no_intra_emphasis
+    - strikethrough
+    - autolink
+    - tables
+safe: false
+paginate: 10
+paginate_path: "page:num"
+permalink: /posts/:title.html
+exclude:
+  - README.md
+
+name: 景庄
+host: wwsun.github.com
+baseurl: http://wwsun.github.io/
+desc: To be Full-Stack
+
+custom:
+    category:
+        knowledge: knowledge
+        database: database
+        technique: technique
+        others: others
+
+    categories:
+      - name:  knowledge
+        title: knowledge
+
+      - name:  database
+        title: database
+
+      - name: technique
+        title: technique
+
+      - name: others
+        title: others
+
+meta:
+    author:
+        name: Weiwei SUN
+        email: ww.sun@outlook.com
+        disqus: wwsun                               # Disqus缩略标识
+        gcse: 017273734144320215856:r-n1xry8woo     # Google自定义搜索标识ID
+        github: wwsun                               # GitHub账号
+        gravatar: 48b4b2d677d28780288ab93737230019  # Gravatar头像标识
+        image: http://7xpv9g.com1.z0.glb.clouddn.com/imgava.jpg  # 头像URL
+
+    disqus: disqus.com/embed.js                     # Disqus评论的JS地址
+    gapi: http://www.google.com/jsapi               # Google API地址
+    gravatar: http://en.gravatar.com/avatar/        # Gravatar头像服务器地址
+
