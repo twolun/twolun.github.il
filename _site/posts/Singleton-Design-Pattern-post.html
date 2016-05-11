@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Java Singleton Design Pattern</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Java Singleton Design Pattern</h1>
+                <p class="post-meta">Mar 29, 2014</p>
+            </header>
+            <article><p>Singleton pattern is one of the most commonly used patterns in Java. It is used to control the number of objects created by preventing external instantiation and modification. That is to say, at any time there can only be one instance of singleton (object) created by the JVM.</p>
+
+<!--more-->
+<p>####How to construct:
+- private constructor
+- private reference 
+- public static method is the only place that can get an object</p>
+
+<h4 id="implementation-of-singleton-pattern">Implementation of Singleton Pattern</h4>
+<p><strong>Step one</strong>, provide a default private constructor</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Singleton {
+    //set the default constructor as private
+    private Singleton(){
+    }
+}
+</code></pre>
+</div>
+
+<p><strong>Step two</strong>, create a method for getting the reference of this singleton object</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>private statci Singleton singletonObject = null;
+
+public static Singleton getSingletonInstance(){
+    if (singletonObject == null){
+        singletonObject = new Singleton();
+    }
+    return singletonObject;
+}
+</code></pre>
+</div>
+
+<p><strong>Step three</strong>, make the access method synchronized to prevent thread problem</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static synchronized Singleton getSingletonInstance(){
+    //ignore the code segment
+}
+</code></pre>
+</div>
+
+<p><strong>Step four</strong>, override the Object clone method to prevent cloning</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public Object clone() throws CloneNotSupportedException {
+	throw new CloneNotSupportedException();
+}
+</code></pre>
+</div>
+
+<p>The Singleton’s purpose is to control object creation, limiting the number of obejcts to one only. Since there is only one Singleton instance, any instance fields of a Singleton will occur only once per class, just like static fields. Singletons often control access to resources such as database connections or sockets.</p>
+
+<p>For example, if you have a license for only one connection for your database or your JDBC driver has trouble with multithreading, the Singleton makes sure that only one connection is made or that only one thread can access the connection at a time.</p>
+
+<p><strong>At last</strong>, we have a singleton class (with full source code) as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class Singleton {
+
+     private statci Singleton singletonObject = null;
+    
+    //set the default constructor as private
+    private Singleton(){
+        //init    
+    }
+
+    public static synchronized Singleton getSingletonInstance(){
+        if (singletonObject == null){
+            singletonObject = new Singleton();
+        }
+        return singletonObject;
+    }
+    
+    public Object clone() throws CloneNotSupportedException {
+	    throw new CloneNotSupportedException();
+    }
+}
+</code></pre>
+</div>
+
+<p>References:</p>
+
+<ul>
+  <li>http://www.javabeginner.com/learn-java/java-singleton-design-pattern</li>
+  <li>http://www.programcreek.com/</li>
+</ul>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/Singleton-Design-Pattern-post.html" data-title="Java Singleton Design Pattern"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

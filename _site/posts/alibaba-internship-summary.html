@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>“拥抱变化”暨阿里巴巴暑期实习小结</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>“拥抱变化”暨阿里巴巴暑期实习小结</h1>
+                <p class="post-meta">Sep 8, 2015</p>
+            </header>
+            <article><p>我想谈谈自己学生时代最后一个暑期的实习经历，对于实习，我收到了一些邀请，最终选择了去阿里。
+在本文我会谈谈这段实习经历的工作、学习、收获，最后也会谈谈我对“拥抱变化”的理解。</p>
+
+<!--more-->
+
+<h2 id="section">谈谈实习内容</h2>
+
+<p>其实很高兴能够进入阿里实习，不仅仅是感受公司的实际开发环境，更多的在于遇到了一群可爱的同事们。主管和带我
+的师傅对我都非常的好，此外，主管还根据我的兴趣给我安排了新技术研究的实习内容，与一般的业务开发不同，
+我能够更自由的去接触新技术，足够自由的在内部系统开发中使用新技术，探索新技术在业务场景下的可能性。</p>
+
+<h3 id="section-1">模块化构建</h3>
+
+<p>模块化构建是我在阿里实习期间的第一个任务。大致的需求是为了满足JavaScript前后端代码开发的一致性，使
+浏览器端代码保持和Node端代码一致的编写方式，即都遵循CommonJS风格的书写方式。该需求是国际站内部Node
+框架模块化方案的需求之一。</p>
+
+<p>通过构建，能够让代码同时运行在服务端和客户端，并且解析代码中的模块依赖关系，输出模块的依赖字典，并
+格式化模块的命名。为了配合构建器的工作，在浏览器端还需要实现一个模块Loader，使其能够运行构建后的
+模块代码。你可以理解为实现一个轻量级的<a href="http://browserify.org/">browserify.js</a>。大致的过程可以用
+下图来表示:</p>
+
+<p><img src="/img/posts/150908-module-builder.png" alt="module builder" /></p>
+
+<p>收到这个需求时，除了Loader的实现有点思路，对构建思路几乎不知道如何着手。师傅推荐我从JavaScript的
+的语法解析入手，分析源代码的语法树，从而去实现这个需求。于是花了一天的时间理解JavaScript抽象语法树
+的基本原理、方法、工具，感兴趣的可以参考我之前的一篇博文
+<a href="http://wwsun.me/posts/javascript-ast-tutorial.html">JavaScript的抽象语法树与语法解析</a>。
+大致原理就是将代码转换为一棵树，然后通过对树的遍历操作完成CRUD操作。这样，你可以完成代码结构的调整，
+模块依赖的输出，模块名称的标准化命名等。</p>
+
+<p>对于模块Loader的实现，其实也更为简单些，因为有很多可供参考的思想，例如AMD的<a href="http://requirejs.org/">RequireJS</a>
+方案，CMD的<a href="http://seajs.org/docs/">Sea.js</a>方案，还包括百度的<a href="https://github.com/ecomfe/esl">ESL</a>。
+对模块化构建感兴趣的，也可以参考我之前写的一篇博文
+<a href="http://wwsun.me/posts/creating-javascript-modules-loader.html">从零开始构建JavaScript模块化加载器</a>。
+这里我想感谢<a href="http://ife.baidu.com/">百度前端学院</a>，因为在这里我才形成了统一的前端体系知识，也是我从一名Java使用者转为Node.js
+使用者的起点，可以参考我写的一份<a href="https://github.com/wwsun/fe-knowledge-points">知识点总结</a>。</p>
+
+<p>这是我在实习期间的第一个需求，从零开始，时长大概一周。</p>
+
+<h3 id="webapp">全栈WebApp开发</h3>
+
+<p>起了一个花哨的小标题，其实很多人不屑全栈这个词（前端全栈？后端全栈？）。Node.js的出现让前端向全栈开发迈出了坚实的一步，
+但要想真正的承接后端工作，Node.js还有有很长的路要走。对我个人而言，Node.js的出现让前端出现了更多可能，例如构建测试环境、
+构建数据可视化应用、编写demo、以及开发上的协作分工，Node使这些事都走向了一个良性的方向。我想，新技术的出现，不应该是惧怕和怀疑，
+而是应该在拥抱中学习与融入。</p>
+
+<p>话题扯回来，实习期间的第二个需求是一个人完成一个内部系统的构建，大致的需求是：尝试使用React生态体系技术，
+尝试接入集团一系列服务（例如统一认证、权限审核、数据库），尝试对接一些集团中间件。对我而言，挑战是什么？
+一个人做PD、开发、测试？从未接触过React？或许都算是吧，更多的在可能在于我们部门没有React开发的先例，一切的困难
+可能都要自己去趟，感谢师傅给我这个挑战吧。</p>
+
+<p>关于React其实可以讨论内容很多，但是局限于篇幅，可以参考我最近一直在整理的React系列的分享，因为这块可以找到
+的中文资料很少，所以在CSDN一位编辑的邀请下，我也参与翻译了一些React的优秀资料，
+可以在CSDN的<a href="http://sd.csdn.net/">研发频道</a>或我的博客找到这些文章。链接如下：</p>
+
+<ul>
+  <li><a href="http://wwsun.me/posts/react-getting-started.html">谈谈React.js的核心入门知识</a></li>
+  <li><a href="http://www.csdn.net/article/2015-08-31/2825587-react-flux">详解React Flux架构的工作方式</a></li>
+  <li><a href="http://www.csdn.net/article/2015-08-26/2825539-the-react-js-way-flux-architecture-with-immutable-js">探索React：组件间通信过程解析</a></li>
+  <li><a href="http://www.toptal.com/react/navigating-the-react-ecosystem">探索React生态系统</a></li>
+</ul>
+
+<p>这个项目是我在实习期间的近两个月里一直在做的，由于主管和师傅的信任，这完全成了我自由发挥的舞台，遇到了很多
+问题，也试图用不同的方式去解决这些困难，例如Flux架构，例如组件间通信，例如同构方案……因为是篇总结，这里不再细谈。</p>
+
+<p>除了这些外部技术，另一个挑战在于与集团技术的对接，这涉及到与集团内非常多的开发者打交道，可喜的是，集团内
+丰富的技术体系你能学到很多知识，你也能轻松的与代码的作者联系到，遗憾的是，大家有时也很忙，没有太多的时间
+促足回首，团队合作，是我学到的另一课，开发者与DBA，开发者与服务提供方，开发者与PD\SCM等。</p>
+
+<h2 id="section-2">一些杂念</h2>
+
+<p>谈完了实习内容，可能遗憾的是我并不能讲述太多关于真实的业务开发中的实际过程，因为我接触的并不多。作为一家
+互联网公司，阿里内部的技术体系非常丰富，并且研发氛围也非常的活跃，除了业务开发，还有足够多的时间参与到你
+感兴趣的方向上，例如工程化产品、可视化产品。我所在的部门位于滨江园区，相比淘宝、天猫、支付宝，国际站的业务
+是阿里最早开始做的，技术上受其历史的影响，发展相对慢一些，也因此，可以借鉴集团其他BU的技术也非常多，在其他
+BU不断试错的过程中，国际站的技术体系的发展来的相对稳定。</p>
+
+<p>对于阿里，在实习期间谈不上为公司贡献了多少，更多的是自己在其中学到的成长。无论在技术上，还是在团队合作上。
+我是8月31号办理的离职，9月1日回到南京后便听说了<a href="https://campus.alibaba.com/noticeDetail.htm?code=tmsItemData3">拥抱变化</a>
+的消息，而不得不面临的也是口头offer丢失的情况。而此时，知乎也成了很多人口诛笔伐的战场。</p>
+
+<p>对于这些事，我一直不想表达自己的态度，发了两条微博，最后都觉得不妥也都删掉了。工作而已，在于的是双向选择，
+做好你该做的事，坚定自己的方向，世界很大，很多地方都是你没看过的，为什么不去看看？</p>
+
+<h3 id="section-3">感谢一些人</h3>
+
+<p>感谢致嵩、宗羽、雪卒、夜沉、天意，感谢基础产品团队，也感谢整个ICBU国际前端技术部。</p>
+
+<h3 id="section-4">最后的最后</h3>
+
+<p><del>最后的最后，因为众所周知的原因，我有求职的意向，如果你喜欢我的文章和过往经历，欢迎联系我。作为应届毕业生，
+我喜欢杭州、上海，我想在技术较为成熟的公司工作与学习。我主要使用的语言为Java, JavaScript, Node。</del></p>
+
+<p>感谢主管和HRG的信任与坚持，阿里发了（实习生转正）Offer，职位为前端工程师（Node.js方向）。</p>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/alibaba-internship-summary.html" data-title="“拥抱变化”暨阿里巴巴暑期实习小结"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基于Worklight开发混合移动应用</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>基于Worklight开发混合移动应用</h1>
+                <p class="post-meta">Dec 14, 2014</p>
+            </header>
+            <article><p>混合移动应用一般指的是基于HTML5而开发的移动应用，它的特点通过一些编译环境可以快速的生成多个平台的应用，做到“一次编写，多处运行”的特点。本文将简要概述混合移动应用开发的相关经验，并分享一些相关的资源。</p>
+
+<!--more-->
+
+<h3 id="ibm-worklight">IBM Worklight</h3>
+<p>Worklight原本是以色列的一家公司，<a href="http://www.36kr.com/p/79555.html">后被IBM收购</a>。Worklight使用的是HTML5技术开发混合、本地的移动应用。其安全性、整合数据的管理和分析能力都有很大的优势。通过为跨平台设备提供更好的客户使用体验，WorkLight 可以有效的减少企业应用的市场推广时间、成本和复杂性。</p>
+
+<p>Wokrlight的基础知识可以参考<a href="http://www.ibm.com/developerworks/cn/mobile/mo-aim1206-working-with-worklight-1/">这篇文章</a>，这篇文章详细介绍了如何配置Worklight的开发环境，及相关的基础知识。IBM为Worklight提供了非常详细的开发文档，可以帮助开发者快速的上手Wokrlight的开发，参考<a href="http://www.ibm.com/developerworks/cn/mobile/worklight/getting-started.html">这个页面</a>。</p>
+
+<h3 id="worklight-tutorial">Worklight Tutorial</h3>
+<p>我整理了Worklight开发的一些常用的资源，这涉及到客户端、服务器端、通用控件、集成新浪微博API，集成百度地图API，以及如何在Wokrlight中使用MongoDB等相关开发内容。有兴趣的读者可以使用下面的命令获取资源，或直接访问我的<a href="https://github.com/wwsun/worklight-tutorial">Github项目页面</a>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/wwsun/worklight-tutorial.git
+</code></pre>
+</div>
+
+<p>我的测试环境如下：</p>
+
+<ul>
+  <li>OS：Windows 8.1 pro en-us x64</li>
+  <li>JDK: 1.7</li>
+  <li>Eclipse EE Luna x64</li>
+  <li>MongoDB 2.6 x64</li>
+</ul>
+
+<p>在上面的Worklight Tutorial，我详细编写了每一部分的使用文档，你可以阅读相关的Markdown文件以获得详细的开发信息。但是，我还是希望你能够阅读官方的文档获取最详细的开发说明。</p>
+
+<h3 id="section">基础知识</h3>
+
+<p>Worklight开发的混合移动应用，主要使用到了两大技术用于实现跨平台应用的开发：Apache Cordova和PhoneGap。其中Apache Cordova使得应用能够通过JavaScript技术直接调用设备的本地功能，例如相机、传感器等，这很好的隔离了混合移动应用与原生应用之间开发的复杂度。</p>
+
+<p>PhoneGap是一个开源的HTML5平台，允许你使用我们之前讨论的混合型方法为多个移动操作系统创建原生应用。你可以使用HTML5技术编写应用，PhoneGap通过一个一致的、跨平台的JS API在你的代码和原生代码之间搭建桥梁。</p>
+
+<p>这两个项目都是开源的，你可以访问它们的官方网站获取更详细的信息</p>
+
+<h3 id="web">移动web应用框架</h3>
+<p>Web应用框架是一组打包的交互式元素和代码工具，可以为我们助一臂之力。</p>
+
+<ol>
+  <li>框架可以帮我们让网站或应用看上去是移动友好的。</li>
+  <li>框架可以帮助我们让网站或应用感觉是面向移动的。</li>
+  <li>框架可以帮助我们管理跨平台不一致性。</li>
+</ol>
+
+<p>本文不会介绍具体的框架使用方法，如果你感兴趣，可以访问它们的官方网站寻找相关的学习资源。
+通常你可以有如下的几种选择：</p>
+
+<ol>
+  <li>jQuery Mobile</li>
+  <li>Dojo</li>
+  <li>Sencha Touch</li>
+  <li>…</li>
+</ol>
+
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/mobile-app-worklight-post.html" data-title="基于Worklight开发混合移动应用"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

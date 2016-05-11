@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Deployd，快速提供REST服务</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Deployd，快速提供REST服务</h1>
+                <p class="post-meta">Apr 3, 2015</p>
+            </header>
+            <article><p>Deployd是一款出色的可跨平台的Web API引擎。它建立在Node.js和MongoDB的基础上，以JSON形式（类JSON）存储数据，并且支持使用JavaScript书写服务器端脚本。对于一些测试用的Web应用而言，Deployd可以非常快速的构建服务器端的REST API。</p>
+
+<!--more-->
+
+<h2 id="section">开发准备</h2>
+
+<ol>
+  <li>注意，安装前需要确保你的机器上安装了<code class="highlighter-rouge">mongod 2.0.x</code>和<code class="highlighter-rouge">node 0.8.x</code>及以上版本，并且在PATH中配置了mongodb和node的环境变量</li>
+  <li>去<a href="http://deployd.com/">官网</a>下载对应版本： http://deployd.com/</li>
+  <li>详情参考<a href="http://docs.deployd.com/docs/getting-started/installing-deployd.html">安装文档</a></li>
+  <li>测试方法：安装后在命令行中输入<code class="highlighter-rouge">dpd -V</code>，如果出现版本号即安装正确</li>
+</ol>
+
+<p>除此之外，你要也可以将deployd作为一个node模块进行安装，可以使用<code class="highlighter-rouge">npm</code>直接安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm isntall -g deployd
+</code></pre>
+</div>
+
+<h2 id="first-dployd-api">First Dployd API</h2>
+
+<h3 id="section-1">创建工程</h3>
+<p>现在，你可以用如下命令创建一个新的dpd工程，首先定位到你的项目目录下(你可以在根目录下新建一个<code class="highlighter-rouge">deployd</code>目录，用来统一放置dpd工程)：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dpd create sportstore
+cd sportstore
+dpd
+</code></pre>
+</div>
+
+<p>默认情况下，dpd会在端口2403启动一个Node应用用于监听请求。你也可以使用<code class="highlighter-rouge">-p</code>参数手动指定端口号：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dpd -p 5500
+</code></pre>
+</div>
+
+<p>启动完成后，管理dpd应用的最直接方式是使用dpd提供的管理面板，浏览器中访问：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://localhost:5500/dashboard
+</code></pre>
+</div>
+
+<p><img src="/img/posts/150403-dpd-dashboard.PNG" alt="deployd" /></p>
+
+<h3 id="section-2">创建数据结构</h3>
+
+<p>点击资源面板中的绿色加号按钮，选择<code class="highlighter-rouge">Collection</code>选项，设置新的集合名为<code class="highlighter-rouge">/products</code>，这里我们创建的示例的数据结构如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>name, string, required
+description, string, required
+category, string, required
+price, number, required
+</code></pre>
+</div>
+
+<h3 id="section-3">添加数据</h3>
+
+<p>在定义好对象的数据结构后需要做的就是为该集合添加数据。点击左侧菜单的<code class="highlighter-rouge">Data</code>链接，录入相应的测试数据即可，例如符合上述结构的一条数据如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Kayak, A bot for one person, Watersports, 275
+</code></pre>
+</div>
+
+<h3 id="section-4">测试数据服务</h3>
+
+<p>最简单的方法是直接在浏览器输入<code class="highlighter-rouge">http://localhost:5500/products</code>来测试获得到的数据。一个更合适的方法是使用<a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en">Postman</a>来测试，Postman是一个强大的REST API测试工具，它可以安装为Chrome的一个扩展应用。</p>
+
+<p>测试结果如下图所示：
+<img src="/img/posts/150403-dpd-postman.PNG" alt="postman" /></p>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/deployd-introduction.html" data-title="Deployd，快速提供REST服务"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

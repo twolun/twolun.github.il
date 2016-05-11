@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Node.js编程建议（1）</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Node.js编程建议（1）</h1>
+                <p class="post-meta">Jul 26, 2015</p>
+            </header>
+            <article><p>本文总结一下我们在工作中的Node.js的最佳实践，包括Node.js的代码风格以及开发者工作流。本文是本系列的第一篇。</p>
+
+<!--more-->
+
+<h2 id="section">代码风格</h2>
+
+<h3 id="section-1">回调约定</h3>
+
+<p>模块应该暴露错误优先的回调接口。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>module.exports = function (dragonName, callback) {  
+  // do some stuff here
+  var dragon = createDragon(dragonName);
+
+  // note, that the first parameter is the error
+  // which is null here
+  // but if an error occurs, then a new Error
+  // should be passed here
+  return callback(null, dragon);
+}
+</code></pre>
+</div>
+
+<p><strong>总是在回调中检查错误</strong>： 为了理解这一点，我们从一个违反该规则的例子看起</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// this example is **BROKEN**, we will fix it soon :)
+var fs = require('fs');
+
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {  
+    callback(JSON.parse(data));
+  });
+}
+
+readJSON('./package.json', function (err, pkg) { ... }
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">readJSON</code>函数的最主要的问题是，如果在执行过程中发生<code class="highlighter-rouge">Error</code>，它并不会检查这个错误。</p>
+
+<p>改进版本如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// this example is **STILL BROKEN**, we are fixing it!
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {
+    // here we check, if an error happened
+    if (err) {
+      // yep, pass the error to the callback
+      // remember: error-first callbacks
+      callback(err);
+    }
+
+    // no error, pass a null and the JSON
+    callback(null, JSON.parse(data));
+  });
+} **在回调中返回！**
+</code></pre>
+</div>
+
+<p>上面代码仍然存在的问题是，当<code class="highlighter-rouge">Error</code>发生的时候，程序的执行并不会在<code class="highlighter-rouge">if</code>语句中停止，而是会继续。这回导致很多意料之外的问题。正如上面加粗部分提到的，总是在回调中返回！</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// this example is **STILL BROKEN**, we are fixing it!
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {
+    if (err) {
+      return callback(err);
+    }
+
+    return callback(null, JSON.parse(data));
+  });
+} **只在同步代码中使用try-catch**
+</code></pre>
+</div>
+
+<p>有一点需要注意的是，<code class="highlighter-rouge">JSON.parse</code>在无法将指定的字符串格式化为JSON格式的时候会抛出一个异常。</p>
+
+<p>因为<code class="highlighter-rouge">JSON.parse</code>是一个同步函数，因此我们可以将其包围在<code class="highlighter-rouge">try-catch</code>语句块中。<strong>一定要注意的是，只有同步代码块才能使用try-catch，你不能用在回调中！</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// this example **WORKS**! :)
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {
+    var parsedJson;
+
+    // Handle error
+    if (err) {
+       return callback(err);
+    }
+
+    // Parse JSON
+    try {
+      parsedJson = JSON.parse(data);
+    } catch (exception) {
+      return callback(exception);
+    }
+
+    // Everything is ok
+    return callback(null, parsedJson);
+  });
+}
+</code></pre>
+</div>
+
+<p><strong>避免<code class="highlighter-rouge">this</code>和<code class="highlighter-rouge">new</code></strong></p>
+
+<p>在Node中与指定的上下文绑定并不是总是个好事，因为在Node程序中经常涉及到传递回调函数，并且会经常使用高层函数管理工作流。函数风格的编程方式会帮你避免很多麻烦。</p>
+
+<h3 id="section-2">创建小模块</h3>
+
+<p>使用Unix的方式：</p>
+
+<blockquote>
+  <p>Developers should build a program out of simple parts connected by well defined interfaces, so problems are local, and parts of the program can be replaced in future versions to support new features.</p>
+</blockquote>
+
+<p>保持模块足够小（内聚），模块应该只做一件事！</p>
+
+<h3 id="section-3">使用好的同步模式</h3>
+
+<p>使用<a href="https://github.com/caolan/async">async</a></p>
+
+<h3 id="section-4">错误处理</h3>
+
+<p>错误主要分为两种：操作错误（operational errors）和程序员错误。</p>
+
+<p><strong>Operational errors</strong></p>
+
+<p>例如：</p>
+
+<ol>
+  <li>请求超时</li>
+  <li>系统内存不足</li>
+  <li>连接远程服务失败</li>
+</ol>
+
+<h3 id="operational-errors">处理Operational errors</h3>
+
+<p>Log everything! 启用日志服务！</p>
+
+<h3 id="section-5">程序员错误</h3>
+
+<p>程序员错误即是程序的bug。这是你可以尽量避免的，比如：</p>
+
+<ol>
+  <li>调用异步方法时没有使用回调</li>
+  <li>无法读取<code class="highlighter-rouge">undefined</code>的属性</li>
+</ol>
+
+<h2 id="section-6">工作流建议</h2>
+
+<h3 id="npm-init">使用<code class="highlighter-rouge">npm init</code>启动一个新项目</h3>
+
+<p><code class="highlighter-rouge">init</code>命令帮你创建一个应用的<code class="highlighter-rouge">package.json</code>文件，并且会设置一些初始值，便于你后期进行修改。试着用这个命令启动一个新项目吧：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir my-awesome-new-project  
+cd my-awesome-new-project  
+npm init
+</code></pre>
+</div>
+
+<h3 id="starttest">指定一个start和test脚本</h3>
+
+<p>在<code class="highlighter-rouge">package.json</code>中你可以使用<code class="highlighter-rouge">script</code>属性设置脚本。默认情况下，<code class="highlighter-rouge">npm init</code>会生成两个，<code class="highlighter-rouge">start</code>和<code class="highlighter-rouge">test</code>。你可以使用<code class="highlighter-rouge">npm start</code>和<code class="highlighter-rouge">npm test</code>执行他们。</p>
+
+<p>当然你也可以定义自己的脚本，使用如下命令执行<code class="highlighter-rouge">npm run-script &lt;SCRIPT_NAME&gt;</code>。</p>
+
+<p>注意，NPM会设置<code class="highlighter-rouge">$PATH</code>来查找<code class="highlighter-rouge">node_modules/.bin</code>中的可执行文件。这可以避免安装全局的NPM模块。也就是说，例如<code class="highlighter-rouge">grunt</code>这样的工具，你可以只安装在项目中，而不是全局安装这个NPM模块。</p>
+
+<h3 id="section-7">环境变量</h3>
+
+<p>在生产和开发环境可能需要设置不同的环境变量，最通常的方法是通过<code class="highlighter-rouge">NODE_ENV</code>来分别设置<code class="highlighter-rouge">production</code>或<code class="highlighter-rouge">staging</code>。</p>
+
+<p>基于不同的环境变量，你可以载入不同的配置信息，例如可以借助<a href="https://github.com/indexzero/nconf">nconf模块</a>。</p>
+
+<p>当然你也可以利用<code class="highlighter-rouge">process.env</code>在你的Node.js应用程序中使用其他的环境变量，也就是你可以在一个对象中包含用户环境。</p>
+
+<p>可以参考Node的<a href="https://nodejs.org/api/process.html#process_process_env">对应文档</a>。</p>
+
+<h3 id="section-8">不要重复发明轮子</h3>
+
+<p>首先寻找已有的解决方案。NPM中包括非常丰富的包，所以请最大化的利用这些资源。</p>
+
+<h3 id="section-9">使用风格指南</h3>
+
+<p>可以参考RisingStack的<a href="https://github.com/RisingStack/node-style-guide">Node.js风格指南</a>。</p>
+
+<h2 id="more">More</h2>
+
+<p>Node.js编程建议（2）已发布，点击<a href="http://wwsun.me/posts/node-best-practices-2.html">链接</a>查看。</p>
+
+<h2 id="statement">Statement</h2>
+
+<blockquote>
+  <p>原文地址：https://blog.risingstack.com/node-js-best-practices/</p>
+</blockquote>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/node-best-practices.html" data-title="Node.js编程建议（1）"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

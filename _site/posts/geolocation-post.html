@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>浅谈地理定位与测距，及地图API的使用</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>浅谈地理定位与测距，及地图API的使用</h1>
+                <p class="post-meta">Oct 6, 2014</p>
+            </header>
+            <article><p>在今天，几乎你的任何手持智能设备都具备定位功能，例如手机、笔记本、平板电脑。那么这些设备基于什么原理来进行定位呢？仅仅是GPS吗？传统的GPS定位需要花费数分钟的时间，但目前各种设备的平均定位时间只要几秒钟，这是如何做到的？本文将探讨这个问题。</p>
+
+<!--more-->
+
+<h3 id="section">定位手段</h3>
+<ol>
+  <li>IP地址：基于IP地址的位置信息使用一个外部数据库将IP地址映射到一个物理位置。这种方法的好处是在任何地方都可以使用，定位精度在城市或者街道级别。</li>
+  <li>GPS：GPS利用卫星数据提供精确的位置信息，但GPS得缺点是必须在户外才能定位，而且需要花费较长的时间和耗电。</li>
+  <li>蜂窝电话：通过三角定位可以根据你与一个或多个蜂窝电话几张的距离来确定你的位置，显然，基站越多定位越准确，而且在室内也能用。</li>
+  <li>WIFI：使用一个或多个WIFI接入点来完成三角定位。这种方法可能很精确，并且快速，在室内也可以使用。</li>
+</ol>
+
+<h3 id="section-1">基础知识</h3>
+
+<p>维度和经度共同构成了地球表面的左边系统。纬度在南北方向指定地球上的一个点，经度则在东西方向指定了地球上的一个点。维度从赤道开始测量，经度则以英国格林威治作为起点测量。</p>
+
+<h3 id="gps">GPS定位</h3>
+<p>GPS依靠两个参数来计算你所处位置的经纬度：时间和空间。具体的定位原理可以参考下面的一段话：</p>
+
+<blockquote>
+  <p>GPS satellites broadcast precise time signals using a built-in atomic clock along with their current location. They also broadcast the location of all other satellites in the sky, called the almanac.</p>
+</blockquote>
+
+<blockquote>
+  <p>Every 30 seconds, a GPS satellite broadcasts a time stamp, its current location and some less precise location information for other GPS satellites. It takes 25 of these broadcasts (thus, 12.5 minutes) to obtain the full list of satellite locations. This information has to be decoded for a receiver to then properly interpret signals from the satellites that are within range.</p>
+</blockquote>
+
+<blockquote>
+  <p>If you know the position of four satellites and the time at which each sent their position information, you—or, rather, your GPS receiver—can calculate to within 10 meters the latitude, longitude, and elevation of your current location along with the exact current time. With three satellites, you lose elevation, but a device can still track movement fairly accurately. Standalone GPS receivers can lock in simultaneously on multiple satellites, and track more than four. Other techniques can improve accuracy, too.</p>
+</blockquote>
+
+<blockquote>
+  <p>But, heck, I don’t have 12.5 minutes. I’m a busy man! Give me that location faster!</p>
+</blockquote>
+
+<p>显然在手机这样的手持设备中，不能单纯的使用GPS进行定位，因为它太过耗时。因此，在在手机中引入了Assisted GPS(AGPS)来辅助定位，以减少定位时间。通过手机内置芯片来辅助计算移动路线，从而避免不断从GPS卫星中下载数据。</p>
+
+<h3 id="section-2">基站定位</h3>
+<p>在CDMA网络中，网络基础操作依赖于GPS的授时。实际上，CDMA信号塔都内置了一个GPS单元，用于与GPS的原子时间进行同步。另外蜂窝信号塔也具有非常准确的GPS位置数据，因此你可以利用蜂窝基站来进行位置定位。但是这依赖于蜂窝基站的数量，因此在偏远地区，定位精度将非常的差。</p>
+
+<h3 id="wifi">WIFI定位</h3>
+
+<p>WIFI定位的定位原理与基站定位相似，因为一般AP都是固定的，可以获得较为准确的位置数据，WIFI的辐射范围有限，因此如果你在WIFI的覆盖范围内，根据信号强度，能够提供非常准确的位置信息。</p>
+
+<blockquote>
+  <p>Apple, Google, and others turn to Wi-Fi positioning for that. Wi-Fi positioning, originated by Skyhook Wireless, originally required specially equipped trucks with Wi-Fi antennas and highly sensitive GPS receivers that drove around cities to capture network identifiers (the unique hardware address broadcast by Wi-Fi base stations) and relative signal strengths at billions of points. As with cell towers, if you have enough networks and enough signal strength information, you can approximate a position.</p>
+</blockquote>
+
+<p>另外，根据Apple，Goolge的说法，当你使用wifi定位的时候，你的位置信息会被发送回他们的服务器，用于丰富位置信息数据库，从而改进定位信息，这利用了众包的思路，但同时，他们也都否认会跟踪用户的位置信息。</p>
+
+<h3 id="html5">HTML5与定理定位</h3>
+
+<p>既然我们知道了定位的基本原理，下面我们利用简单的代码来获得当前的位置信息。利用HTML5以及基于javascript的地理定位API，可以很容易的在页面中访问位置信息。目前，地理定位得到了浏览器很好的支持，几乎每个现代浏览器都支持地理定位，包括桌面和移动浏览器。因此，最好将你的浏览器升级到最新版本。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function getMyLocation() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(displayLocation);
+    } else {
+        alert("Oops, no geolocation support!")
+    }
+}
+
+function displayLocation(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    var div = document.getElementById("location");
+    div.innerHTML = "you are at Latitude: " + latitude + ", Longitude: " + longitude;
+}
+</code></pre>
+</div>
+
+<p>当浏览器支持地理定位时，它的navigation对象中有一个geolocation属性。通过geolocation可以获得当前的位置信息。</p>
+
+<h3 id="section-3">计算地球上两点间的距离</h3>
+
+<p>既然获得了地理位置信息，我们想更进一步的测量地球上两点间的距离。想想我们在使用导航的时候，导航是如何计算距离的？要计算两个坐标之间的距离，通常我们使用半正矢(Haversine)公式。其详细解释见[2]</p>
+
+<p><img src="/img/posts/141006-haversine.PNG" alt="Haversine Formula" /></p>
+
+<p>我们将公式转换为javascript代码，如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function computeDistance(startCoords, destCoords) {
+    var startLatRads = degreesToRadians(startCoords.latitude);
+    var startLongRads = degreesToRadians(startCoords.longitude);
+    var destLatRads = degreesToRadians(destCoords.latitude);
+    var destLongRads = degreesToRadians(destCoords.longitude);
+
+    var Radius = 6371; //radius of the Earth in km
+    var distance = Math.acos(Math.sin(startLatRads) * Math.sin(destLatRads) +
+                            Math.cos(startLatRads) * Math.cos(destLatRads) *
+                            Math.cos(startLongRads - destLongRads)) * Radius;
+
+    return distance;
+}
+
+function degreesToRadians(degree){
+    var radians = (degree * Math.PI)/180;
+    return radians;
+}
+</code></pre>
+</div>
+
+<p>事实上，各个地图API几乎都实现了测距功能，通过调用简单的函数，即可得到两点间的距离。这里，我们只是为了介绍其原理，在实际使用时，我们无需自己手动实现该算法。以百度地图为例，获得两点间的距离，我们可以调用：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>map.getDistance(pointA,pointB))
+</code></pre>
+</div>
+
+<h3 id="section-4">可视化地理信息</h3>
+
+<p>我们获得了当前位置的经纬度，通过地图API我们可以将地址位置信息更加形象的表现出来。这里，我们使用百度地图用于可视化当前的位置信息。关于百度地图的详细API文档请参考[3],[4]。这里我们只是做简单的演示。</p>
+
+<p>1.引入百度地图的JS库</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;script src="http://api.map.baidu.com/api?v=2.0&amp;ak=APIKEY"&gt;&lt;/script&gt;
+</code></pre>
+</div>
+
+<p>2.利用得到的经纬度信息，将其在地图中显示出来</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function showMap(longitude, latitude){
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(longitude,latitude);
+    var marker = new BMap.Marker(point);
+    map.centerAndZoom(point, 15);
+    map.addOverlay(marker);//add marker
+}
+</code></pre>
+</div>
+
+<p>3.得到的效果如下</p>
+
+<p><img src="/img/posts/141006-map.PNG" alt="Baidu map api" /></p>
+
+<p>关于地图API的更多实例，请参考各种地图的API文档。</p>
+
+<h3 id="references">References:</h3>
+<ol>
+  <li>http://www.macworld.com/article/1159528/how_iphone_location_works.html</li>
+  <li>http://en.wikipedia.org/wiki/Haversine_formula</li>
+  <li>http://developer.baidu.com/map/index.php</li>
+  <li>http://developer.baidu.com/map/jsdemo.htm</li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/geolocation-post.html" data-title="浅谈地理定位与测距，及地图API的使用"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

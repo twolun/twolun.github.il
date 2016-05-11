@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>双轮行 - 越努力 越幸运</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="content" class="site-content">
+        <div class="container main-content-area">
+            <div class="row pull-left">
+                <div class="main-content-inner col-sm-12 col-md-8">
+                    
+
+<div id="primary" class="content-area">
+    <div id="main" class="site-main" role="main">
+  
+        <article class="post sticky hentry">
+            <div class="blog-item-wrap">
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/d3-visualization-post.html" rel="bookmark">使用D3进行数据可视化</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Sep 24, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><blockquote>
+  <p>先给出一个大小合适、筛选得当的概要，然后根据需要展示细节。 —— Ben Shneiderman</p>
+</blockquote>
+
+<h3 id="d3">D3基础知识</h3>
+
+<p>D3是一个JS库，用于创建数据可视化图形，能够实现交互可视化，而交互可视化能够把那些原本会对相关主题和数据视而不见的人吸引过来。 D3的全程为 Data-Driven Documents（数据驱动的文档）。D3的项目地址为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://github.com/mbostock/d3/
+</code></pre>
+</div>
+
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/jndi-base-post.html" rel="bookmark">JNDI - Java Naming and Directory Interface</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Sep 12, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><h3 id="jndi-concept">JNDI Concept</h3>
+
+<p>JNDI，即JAVA命名及目录接口，是Java EE的重要规范之一，它也是EJB的一个重要组成部分。那么到底什么是JNDI呢？维基百科的正式解释如下：</p>
+
+<blockquote>
+  <p>The Java Naming and Directory Interface (JNDI) is a Java API for a directory service that allows Java software clients to discover and look up data and objects via a name. Like all Java APIs that interface with host systems, JNDI is independent of the underlying implementation. Additionally, it specifies a service provider interface (SPI) that allows directory service implementations to be plugged into the framework. It may make use of a server, a flat file, or a database; the choice is up to the vendor.
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/json-java-post.html" rel="bookmark">JSON Java Libraries</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Sep 7, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><p>21世纪初，Douglas Crockford寻找一种简便的数据交换格式，能够在服务器之间交换数据。当时通用的数据交换语言是XML，但是Douglas Crockford觉得XML的生成和解析都太麻烦，所以他提出了一种简化格式，也就是JSON。</p>
+
+<p>JSON, JavaScript Object Notation, 它是一种轻量级的数据交换格式，非常适合于服务器与JavaScript的交互。对消息通信而言，JSON的优势是比XML更简单，因而可以大大提高开发效率，代码也更为简单。</p>
+
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/data-model-post.html" rel="bookmark">Data Model Intro.</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Sep 6, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><h3 id="data-model-basic">Data Model Basic</h3>
+
+<p>Database model, it means a collection of concepts and rules used in defining data models:  for example the relational model uses relations and tuples, while the network model uses records, sets, and fields.
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/Jquery-Beginning-post.html" rel="bookmark">Beginning JQuery</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Aug 24, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><h3 id="why-jquery">Why JQuery</h3>
+<p>jQuery is a lightweight, “write less, do more”, JavaScript library. The purpose of jQuery is to make it much easier to use JavaScript on your website. The jQuery library contains the following features:</p>
+
+<ul>
+  <li>HTML/DOM manipulation</li>
+  <li>CSS manipulation</li>
+  <li>HTML event methods</li>
+  <li>Effects and animations</li>
+  <li>AJAX</li>
+  <li>Utilities
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/HTML-5-Beginning-post.html" rel="bookmark">Beginning HTML5 New Features</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Aug 20, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><h3 id="new-features-added-to-html5">New Features Added to HTML5</h3>
+
+<ul>
+  <li>Semantics: allowing you to describe more precisely what your content is.</li>
+  <li>Connectivity: allowing you to communicate with the server in new and innovative ways.</li>
+  <li>Offline &amp; Storage: allowing webpages to store data on the client-side locally and operate offline more efficiently.</li>
+  <li>Multimedia:</li>
+  <li>2D/3D</li>
+  <li>Device Access: allowing for the usage of various input and output devices
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/REST-API-usage-post.html" rel="bookmark">REST API使用指南</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Aug 7, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><p>我们了解了什么是REST, 并且知道大部分的网络服务都提供了REST API，国内的诸如微博、土豆等，国外的诸如google, twitter等。但是我们如何来具体的使用REST API呢，本文将介绍如何使用Java语言使用第三方REST API。
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <div class="post-inner-content">
+                    <header class="entry-header page-header">
+                        <h2 class="entry-title"><a href="/posts/jersey-2.3-basic-post.html" rel="bookmark">Jersey2.11 快速入门指南</a></h2>
+                        <div class="entry-meta">
+                            <span class="posted-on"><i class="fa fa-calendar"></i>
+                                <a rel="bookmark"><time class="entry-date published">Aug 3, 2014</time></a>
+                            </span>
+                        </div><!-- .entry-meta -->
+                    </header>
+                    <div class="entry-content"><p>前面我们提到了REST, 该概念在2000年由Roy Fielding在博士论文中提出。但是，对Java而言，直到2008年JSR 311(JAX-RS: Java Api for RESTful Web Services)规范定稿才将其标准化。Jersey是JSR 311的参考实现，本文将介绍Jersey2.11的必要API和注释，使用Netbeans 8.0 for Java EE作为IDE。
+</div>
+                    
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            </div>
+        </article>
+
+        <!-- Pagination links -->
+        <div class="pagination">
+        
+            <a href="/page8" class="btn btn-default btn-sm">Previous</a>
+        
+            <span class="page_number ">Page: 9 of 12</span>
+        
+            <a href="/page10" class="btn btn-default btn-sm">Next</a>
+        
+        </div><!--#pageination-->
+    </div><!--#main-->
+</div><!--#primary-->
+
+                </div>
+                
+                <div id="secondary" class="widget-area col-sm-12 col-md-4" role="complementary">
+                    <div class="well">
+    <aside class="widget search-panel">
+        <div class="serch-form">
+            <form method="get" class="form-search" _lpchecked="1">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <input type="text" id="st-search-input" class="form-control search-query" placeholder="Search...">
+                            <span class="input-group-btn">
+                      <button type="submit" class="btn btn-primary btn-sm btn-default" name="submit" id="searchsubmit" value="Go" style="">
+                        <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </aside>
+
+    <aside class="widget avatar-panel">
+        <div class="avatar">
+            <a href="/about.html">
+                <img class="img-thumbnail" src="https://avatars2.githubusercontent.com/u/11350403?v=3&s=460" style="width: 150px;">
+            </a>
+        </div>
+    </aside>
+
+    <aside class="widget sparkling-social">
+        <h3 class="widget-title">Follow me</h3>
+        <!-- social icons -->
+        <div class="social-icons sticky-sidebar-social">
+            <div class="social-icons sticky-sidebar-social">
+                <nav id="menu-social" class="social-icons">
+                    <ul id="menu-social-items" class="social-menu">
+                        <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                        <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                        <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                        <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                        <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- end social icons -->
+    </aside>
+    
+    <aside class="widget widget-categories">
+        <h3 class="widget-title">Categories</h3>
+        <ul>
+            <li class="cat-item cat-item-14">
+                <a href="/category/knowledge/"> 知道相关 </a>
+            <li class="cat-item cat-item-14">
+                <a href="/category/database/"> database </a>
+            <li class="cat-item cat-item-14">
+                <a href="/category/technique/"> 技术探索 </a>
+            <li class="cat-item cat-item-14">
+                <a href="/category/others/"> 其它 </a></ul>
+    </aside>
+    
+    <aside class="widget">
+        <h3 class="widget-title">Powered by</h3>
+        <p>
+            <a href="https://github.com/" target="_blank">GitHub</a>,
+            <a href="https://github.com/mojombo/jekyll" target="_blank">jekyll</a>
+        </p>
+        <hr />
+        <p>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" class="hide-target-icon" title="Copyright declaration of site content"><img alt="知识共享许可协议" src="http://i.creativecommons.org/l/by-nc-nd/2.5/cn/88x31.png" /></a>
+        </p>
+    </aside>
+</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+<footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+
+</body>
+</html>

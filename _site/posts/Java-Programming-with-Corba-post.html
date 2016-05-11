@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基于Java的CORBA编程入门</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>基于Java的CORBA编程入门</h1>
+                <p class="post-meta">Apr 25, 2014</p>
+            </header>
+            <article><h4 id="abstract">Abstract:</h4>
+<p>Common Object Request Broker Architecture (CORBA), which allows objects written in a variety of programming languages to be accessed by client programs which themselves may be written in a variety of programming languages. Corba is a product of OMG (Object Management Group).</p>
+
+<!--more-->
+<p>####Basics:
+CORBA is not a specific implementtation, but a specification for creating and using distributed objects. Java IDL (Interface Definition Language) is the ORB that constitutes one of the core packages of the Java SE.</p>
+
+<p>RMI ORBs use a protocol called JRMP (Java Remote Method Protocol), CORBA ORBs use IIOP (Internet Inter-Orb Protocol), which is based on TCP/IP. It is IIOP that provides interoperability between ORBs from different vendors. CORBA use IDL to define the interfaces for its objects.</p>
+
+<h4 id="the-java-idl-process">The Java IDL Process:</h4>
+<p><strong>1.Create the IDL file.</strong>
+Hello.idl</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>module SimpleCORBAExample{
+    interface Hello{
+        string getGreeting();
+    };//donot forget semi-colon
+};//it seems like c++, terminated with a semi-colon
+</code></pre>
+</div>
+
+<p><strong>2.Compile the IDL file.</strong>
+Using the following command to comile the IDL file.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>idlj -fall Hello.idl
+</code></pre>
+</div>
+
+<p>The parameter <strong>-f</strong> should be followed with <strong>client, server, and all</strong>. <strong>all</strong> means the client and server are to be run on the same machine.</p>
+
+<p><strong>3.Implement the interface(server-side)</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class HelloServant extends HelloPOA{
+    //implement the interface
+}
+</code></pre>
+</div>
+
+<p><strong>4.Create the server</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// init ORB
+ORB orb = ORB.init( args, null );
+
+// init POA
+POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+poa.the_POAManager().activate();
+
+// create a Hello object
+HelloImpl impl = HelloImpl();	
+</code></pre>
+</div>
+
+<p>//get object reference from the servant
+	org.omg.CORBA.Object ref = rootpoa.servant_to_reference(impl);
+	FlightBooking href = FlightBookingHelper.narrow(ref);</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
+NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+
+String name = "hello";
+NameComponent path[] = ncRef.to_name(name);
+ncRef.rebind(path, href);
+		
+System.out.println("Server ready and waiting...");
+//startup the thread, waiting for the call from client
+orb.run();
+</code></pre>
+</div>
+
+<p><strong>5.Create a client</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ORB orb = ORB.init(args, null);
+// get the root naming context
+org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
+NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+
+// resolve the Object Reference in Naming
+String name = "Hello";
+impl = FlightBookingHelper.narrow(ncRef.resolve_str(name));
+
+System.out.println("Obtained a handle on server object: " + impl);
+</code></pre>
+</div>
+
+<p><strong>6.Compile and run</strong>
+Start the CORBA naming service firstly (in CMD):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tnameserv
+//or specify any port number
+tnameserv -ORBInitialPort 1234
+</code></pre>
+</div>
+
+<p>Start the server in a new command window</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>java HelloServer
+//or specify any port number
+java HelloServer -ORBInitialPort 1234
+</code></pre>
+</div>
+
+<p>Start the client in a third command window</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>java HelloClient
+//or specify any port number
+java HelloClient -ORBInitialPort 1234
+</code></pre>
+</div>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/Java-Programming-with-Corba-post.html" data-title="基于Java的CORBA编程入门"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

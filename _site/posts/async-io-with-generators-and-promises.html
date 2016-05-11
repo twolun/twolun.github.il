@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>使用Generators和Promises实现异步I/O</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>使用Generators和Promises实现异步I/O</h1>
+                <p class="post-meta">Mar 7, 2016</p>
+            </header>
+            <article><p>本文主要介绍的是如何利用ES6的生成器来设计API，用于解决异步的数据输入和输出问题。
+此外，还能够使用Promise来将一组操作链接起来。</p>
+
+<!--more-->
+
+<h2 id="statement">Statement</h2>
+
+<ul>
+  <li><strong>原文地址：</strong>https://ponyfoo.com/articles/asynchronous-i-o-with-generators-and-promises</li>
+  <li><strong>译者：</strong><a href="http://wwsun.github.com">景庄</a>，Web开发者，主要关注JavaScript、Node.js、React、Docker等。</li>
+</ul>
+
+<p>对我而言，在阅读一本工程技术类的书籍而言，其中最有趣的部分往往是其中的示例部分，
+并且对于作者而言，示例部分也是在写一本引人入胜的技术材料时最难的以部分。
+我发现最好的例子是那些能够带着你思考API设计和编码实践的例子，而不是那些单纯的介绍特定语言特性的例子。
+即使这样，如果你已经通过实例理解了语言特性，你可能还是要通过一些有趣的例子来发现其使用价值（practical）。</p>
+
+<p>下面所描述的问题的例子包括了寻找在生成器函数中使用<code class="highlighter-rouge">return</code>语句的用处。
+<a href="https://ponyfoo.com/articles/es6-generators-in-depth">正如我们知道的那样</a>，
+生成器函数对待<code class="highlighter-rouge">return</code>语句的方式与<code class="highlighter-rouge">yield</code>表达式并不同。我们先来看下面这个使用生成器的例子：</p>
+
+<p><code class="highlighter-rouge">javascript
+function* numbers() {
+  yield 1;
+  yield 2;
+  return 3;
+  yield 4;
+}
+</code></p>
+
+<p>如果我们使用<code class="highlighter-rouge">Array.from(numbers()), [...numbers()]</code>，或者甚至是一个<code class="highlighter-rouge">for...of</code>循环，
+我们将只能看到输出结果为<code class="highlighter-rouge">1</code>和<code class="highlighter-rouge">2</code>。然而，如果我们更进一步的，并使用生成器对象的话，
+我们将在输出结果中看到<code class="highlighter-rouge">3</code> —— 即使迭代器结果会提示<code class="highlighter-rouge">done: true</code>。</p>
+
+<p><code class="highlighter-rouge">javascript
+var g = numbers();
+console.log(g.next());
+// &lt;- { done: false, value: 1 }
+console.log(g.next());
+// &lt;- { done: false, value: 2 }
+console.log(g.next());
+// &lt;- { done: true, value: 3 }
+</code></p>
+
+<p>在上面我所给出的例子中，函数调用的其实是一个生成器函数（<code class="highlighter-rouge">numbers</code>），
+我们通过<code class="highlighter-rouge">yield</code>关键字获取需要被持有的资源，然后在你需要保存（persist）这些资源的时候，
+<code class="highlighter-rouge">return</code>端点（endpoint）。迭代器将会每次一个的拉取资源，并最终为每一个资源推送数据到另一个端点，
+可以假定为将所有的数据保存在一个对象中。</p>
+
+<h2 id="api">API设计</h2>
+
+<p>上面所说的问题中的API可以参考下面的代码。<code class="highlighter-rouge">saveProducts</code>方法将会<code class="highlighter-rouge">GET</code>一系列产品的JSON描述，
+并且将产品的数据<code class="highlighter-rouge">POST</code>到用户的购物车中。</p>
+
+<p><code class="highlighter-rouge">javascript
+saveProducts(function* () {
+  yield '/products/javascript-application-design'; // 获取产品1
+  yield '/products/barbie-doll'; // 获取产品2
+  return '/cart'; // 将产品1和2的数据上传给购物车
+});
+</code></p>
+
+<p>此外，我认为如果<code class="highlighter-rouge">saveProducts</code>能返回一个<code class="highlighter-rouge">Promise</code>对象的话将会变得更加每秒，
+因为这意味着开发者可以在产品被保存到购物车后，继续<a href="https://ponyfoo.com/articles/es6-promises-in-depth">链接一系列的其他操作</a>。
+例如：</p>
+
+<p><code class="highlighter-rouge">javascript
+saveProducts(productList)
+  .then(data =&gt; console.log('Saved', data));
+</code></p>
+
+<p>当然，也可以加入一些条件逻辑来允许这个假设方法能够将产品保存到心愿列表中，而不是保存到购物车中。</p>
+
+<p><code class="highlighter-rouge">javascript
+saveProducts(function* () {
+  yield '/products/javascript-application-design';
+  yield '/products/barbie-doll';
+  if (addToCart) {
+    return '/cart'; // 保存到购物车
+  }
+  return '/wishlists/nerd-items'; // 保存到心愿列表
+})
+</code></p>
+
+<p>这个例子也可以应用到服务端，每一个被yield的值都可能导致一次数据库查询，
+并且所返回的值也可以表示某种我们想要保存回数据库中的对象。相似的，迭代器可以决定所yield输入值被处理的节奏：</p>
+
+<ul>
+  <li>可以是一个非常简单的同步队列</li>
+  <li>可以是并行处理所有查询</li>
+  <li>可以是一个有限并发的并行队列</li>
+</ul>
+
+<p>无论如何，API可以或多或少的保持一致，这取决于消费者是否希望在生成器中使用产品数据。</p>
+
+<h2 id="saveproducts">实现<code class="highlighter-rouge">saveProducts</code></h2>
+
+<p>首先，在上面所讨论的问题中的方法中接收了一个生成器，并初始化了该生成器对象用于迭代生成器函数所产生的值。</p>
+
+<p><code class="highlighter-rouge">javascript
+function saveProducts (productList) {
+  var g = productList; // productList是一个生成器函数
+}
+</code>
+### 简单实现</p>
+
+<p>使用简单的实现方案，我们可以在一个异步序列模式中逐个的拉取产品。代码片段如下所示，
+该例子使用了<code class="highlighter-rouge">fetch</code>来拉取用户提供的生成器所yield的资源 —— 作为JSON。</p>
+
+<p>```javascript
+function saveProducts (productList) {
+  var g = productList(); // productList是一个生成器函数
+  var item = g.next();
+  more();</p>
+
+<p>function more () {
+    if (item.done) {
+      return;
+    }
+    fetch(item.value)
+      .then(res =&gt; res.json())
+      .then(product =&gt; {
+        item = g.next(product);
+        more();
+      });
+  }
+}</p>
+
+<p>```</p>
+
+<blockquote>
+  <p>通过调用<code class="highlighter-rouge">g.next(product)</code>，我们能够允许消费者通过<code class="highlighter-rouge">data = yield '/resource'</code>这种方式读取产品数据。</p>
+</blockquote>
+
+<p>到目前为止，我们拉取所有的数据（获取商品信息），并将它传递回（保存到购物车），对于生成器而言是逐个的进行传递的，
+这让我们感觉代码好像是同步的一样。为了能够利用<code class="highlighter-rouge">return</code>语句，我们需要将产品保存到一个临时的数组中，
+当迭代结束的时候，我们再将它们<code class="highlighter-rouge">POST</code>回去（保存到购物车）。</p>
+
+<p>```javascript
+function saveProducts (productList) {
+  var products = [];
+  var g = productList();
+  var item = g.next();
+  more();</p>
+
+<p>function more () {
+    if (item.done) {
+      save(item.value);
+    } else {
+      details(item.value);
+    }
+  }</p>
+
+<p>// 获取商品信息
+  function details (endpoint) {
+    fetch(endpoint)
+      .then(res =&gt; res.json())
+      .then(product =&gt; {
+        products.push(product);
+        item = g.next(product);
+        more();
+      });
+  }</p>
+
+<p>// 保存产品列表数据
+  function save (endpoint) {
+    fetch(endpoint, {
+      method: ‘POST’,
+      body: JSON.stringify({ products })
+    });
+  }
+}</p>
+
+<p>```</p>
+
+<p>此时，我们获取了产品的描述信息，并将它们缓存到了<code class="highlighter-rouge">products</code>数组中，转发给生成器的函数体，
+并最终通过<code class="highlighter-rouge">return</code>语句所提供的端点进行保存。那么如何支持<code class="highlighter-rouge">Promise</code>呢？这些非常容易添加进来：
+<code class="highlighter-rouge">fetch</code>返回的是一个<code class="highlighter-rouge">Promise</code>对象，并且它<code class="highlighter-rouge">return</code> all the way down。</p>
+
+<p>```javascript
+function saveProducts (productList) {
+  var products = [];
+  var g = productList();
+  var item = g.next();
+  return more();</p>
+
+<p>function more () {
+    if (item.done) {
+      return save(item.value);
+    }
+    return details(item.value);
+  }</p>
+
+<p>function details (endpoint) {
+    // 直接返回fetch
+    return fetch(endpoint)
+      .then(res =&gt; res.json())
+      .then(product =&gt; {
+        products.push(product);
+        item = g.next(product);
+        return more();
+      });
+  }</p>
+
+<p>function save (endpoint) {
+    // 直接返回fetch
+    return fetch(endpoint, {
+        method: ‘POST’,
+        body: JSON.stringify({ products })
+      })
+      .then(res =&gt; res.json());
+  }
+}
+```</p>
+
+<blockquote>
+  <p>我们也需要将<code class="highlighter-rouge">save</code>操作的响应结果转型为JSON，这样链接到<code class="highlighter-rouge">saveProducts</code>上的Promise链就可以利用响应结果中的<code class="highlighter-rouge">data</code>对象了。</p>
+</blockquote>
+
+<p>正如你所看到的那样，该实现方法并没有对该操作的任何重要的方面进行硬编码实现，这意为着你可以在其他场景范范的使用这种模式，
+也就是说，如果你拥有零个或多个输入，并且想要将它们拼接到同一个输出管道中。对消费者而言，它们最终获取到的是一个具有非常优雅外观的方法，
+并且易于理解 —— 它们只需要<code class="highlighter-rouge">yield</code>输入值，并<code class="highlighter-rouge">return</code>输出值。此外，我们通过使用promise来使其更易于与其他操作相拼接。
+这种方式下，我们能够控制条件语句和流程控制机制中的潜在混乱，这是通过将流程控制抽象到<code class="highlighter-rouge">saveProducts</code>方法的迭代机制中进行实现的。</p>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/async-io-with-generators-and-promises.html" data-title="使用Generators和Promises实现异步I/O"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

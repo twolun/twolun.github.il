@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>使用ES6编写React应用（4）：使用高阶组件替代Mixins</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>使用ES6编写React应用（4）：使用高阶组件替代Mixins</h1>
+                <p class="post-meta">Feb 15, 2016</p>
+            </header>
+            <article><p>本文是使用ES6编写React应用的第4篇，我们将主要讨论如何使用高阶组件的方式取代传统的React Mixins。</p>
+
+<!--more-->
+
+<h2 id="statement">Statement</h2>
+
+<ul>
+  <li><strong>作者：</strong> <a href="http://wwsun.github.com">景庄</a>，Web开发者，主要关注JavaScript、Node.js、React、Docker等。</li>
+  <li><strong>源码：</strong> 本文的源代码地址：https://github.com/wwsun/react-es6-tutorial</li>
+</ul>
+
+<h2 id="section">介绍</h2>
+
+<p>当使用<code class="highlighter-rouge">React.createClass()</code>的时候，你可能会使用到所谓的Mixins。使用Mixins允许我们在我们的React组件中混入一些附加的功能。
+这个概念并不是React所独有的，它也存在于普通的JS或其他语言的框架中。</p>
+
+<p>如果是要使用ES6来编写React组件的话，我们将不建议你使用React的mixin机制了。
+本文并不会深入的探讨为什么不建议使用mixin的原因。如果你感兴趣的话，你可以通过如下的链接查看相关的资料：</p>
+
+<ul>
+  <li><a href="https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#mixins">React官方有关在ES6中使用mixins的博文</a></li>
+  <li><a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">Mixins已死——Dan Abramov</a></li>
+</ul>
+
+<p>下面我们将主要关注的是具体的例子。</p>
+
+<h2 id="mixins">使用高阶组件替代Mixins</h2>
+
+<p>本文我们将继续使用之前的代码，并对代码做一定的修改。通过本文，我们将能够在页面中显示用户在当前页面停留的时间。</p>
+
+<p>为什么能够更好的进行说明，我们将不会修改<code class="highlighter-rouge">CartItem</code>组件的代码。而是通过提供一些能够包裹<code class="highlighter-rouge">CartItem</code>组件的组件，
+并通过一些额外的功能来“增强”<code class="highlighter-rouge">CartItem</code>组件。这样的组件我们称之为高阶组件（Higher-Order Component）。</p>
+
+<p>这个概念听起来可能有点含义模糊，随着我们的深入，你将会理解的更透彻一点。</p>
+
+<p>假设，我们有一个<code class="highlighter-rouge">IntervalEnhance</code>组件，我们在<code class="highlighter-rouge">CartItem</code>组件中导入它，并通过它来包裹原有的导出对象。</p>
+
+<p>```javascript
+// src/components/cart-item.jsx
+import React from ‘react’;
+import { IntervalEnhance } from “./interval-enhance.jsx”; // 1. 导入包裹组件</p>
+
+<p>class CartItem extends React.Component {
+  // component code here
+}</p>
+
+<p>export default IntervalEnhance(CartItem); // 2. 包裹原有的CartItem组件
+```</p>
+
+<p>现在我们将来编写这个<code class="highlighter-rouge">IntervalEnhance</code>组件。</p>
+
+<p>```javascript
+// src/components/interval-enhance.jsx
+import React from ‘react’;</p>
+
+<p>// 1
+export let IntervalEnhance = ComponsedComponent =&gt; class extends React.Component {</p>
+
+<p>constructor(props) {
+    super(props);
+    this.state = {
+      seconds: 0 // 2
+    };
+  }</p>
+
+<p>// 3
+  componentDidMount() {
+    this.interval = setInterval(this.tick.bind(this), 1000);
+  }</p>
+
+<p>// 3
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }</p>
+
+<p>tick() {
+    this.setState({
+      seconds: this.state.seconds + 1000
+    });
+  }</p>
+
+<p>render() {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 4
+return &lt;ComponsedComponent {...this.props} {...this.state} /&gt;;   } }; ```
+</code></pre>
+</div>
+
+<p>我们一一的来解释上面几处加注释的代码：</p>
+
+<ol>
+  <li><code class="highlighter-rouge">ComposedComponent =&gt; class extends React.Component</code> - 这其实和定义返回类的函数一样。
+其中<code class="highlighter-rouge">ComposedComponent</code>是我们想要“增强”的组件（在上面的代码中就是<code class="highlighter-rouge">CartItem</code>组件）。
+通过使用<code class="highlighter-rouge">export let IntervalEnhance</code>我们可以导出整个函数为<code class="highlighter-rouge">IntervalEnhance</code>（也就是上面代码中的<code class="highlighter-rouge">CartItem</code>）。</li>
+  <li>初始化组件的状态（state），设置<code class="highlighter-rouge">seconds</code>的值为0。</li>
+  <li>组件的生命周期钩子函数，用于期待能够和暂停计数器。</li>
+  <li>最重要的一个部分。这行代码将所有的<code class="highlighter-rouge">state</code>或<code class="highlighter-rouge">props</code>拿到我们的“增强器”组件中，然后转移到<code class="highlighter-rouge">CartItem</code>组件中。
+通过这种方式，<code class="highlighter-rouge">CartItem</code>组件将能够访问到<code class="highlighter-rouge">this.state.seconds</code>属性。</li>
+</ol>
+
+<p>最后一步是改变<code class="highlighter-rouge">CartItem</code>组件中的<code class="highlighter-rouge">render</code>方法。我们将直接向视图中输出<code class="highlighter-rouge">this.state.seconds</code>：</p>
+
+<p>```javascript
+import React from ‘react’;
+import { IntervalEnhance } from “./interval-enhance.jsx”;</p>
+
+<p>class CartItem extends React.Component {
+    // component code here</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>render() {
+    return &lt;article className="row large-4"&gt;
+            &lt;!-- some other tags here --&gt;                    
+            &lt;p className="large-12 column"&gt;
+                &lt;strong&gt;Time elapsed for interval: &lt;/strong&gt;
+                {this.props.seconds} ms
+            &lt;/p&gt;    
+        &lt;/article&gt;;
+    } } export default IntervalEnhance(CartItem); ```
+</code></pre>
+</div>
+
+<p>现在我们可以浏览器中检查结果了，我们将在页面中看到一行文字，显示用户在当前页面停留的时间。</p>
+
+<p><strong>注意：</strong>所有这一切并没有改变<code class="highlighter-rouge">CartItem</code>组件的任何主体代码（除了<code class="highlighter-rouge">render</code>方法）！
+这就是为什么高阶组件这么强大的原因！</p>
+
+<h2 id="section-1">装饰器*</h2>
+
+<p>此外，ECMAScript的未来标准中还将引入装饰器的概念，通过这种方法能够更优雅的解决Mixin的问题，
+本文不对未标准化的特性做过多的介绍。不过，代码大致如下：</p>
+
+<p>```javascript
+import React from ‘react’;
+import { IntervalEnhance } from “./interval-enhance”;</p>
+
+<p>@IntervalEnhance
+export default class CartItem extends React.Component {
+    // component code here
+}
+```</p>
+
+<h2 id="purerendermixin"><code class="highlighter-rouge">PureRenderMixin</code>呢？</h2>
+
+<p>如果你使用了诸如<code class="highlighter-rouge">PureRenderMixin</code>这样的mixins，那么酱油一些其他的方法来使用ES6将这种功能带到React组件中。
+其中一种如下：</p>
+
+<p><code class="highlighter-rouge">javascript
+class Foo extends React.Component {
+   constructor(props) {
+     super(props);
+     this.shouldComponentUpdate = React.addons.PureRenderMixin.shouldComponentUpdate.bind(this);
+   }
+   render () {
+     return &lt;div&gt;Helllo&lt;/div&gt;
+   }
+}
+</code></p>
+
+<h2 id="section-2">小结</h2>
+
+<p>高阶组件非常的强大并且表达能力强。目前，它们使用非常广泛，并且可以作为古老的mixin语言的替代。</p>
+
+<p>对于高阶组件的使用最出名的要属<a href="">Relay</a>框架。Relay是Facebook发布的一个完全的基于React的框架。
+你所编写的没一个组件都可以被包裹进Relay容器，它能够自动检索数据依赖，以及一些其他的事。
+这非常的便捷，并且在你刚接触的时候会觉得很神奇。</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#mixins">About mixins in ES6 in official React blog</a></li>
+  <li><a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750">Mixins Are Dead. Long Live Composition by Dan Abramov</a></li>
+  <li><a href="https://facebook.github.io/react/docs/jsx-spread.html">JSX Spread Attributes</a></li>
+  <li><a href="https://gist.github.com/ryanflorence/a93fd88d93cbf42d4d24">Gist with PureRenderMixin in ES6</a></li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/react-with-es6-part-4.html" data-title="使用ES6编写React应用（4）：使用高阶组件替代Mixins"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

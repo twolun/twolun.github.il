@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Simple Introduction to HOPP Design Pattern</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Simple Introduction to HOPP Design Pattern</h1>
+                <p class="post-meta">Apr 10, 2014</p>
+            </header>
+            <article><p>Sometimes objects must appear in more than one computing context (that is, address space.) How can we make difference one and multiple address spaces (for example, single versus distributed processing) transparent? This post will introduced a FTP program which using the design pattern named HOPP (Half Object Plus Protocol).</p>
+
+<!--more-->
+<p>####solution:
+Divide the object into two interdependent half-objects, one in each address space, with a protocol between them. In each address space, implement whatever functionality is required to interact efficiently with the other objects in that address space. This may result in duplicated functionality.</p>
+
+<p>The HOPP pattern deals with the placement and replication of objects in a distributed computing environment. However, how can we use the HOPP design pattern in the design of a distributed system.</p>
+
+<h4 id="client-side-hopp">Client-side HOPP</h4>
+<p>From my respect of view, the HOPP in client-side should be used to extract the business logic that could sperate the control flow and communication logic, that is to say, the client could only care about the results they needed, rather than the detail of the communication between client and server.</p>
+
+<p>Based on this solution, we can extract the the communication logic as a HOPP class. For instance, if we design a FTP program based on Socket, the HOPP in client side should be implemented as the following format:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ClientHOPP{
+    //constructor with one argument
+    public ClientHOPP(String server){
+        //socket init
+        //create the tcp socket in client-side
+        //getReader
+        //getWriter
+    }
+    
+    //business logic as follows:
+    public String[] dir(){
+        writer.print(DIR+CR_LF);
+        while(true){
+            line = reader.readLine();
+            if(line.equals(""))break;
+            list.add(line);
+        }
+        return list.toArray(listStr);//list--&gt;string
+    }
+    
+    //ignore others
+    //....
+}
+</code></pre>
+</div>
+
+<p>As we can see from the above codes, all the communication detail should be implemented in the client-side HOPP, the client only care about the results that it wanted. We can implement the client easily.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Client{
+    Client(String server){
+        clientHopp = new ClientHOPP(server);
+    }
+    
+    main(){
+        //business loop
+        //afford a ui to get requests from users
+        if(DIR)
+            dir();
+        else(...)
+            ....;
+    }
+    
+    dir(){
+        String[] dir = clientHOPP.dir();
+        //foreach
+        //syso, print out the results
+    }
+    
+    //ignore others
+
+}
+</code></pre>
+</div>
+
+<p>For good purpose of designing the client, using HOPP is easy and helpful for developers to modify old codes or add new functions. Actually, it is similar to implement HOPP in the server-side. But for a Socket program, HOPP could me used to separate the business logic without the process of communication.</p>
+
+<h4 id="server-side-hopp">Server-side HOPP</h4>
+<p>A basic c/s program could be implemented as the follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Server{
+    server = new ServerSocket(PORT);
+    while(true){
+        incoming = server.accept();
+        new SocketHandler(incoming).start();
+    }
+}
+</code></pre>
+</div>
+
+<p>Here we use a socket handler to handle the specific requests from client.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class SocketHandler extends Thread{
+    run(){
+        if(DIR)
+            dir();
+        else if(..)
+            ...;
+    }
+    
+    public void dir(){
+        String[] fileNames = serverHopp.dir();
+        writer.print(RESULT+CR_LF);
+    }
+}
+</code></pre>
+</div>
+
+<p>And we can implement all the specific requests in server-side HOPP class. For a distributed system, using HOPP will be helpful for designer to seperate differnt communicaiton logic. The following figure shows the HOPP design in a simple distributed system.</p>
+
+<p><img src="/images/blog/hopp.png" alt="HOPP in a simple distributed system" /></p>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/Implementation-of-HOPP-post.html" data-title="Simple Introduction to HOPP Design Pattern"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

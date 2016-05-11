@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>依赖注入与JSR-330的参考实现——Guice</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>依赖注入与JSR-330的参考实现——Guice</h1>
+                <p class="post-meta">Mar 13, 2015</p>
+            </header>
+            <article><p>依赖注入（控制反转的一种形式），它是Java开发主流中一个重要的编程范式（思维方式）。简单的说，使用DI技术可以让对象从别处获得依赖项，而不是由它自己来构造。使用DI有很多好处，它能降低代码之间的耦合度，让代码更易于测试、更易读。Java DI的官方标准是JSR-330，本文我们还会介绍<code class="highlighter-rouge">JSR-330</code>的参考实现<code class="highlighter-rouge">Guice 3</code>，一个轻量级 的DI框架。
+<!--more--></p>
+
+<h2 id="ioc-and-di">IoC and DI</h2>
+
+<p>使用IoC范式编程时，程序逻辑的流程通常是由一个功能中心来控制的。而使用IoC，这个“中心控制”的设计原则会被反转过来。调用者的代码处理程序的执行顺序，而程序逻辑则被封装在接受调用的子流程中。通过一个例子来理解IoC:</p>
+
+<p>在GUI应用中，GUI框架负责控制调用事件处理器，而不是应用逻辑。当用户点击了一个动作，比如“向前”，GUI框架会自动调用 对应的事件处理器，而应用逻辑可以把重点放在处理动作上。程序的控制被反转了，将控制权由应用逻辑转移到了GUI框架。</p>
+
+<p>IoC也被称为<code class="highlighter-rouge">好莱坞原则</code>：会有另一段代码拥有最初的控制线程，并且由它来调用你的代码，而不是由你的代码调用它。</p>
+
+<blockquote>
+  <p>不要给我们打电话，我们会打给你。——好莱坞原则</p>
+</blockquote>
+
+<p>IoC有多种不同的实现，包括工厂模式、服务器定位模式，当然还有依赖注入。需要注意的是，DI并不等于IoC，DI只是IoC的一种实现方式，IoC是一种机制。</p>
+
+<p>DI是IoC的一种特定形态，是指寻找依赖项的过程不在当前执行代码的直接控制之下。Java中为DI提供的容器有Guice、Spring、PicoContainer等。DI的好处有：松耦合、易测试、强内聚、可重用、更轻盈的代码。</p>
+
+<h2 id="example">Example</h2>
+
+<p>下面编写代码来解释到底什么是DI，如何使用DI。我们首先编写传统的代码，然后使用工厂模式解耦，进而再使用DI来改进代码，通过这个过程，你将了解到DI的精妙之处。这些改进都基于同一个关键技术，即面向接口编程。</p>
+
+<p>假设你想找到所有对Java可开发人员比较友善的好莱坞经纪人。首先，我们有了一个<code class="highlighter-rouge">AgentFinder</code>接口，及其两个实现类<code class="highlighter-rouge">SpreadSheetAgentFinder</code>和<code class="highlighter-rouge">WebServiceAgentFinder</code>。<code class="highlighter-rouge">AgentFinder</code>接口如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public interface AgentFinder {
+    public List&lt;Agent&gt; findAllAgents();
+}
+</code></pre>
+</div>
+
+<h3 id="section">传统方式寻找友善经纪人</h3>
+
+<p>为了找到经纪人，项目中有个默认的<code class="highlighter-rouge">HollywoodService</code>类，它会从<code class="highlighter-rouge">SpreadSheetAgentFinder</code>里得到一个经纪人列表，并且过滤出友善的经纪人，最终返回该列表。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class HollywoodService {
+    public static List&lt;Agent&gt; getFriendlyAgents() {
+        AgentFinder finder = new SpreadsheetAgentFinder();
+        List&lt;Agent&gt; agents = finder.findAllAgents();
+        List&lt;Agent&gt; friendlyAgents = filterAgents(agents,"Java Developers");
+
+        return friendlyAgents;
+    }
+	//filterAgents
+}
+</code></pre>
+</div>
+
+<p>这是最传统的编码方式，显然，<code class="highlighter-rouge">HollywoodService</code>被<code class="highlighter-rouge">SpreadsheetAgentFinder</code>这个<code class="highlighter-rouge">AgentFinder</code>的具体实现死死的绑定住了。</p>
+
+<p>为了改进这个问题，通常我们会想到一个常用的设计模式——工厂模式。工厂模式可以一定程度上解耦程序，它也是IoC的一种实现方式。</p>
+
+<h3 id="section-1">工厂模式</h3>
+
+<p>利用工厂模式（其实这里用到的是一个简单工厂）重新编写上面的代码，如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public List&lt;Agent&gt; getFriendlyAgents(String agentFinderType) {
+    AgentFinderFactory factory = AgentFinderFactory.getInstance();
+    AgentFinder finder = factory.getAgentFinder(agentFinderType);
+    List&lt;Agent&gt; agents = finder.findAllAgents();
+    return filterAgents(agents, "Java Developers");
+}
+</code></pre>
+</div>
+
+<p>如你所见，这里不再有具体的实现来黏住你，而是通过注入<code class="highlighter-rouge">agentFinderType</code>的方式让你选择想要的AgentFinder。但这里仍然还有问题：</p>
+
+<ol>
+  <li>代码注入的仅仅是一个引用凭据（<code class="highlighter-rouge">agentFinderType</code>），而不是真正实现<code class="highlighter-rouge">AgentFinder</code>的对象</li>
+  <li>方法<code class="highlighter-rouge">getFriendlyAgents</code>中还有获取其依赖的代码，达不到只关注自身智能的理想状态</li>
+</ol>
+
+<p>我们需要通过DI来达成这两个目标。</p>
+
+<h3 id="di">手工实现DI</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static List&lt;Agent&gt; getFriendlyAgents(AgentFinder finder){
+    List&lt;Agent&gt; agents = finder.findAllAgents();
+    return filterAgents(agents,"Java Developers");
+}
+</code></pre>
+</div>
+
+<p>上面的代码是一个纯手工打造的DI方案，<code class="highlighter-rouge">AgentFinder</code>被直接注入到<code class="highlighter-rouge">getFriendlyAgents</code>方法中。现在这个<code class="highlighter-rouge">getFriendlyAgents</code>方法干净利落，只专注于纯业务逻辑。</p>
+
+<p>但是，这种手工方式的DI显然存在问题，如何配置<code class="highlighter-rouge">AgentFinder</code>具体实现的问题并没有解决，原本<code class="highlighter-rouge">AgentFinderFactory</code>要做的工作还是要找一个地方去做。解决这个问题的方式是借助DI框架，而DI框架就是把你的代码打包起来的运行时环境，在你需要的时候注入依赖项。</p>
+
+<h3 id="guice">使用Guice</h3>
+
+<p>Java中DI方面的标准规范是<code class="highlighter-rouge">JSR-330</code>，它提供了统一的DI通用功能的标准，而且提供了你需要了解的幕后规则及限制。这里不具体介绍<code class="highlighter-rouge">JSR-330</code>，有兴趣的可以查找相关资料阅读。我们重点介绍<code class="highlighter-rouge">JSR-330</code>的参考实现<code class="highlighter-rouge">Guice</code>，它是一个由Google实现的针对Java 6以上版本的流行的、轻量级的DI框架。</p>
+
+<p>下面我们使用Guice来解决手工方式实现DI的不足问题：</p>
+
+<p>首先我们需要创建一个定义绑定关系的AgentFinderModule模块（配置类）。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class AgentFinderModule extends AbstractModule{
+    @Override
+    protected void configure() {
+        bind(AgentFinder.class).to(WebServiceAgentFinder.class);
+    }
+}
+</code></pre>
+</div>
+
+<p>绑定关系的确立在调用Guice的<code class="highlighter-rouge">bind</code>方法时发生，把要绑定的类（<code class="highlighter-rouge">AgentFinder</code>)传给它，然后调用to方法指明要注入到哪个实现类。</p>
+
+<p>下面我们来Guice版本的HollywoodService：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public class HollywoodServiceGuice {
+    private AgentFinder finder = null;
+
+    @Inject
+    public HollywoodServiceGuice(AgentFinder finder){
+        this.finder = finder;
+    }
+
+    public List&lt;Agent&gt; getFriendlyAgents(){
+        List&lt;Agent&gt; agents = finder.findAllAgents();
+        return filterAgents(agents, "Java Developers");
+    }
+
+	//...
+}
+</code></pre>
+</div>
+
+<p>我们在模块中声明了绑定关系，下面我们就可以让注入器构建对象关系图了。接下来我们看看在独立Java程序和Web应用程序这两种情况下分别要如何实现：</p>
+
+<ol>
+  <li>
+    <p>构建Guice对象关系图——独立Java程序</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> public class HollywoodServiceClient {
+     public static void main(String[] args) {
+         Injector injector = Guice.createInjector(new AgentFinderModule());
+         HollywoodServiceGuice hollywoodServiceGuice = injector.getInstance(HollywoodServiceGuice.class);
+         List&lt;Agent&gt; agents = hollywoodServiceGuice.getFriendlyAgents();
+     }
+ }
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>构建Guice对象关系图——Web应用程序
+把<code class="highlighter-rouge">Gucie-servlet.jar</code>加到web应用的类库中，然后再<code class="highlighter-rouge">web.xml</code>中添加下面的配置项：</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>   &lt;filter&gt;
+     &lt;filter-name&gt;guiceFilter&lt;/filter-name&gt;
+     &lt;filter-class&gt;com.google.inject.servlet.GuiceFilter&lt;/filter-class&gt;
+   &lt;/filter&gt;
+	
+   &lt;filter-mapping&gt;
+     &lt;filter-name&gt;guiceFilter&lt;/filter-name&gt;
+     &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+   &lt;/filter-mapping&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>然后是标准动作，扩展<code class="highlighter-rouge">ServletContextListene</code>r以便使用Guice的<code class="highlighter-rouge">ServeltModule</code>：</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> public class MyGuiceServletConfig extends GuiceServletContextListener {
+	
+   @Override
+   protected Injector getInjector() {
+     return Guice.createInjector(new ServletModule());
+   }
+ }
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>最好，将其加入到<code class="highlighter-rouge">web.xml</code>文件中，以便servlet容器在部署应用时触发该类：</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;listener&gt;
+   &lt;listener-class&gt;com.example.MyGuiceServletConfig&lt;/listener-class&gt;
+ &lt;/listener&gt;
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>经由注入器创建<code class="highlighter-rouge">HollywoodServiceGuice</code>，你得到一个配置完备的类，马上就可以调用其中的<code class="highlighter-rouge">getFriendlyAgents</code>方法了。</p>
+
+<p>关于JSR-330和Guice的更多用法，请参考其<a href="https://github.com/google/guice">Github页面</a>。</p>
+
+<h2 id="references">References</h2>
+<ol>
+  <li>https://github.com/google/guice/wiki/GettingStarted</li>
+  <li>The Well-Grounded Java Developer, chapter 3, Dependency Injection</li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/di-guice-post.html" data-title="依赖注入与JSR-330的参考实现——Guice"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

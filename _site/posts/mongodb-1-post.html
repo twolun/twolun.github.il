@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web Application Dev. based on MongoDB using Java - An Introduction</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Web Application Dev. based on MongoDB using Java - An Introduction</h1>
+                <p class="post-meta">Oct 24, 2014</p>
+            </header>
+            <article><p>对于web开发而言，很多时候我们并不需要复杂的关系数据库，并且关系数据库要求严格的模式定义，而这很多时候并不适用于web上大量的无结构信息。近年来，追着NoSQL的兴起，使得我们更多的开始关注如何有效的存储和处理无结构的web信息。本文将简要的介绍MongoDB的web开发基本过程。
+<!--more--></p>
+
+<h3 id="introduction">Introduction</h3>
+<p>MongoDB是一款为Web应用程序和互联网基础设施设计的开源的NoSQL数据库管理系统,MongoDB使用C++开发。MongoDB最吸引人的地方在于使用直观的文档作为数据模型，这样可以摆脱关系数据库复杂的多表关联导致的复杂性。这里需要记住几个关键词：</p>
+
+<ul>
+  <li>面向文档</li>
+  <li>动态的模式schema</li>
+  <li>不支持Join操作、不支持SQL</li>
+  <li>即时查询 ad hoc query （无需预定义系统接受的查询类型）</li>
+</ul>
+
+<p>其他的特点可以查看阅读mongoDB的官方文档，这里不进行赘述：</p>
+
+<ul>
+  <li>MongoDB简介：http://docs.mongodb.org/manual/core/introduction/</li>
+  <li>MongoDB安装：http://docs.mongodb.org/manual/installation/</li>
+  <li>http://docs.mongodb.org/manual/tutorial/getting-started/</li>
+</ul>
+
+<h3 id="basic-operation">Basic Operation</h3>
+
+<p>安装好MongoDB后，首先要启动MongoDB的和核心服务器，使用<code class="highlighter-rouge">mongod</code>指令，后面需要指明数据库存放的文件路径：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mongod --dbpath d:/data/db
+</code></pre>
+</div>
+
+<p>然后启动MongoDB的JavaScript Shell, 显然，MongoDB的命令行shell是基于JavaScript的，其用于管理数据库和操作数据。进入shell后最常用的命令如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>db			//显示当前数据库
+show dbs	//显示所有数据库
+use DB		//切换到目标数据库DB
+
+show collections			//显示当前数据库下的所有集合
+db.COLLECTION.findOne();	//查看当前数据库下集合COLLECTION中的一条文档
+</code></pre>
+</div>
+
+<p>其他的命令这里也不再赘述，CRUD操作可以参考MongoDB的详细官方文档：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://docs.mongodb.org/manual/core/crud-introduction/
+</code></pre>
+</div>
+
+<h3 id="import-json-to-mongodb">Import JSON to MongoDB</h3>
+<p>可以使用以下命令将一个JSON文档直接导入到MongoDB中</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mongoimport -d students -c grades &lt; grades.json
+	//-d 数据库名
+	//-c 集合名
+</code></pre>
+</div>
+
+<h3 id="application-architecture">Application Architecture</h3>
+
+<p><img src="/img/posts/141026-mongo-arch.PNG" alt="Application Architecture" /></p>
+
+<ul>
+  <li>Database: MongoDB</li>
+  <li>Server-side: SparkJava Framework etc.</li>
+  <li>Client-side: FreeMarker etc.</li>
+</ul>
+
+<h3 id="bson---binary-json">BSON - Binary jSON</h3>
+
+<p>MongoDB用来表示文档的二进制格式，它既是存储格式，也是命令格式。所有文档都已BSON格式存储在磁盘上，所有查询和命令都用BSON文档来指定。</p>
+
+<h3 id="maven">Maven</h3>
+
+<p>我们使用Maven作为项目构建工具。我们将启动一个Maven初始模版（app-start）作为我们开发的起点。启动项目后，首先在pom中加入sparkjava，sparkjava是一个轻型的MVC框架：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+	&lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
+	&lt;artifactId&gt;spark-core&lt;/artifactId&gt;
+	&lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<p>需要注意的是，最新版的sparkjava为2.0.0.0，需要java8的支持，如果你未使用java8的话，就必须退回到旧版本，这里我们使用1.1.1版本，该版本支持java7。 sparkjava项目的官方地址为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://www.sparkjava.com/
+</code></pre>
+</div>
+
+<p>然后，我们将freemarker的相关配置信息加入pom中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+	&lt;groupId&gt;org.freemarker&lt;/groupId&gt;
+	&lt;artifactId&gt;freemarker&lt;/artifactId&gt;
+	&lt;version&gt;2.3.19&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<h3 id="mongodb-java-driver">MongoDB Java Driver</h3>
+
+<p>最后，加入mongodb的java driver:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+   &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
+   &lt;artifactId&gt;mongo-java-driver&lt;/artifactId&gt;
+   &lt;version&gt;2.10.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<p>为了验证以上的步骤是否正确，我们编写如何的测试代码，用于测试MongoDB是否能正常工作（注意，前提是你必须先启动mongod应用服务器）：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>MongoClient client = new MongoClient(new ServerAddress("localhost", 27017));
+	
+DB database = client.getDB("course");
+DBCollection collection = database.getCollection("hello");
+	
+DBObject document = collection.findOne();
+System.out.println(document)；
+</code></pre>
+</div>
+
+<h3 id="summary">Summary</h3>
+<p>本文简单介绍了基于MongDB的web应用开发的基本结构，以及各项组件在应用中的作用。今后，会再利用一两篇博客具体介绍基于mongoDB的web开发的具体细节，包括如何使用sparkjava+freemarker。以及使用以上谈到的技术构建一个简单的博客系统。</p>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/mongodb-1-post.html" data-title="Web Application Dev. based on MongoDB using Java - An Introduction"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

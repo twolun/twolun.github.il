@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>谈一谈JavaScript中的动态this值</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>谈一谈JavaScript中的动态this值</h1>
+                <p class="post-meta">May 1, 2016</p>
+            </header>
+            <article><p>对于大部分的JavaScript初学者而言，该语言中的<code class="highlighter-rouge">this</code>臭名狼籍。JavaScript中的<code class="highlighter-rouge">this</code>
+值取决于它被调用的时机。本文，我们就来讨论一下这个奇怪的特性。</p>
+
+<!--more-->
+
+<h2 id="this">令人烦恼的动态<code class="highlighter-rouge">this</code></h2>
+
+<p>在JavaScript中，<code class="highlighter-rouge">this</code>的动态特性总是令人烦恼。对于新手而言，总是不知道如何去判断当前的<code class="highlighter-rouge">this</code>值。</p>
+
+<p>事实是，<a href="https://github.com/getify/You-Dont-Know-JS/tree/master/this%20%26%20object%20prototypes">规则非常的简单</a>。
+我们先看一个例子：</p>
+
+<p>```javascript</p>
+
+<p>“use strict”;</p>
+
+<p>const polyglot = {
+    name : “Weiwei SUN”,
+    languages : [“Chinese”, “English”, “Italian”, “German”, “Polish”],
+    introduce : function () {
+        // this.name is “Weiwei SUN”
+        const self = this;
+        this.languages.forEach(function(language) {
+            // this.name is undefined, so we have to use our saved “self” variable 
+            console.log(“My name is “ + self.name + “, and I speak “ + language + “.”);
+        });
+    }
+}</p>
+
+<p>polyglot.introduce();
+```</p>
+
+<p>在<code class="highlighter-rouge">introduce</code>中，<code class="highlighter-rouge">this.name</code>的值为<code class="highlighter-rouge">undefined</code>。在回调函数的外部，
+在我们的<code class="highlighter-rouge">forEach</code>循环中，它指向<code class="highlighter-rouge">polyglot</code>对象。在多数情况下，我们的直觉会告诉我们，
+回调函数中的<code class="highlighter-rouge">this</code>和回调函数外部的<code class="highlighter-rouge">this</code>应该是指向同一个对象，然而事实缺并非如此。</p>
+
+<blockquote>
+  <p>在JavaScript中，<code class="highlighter-rouge">this</code>始终指向当前函数的调用者。所有的回调函数在事件循环中被调用。</p>
+</blockquote>
+
+<p>还有一个相似的例子是构造了一个高阶函数的情况，此时内函数与外函数的<code class="highlighter-rouge">this</code>指向也会不同。
+例如，下面这个例子：</p>
+
+<p>```javascript
+var BindingMixin = {
+    handleChange: function (key) {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    // 此时this值会被解释器重新设置，从而丢失原来的this值
+    var that = this;
+    
+    return function (event) {
+      var newState = {};
+      that.setState(newState);
+    }
+  } } ```
+</code></pre>
+</div>
+
+<p>问题在于，在JavaScript中，函数中的<code class="highlighter-rouge">this</code>总是取决于它们的实际调用者，
+大体上可以包括<a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20&amp;%20object%20prototypes/ch2.md">四个规则</a>。
+这个机制就是所谓的动态<code class="highlighter-rouge">this</code>。</p>
+
+<p>这意味着，当JavaScript解释器寻找<code class="highlighter-rouge">this</code>的值的时候，它将会找到其中的一个，
+但对于回调函数的而言，其内部的<code class="highlighter-rouge">this</code>和外部的<code class="highlighter-rouge">this</code>却并非同一个。一般有两种解决方案：</p>
+
+<ol>
+  <li>将<code class="highlighter-rouge">this</code>作为外部函数的局部变量进行保存，通常命名为<code class="highlighter-rouge">this</code>，正如上面的例子中展示的那样，
+然后在内函数中。</li>
+  <li>在内函数中调用<code class="highlighter-rouge">bind()</code>方法，用于设定<code class="highlighter-rouge">this</code>的值。</li>
+</ol>
+
+<p>这些方法虽然有效，但却有点晦涩。</p>
+
+<p>或者，我们换一种思路，哪函数不再设置它们的<code class="highlighter-rouge">this</code>值，JavaScript将会寻找<code class="highlighter-rouge">this</code>的值。
+就像寻找其他变量的值那样：逐层返回到上一层作用域中寻找，直到发现同名变量。这样的话，
+我们就可以正确的使用到<code class="highlighter-rouge">this</code>变量的值，也就是所谓的 词法的<code class="highlighter-rouge">this</code>。</p>
+
+<h2 id="this-1">使用箭头函数来实现 词法的<code class="highlighter-rouge">this</code></h2>
+
+<p>从ES2015开始，我们可以这么做了。箭头函数并不会绑定<code class="highlighter-rouge">this</code>值，从而允许我们利用<code class="highlighter-rouge">this</code>关键字的词法绑定。
+我们可以对上面的代码进行重构：</p>
+
+<p>```javascript
+“use strict”;</p>
+
+<p>let polyglot = {
+    name : “Weiwei SUN”,
+    languages : [“Chinese”, “English”, “Italian”, “German”, “Polish”],
+    introduce : function () {
+        this.languages.forEach((language) =&gt; {
+            console.log(“My name is “ + this.name + “, and I speak “ + language + “.”);
+        });
+    }
+}</p>
+
+<p>```</p>
+
+<p>现在，代码的运行结果正如我们所期望的那样。</p>
+
+<p>箭头函数的使用大概有以下几种类型：</p>
+
+<p>```javascript
+“use strict”;</p>
+
+<p>let languages = [“Spanish”, “French”, “Italian”, “German”, “Polish”];</p>
+
+<p>// 在多行箭头函数中，你必须使用花括号，
+//  并且你必须包含一个return语句
+let languages_lower = languages.map((language) =&gt; {
+    return language.toLowerCase()
+});</p>
+
+<p>// 如果是单行的箭头函数，那么花括号则是可选的
+//  并且函数会隐式的返回表达式，
+//  你可以显示的提供return语句
+let languages_lower = languages.map((language) =&gt; language.toLowerCase());</p>
+
+<p>// 如果你的箭头函数只爆款一个参数，
+//  此时，你可以不使用小括号去包裹参数
+let languages_lower = languages.map(language =&gt; language.toLowerCase());</p>
+
+<p>// 如果你的函数接收多个参数，你必须使用小括号包裹住它们
+let languages_lower = languages.map((language, unused_param) =&gt; language.toLowerCase());</p>
+
+<p>console.log(languages_lower); // [“spanish”, “french”, “italian”, “german”, “polish”]</p>
+
+<p>// 最后，如果你的函数不接收参数，你也必须使用一个空括号
+(() =&gt; alert(“Hello!”))();</p>
+
+<p>```</p>
+
+<p>更详细单内容，我推荐你参考<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN的文档</a>。</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://scotch.io/tutorials/better-node-with-es6-pt-i">Better Node with ES6, Pt. I</a></li>
+  <li><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20&amp;%20object%20prototypes/ch2.md">this All Makes Sense Now!</a></li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/quirks-of-dynamic-this.html" data-title="谈一谈JavaScript中的动态this值"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

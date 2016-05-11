@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Node.js中的依赖注入</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Node.js中的依赖注入</h1>
+                <p class="post-meta">Oct 14, 2015</p>
+            </header>
+            <article><p>依赖注入是一种软件设计模式，一个或多个依赖项（或服务）通过引用被注入或传递进依赖对象中。
+在不久前，我曾总结过<a href="/posts/di-guice-post.html">Java中依赖注入以及JSR-330的参考实现Guice</a>，
+如果你感兴趣可以参考前一篇文章，本文将会讨论如何在Node.js程序中使用依赖注入。</p>
+
+<!--more-->
+
+<h2 id="section">使用依赖注入的原因</h2>
+
+<h3 id="section-1">解耦</h3>
+
+<p>通过依赖注入能够使模块间松耦合，并且使得代码库变得更加可维护。</p>
+
+<h3 id="section-2">更简单的单元测试</h3>
+
+<p>在测试时，你可以将依赖项传递进模块，而不是硬编码依赖项。</p>
+
+<h3 id="section-3">快速开发</h3>
+
+<p>使用依赖注入的方式，在定义接口后，你可以轻松的工作，而不会遇到合并冲突。</p>
+
+<h2 id="nodejs">如何在Node.js中使用依赖注入</h2>
+
+<p>首先，我们来看看如果没有依赖注入，我们如何来编码我们的应用。然后我们再来改写这些代码。</p>
+
+<h3 id="section-4">不使用依赖注入</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// team.js
+var User = require('./user');
+
+function getTeam(teamId) {  
+	return User.find({teamId: teamId});
+}
+
+module.exports.getTeam = getTeam;  
+</code></pre>
+</div>
+
+<p>可以编写一个简单的测试如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// team.spec.js
+var Team = require('./team');  
+var User = require('./user');
+
+describe('Team', function() {  
+	it('#getTeam', function* () {
+		var users = [{id: 1, id: 2}];
+	
+		this.sandbox.stub(User, 'find', function() {
+			return Promise.resolve(users);
+		});
+	
+		var team = yield team.getTeam();
+	
+		expect(team).to.eql(users);
+	});
+});
+</code></pre>
+</div>
+
+<p>上面的代码中：我们首先创建了一个叫<code class="highlighter-rouge">team.js</code>的文件，用于返回某个组中的用户列表。
+对此，我们需要引入<code class="highlighter-rouge">User</code>模型，然后我们可以通过调用它的<code class="highlighter-rouge">find</code>方法来返回特定的用户列表。</p>
+
+<p>这看起来没问题，是吗？但是，当我们需要进行测试它的时候，
+我们就不得不通过<a href="http://sinonjs.org/">sinon</a>来测试stub。</p>
+
+<p>在测试文件中，我们也要<code class="highlighter-rouge">require</code>这个<code class="highlighter-rouge">User</code>模型，然后我们才能stub它的<code class="highlighter-rouge">find</code>方法。
+需要注意的是，我们这里正在使用的是沙盒特性，因此在测试运行后我们无需再手动恢复到原来的函数。</p>
+
+<blockquote>
+  <p>注意：但原对象使用<code class="highlighter-rouge">Object.freeze</code>后，Stub将不能工作。</p>
+</blockquote>
+
+<h3 id="section-5">使用依赖注入</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// team.js
+function Team(options) {  
+	this.options = options;
+}
+
+Team.prototype.getTeam = function(teamId) {  
+	return this.options.User.find({teamId: teamId})
+}
+
+function create(options) {  
+	return new Team(options);
+}
+</code></pre>
+</div>
+
+<p>你可以使用如下的测试文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// team.spec.js
+var Team = require('./team');
+
+describe('Team', function() {  
+	it('#getTeam', function* () {
+		var users = [{id: 1, id: 2}];
+	
+		var fakeUser = {
+			find: function() {
+				return Promise.resolve(users);
+			}
+		};
+	
+		var team = Team.create({
+			User: fakeUser
+		});
+	
+		var team = yield team.getTeam();
+	
+		expect(team).to.eql(users);
+	});
+});
+</code></pre>
+</div>
+
+<p>对比下和之前的不使用依赖注入那个版本的不同之处：
+首先一个是使用了<a href="/posts/node-design-patterns.html">工厂模式</a>：
+我们使用这种方法来注入选项/依赖项，从而创建新的对象——这也就是我们要注入<code class="highlighter-rouge">User</code>模型的地方。</p>
+
+<p>在测试文件中，我们可以创建虚假的模型对象来表示<code class="highlighter-rouge">User</code>模型，然后我们可以轻松的将它传递进
+<code class="highlighter-rouge">Team</code>模型的<code class="highlighter-rouge">create</code>方法中。是的，这很简单。</p>
+
+<h2 id="section-6">在真实项目中的依赖注入</h2>
+
+<p>在很多的开源项目中你都可以发现依赖注入的例子。例如，在你每天的工作中，
+大多数你使用的Express/Koa中间件都使用了非常类似的方法。</p>
+
+<h3 id="express">Express中间件</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var express = require('express');  
+var app = express();  
+var session = require('express-session');
+
+app.use(session({  
+	store: require('connect-session-knex')()
+}));
+</code></pre>
+</div>
+
+<p>上面的代码片段就是利用了工厂模式来使用依赖注入的：在session中间件中，我们传递了
+<code class="highlighter-rouge">connect-session-knex</code>模块（它需要实现一个接口），然后再session模块中被调用。</p>
+
+<p>在这个例子中，<code class="highlighter-rouge">connect-session-knex</code>模块需要实现下面几个方法：</p>
+
+<ul>
+  <li>store.destroy(sid, callback);</li>
+  <li>store.get(sid, callback);</li>
+  <li>store.set(sid, session, callback);</li>
+</ul>
+
+<h3 id="hapi">Hapi插件</h3>
+
+<p>你可以在Hapi中发现非常类似的概念——下面的例子中将<code class="highlighter-rouge">handlebars</code>模块注入进Hapi作为视图引擎。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>server.views({  
+	engines: {
+		html: require('handlebars')
+	},
+	relativeTo: __dirname,
+	path: 'templates'
+});
+</code></pre>
+</div>
+
+<h2 id="section-7">推荐阅读</h2>
+
+<ol>
+  <li><a href="http://wwsun.me/posts/node-design-patterns.html">Node.js常用设计模式</a></li>
+  <li><a href="http://wwsun.me/posts/node-best-practices.html">Node.js编程建议（1）</a></li>
+  <li><a href="http://wwsun.me/posts/node-best-practices-2.html">Node.js编程建议（2）</a></li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/dependency-injection-in-nodejs.html" data-title="Node.js中的依赖注入"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

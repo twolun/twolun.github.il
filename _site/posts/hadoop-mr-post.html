@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Beginning MapReduce in Hadoop</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Beginning MapReduce in Hadoop</h1>
+                <p class="post-meta">Oct 20, 2014</p>
+            </header>
+            <article><p>Hadoop是一个开源框架，它遵循谷歌的方法实现了MapReduce算法，可以编写和运行分布式应用处理大规模数据。利用Hadoop，可以快速、廉价的建立集群。Hadoop开始是<code class="highlighter-rouge">Nutch</code>的一个子项目，而Nutch又是<code class="highlighter-rouge">[Apache Lucene](http://lucene.apache.org/core/)</code>的一个子项目。</p>
+
+<!--more-->
+
+<h3 id="yarn">YARN</h3>
+
+<p>MapReduce在hadoop-0.23版本的时候经历了一次大规模的重构，即所谓的YARN，或MRv2。重构根本的意图是将 JobTracker 两个主要的功能分离成单独的组件，这两个功能是资源管理和任务调度/监控。</p>
+
+<p>新的资源管理器全局管理所有应用程序计算资源的分配，每一个应用的 ApplicationMaster 负责相应的调度和协调。一个应用程序无非是一个单独的传统的 MapReduce 任务或者是一个 DAG( 有向无环图 ) 任务。ResourceManager 和每一台机器的节点管理服务器能够管理用户在那台机器上的进程并能对计算进行组织。</p>
+
+<p>事实上，每一个应用的 ApplicationMaster 是一个详细的框架库，它结合从 ResourceManager 获得的资源和 NodeManager 协同工作来运行和监控任务。更具体的原理解释，请阅读参考资料。</p>
+
+<h3 id="hdfs">HDFS</h3>
+<p>Hadoop File System，是一种分布式文件系统，专门为MapReduce这类框架下的大规模分布式数据处理而设计的。HDFS基于Google的GFS而设计[6]。</p>
+
+<blockquote>
+  <p>HDFS is a filesystem designed for storing <strong><em>very large</em></strong> files with <strong><em>streaming data access</em></strong> patterns, running on clusters of <strong><em>commodity hardware</em></strong>.</p>
+</blockquote>
+
+<p>HDFS遵循“一次写入，多次读取”的模式。HDFS存储的数据集作为hadoop的分析对象。在数据集生成后，长时间在此数据集上进行各种分析。每次分析都将设计该数据集的大部分数据甚至全部数据，因此读取整个数据集的时间延迟比读取第一条记录的时间延迟更重要。</p>
+
+<p>HDFS设计理念之一就是让它能运行在普通的硬件之上，即便硬件出现故障，也可以通过容错策略来保证数据的高可用。</p>
+
+<h4 id="hdfs-1">不适合HDFS的场景</h4>
+
+<ol>
+  <li>将HDFS用于对数据访问要求低延迟的场景：HDFS是为高吞吐量而设计的，必然导致高延迟</li>
+  <li>存储大量小文件</li>
+</ol>
+
+<h3 id="section">数据类型</h3>
+<p>为了让键/值对可以在集群上移动，MapReduce框架提供了一种序列化键/值对的方法。因此，只有哪些支持这种序列化的类菜能够在这个框架中充当键值。具体而言：</p>
+
+<ul>
+  <li>实现Writable接口的类可以是值</li>
+  <li>实现WritableComparable<t>接口的类即可以是键也可以是值（因为Key在Reduce阶段需要比较排序）</t></li>
+  <li>常用的数据类型可以参考[4]</li>
+</ul>
+
+<p>以下数据类型可以用于键值：</p>
+
+<ul>
+  <li>Text: This stores a UTF8 text</li>
+  <li>ByteWritable: This stores a sequence of bytes</li>
+  <li>VIntWritable and VLongWritable : These stores variable length integer and long values</li>
+  <li>NullWritable: This is zero-length Writable type that can be used when you don’t want to use a key or value type</li>
+</ul>
+
+<h3 id="mapreduce">MapReduce</h3>
+<p>MapReduce是一种数据处理模型，它最大的优点是容易扩展到多个计算节点上处理数据。其包含两个数据处理原语，即mapper和reducer。编写好MapReduce程序后，通过简单的配置就可以扩展到任意规模的集群上运行。这也正是MapReduce最吸引人的地方。</p>
+
+<p>MapReduce程序通过操作键/值对来处理数据，一般的处理过程如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>map: (K1,V1) --&gt; list(K2,V2)
+reduce: (k2,list(V2)) --&gt; list(K3,V3)
+</code></pre>
+</div>
+
+<p>map()函数以key/value对作为输入，产生另外一系列key/value对作为中间输出写入本地磁盘MapReduce框架会自动将这些中间数据按照key值进行聚集，且key值相同（用户可设定聚集策略，默认情况下是对key值进行哈希取模）的数据被统一交给reduce()函数处理。</p>
+
+<p>reduce()函数以key及对应的value列表作为输入，经合并key相同的value值后，产生另外一系列key/value对作为最终输出写入HDFS。</p>
+
+<h3 id="example">Example</h3>
+<p>下面解释Hadoop官方的单词计数的例子，核心代码都加上了注释：</p>
+
+<p>对于Mapper，输入的key为字符串的偏移量，value为文本中的一行。通过分词，将每个单词作为输出的key，1作为输出的value。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+ * &lt;KEYIN, VALUEIN, KEYOUT, VALUEOUT&gt;
+ */
+public static class MyMapper extends Mapper&lt;Object, Text, Text, IntWritable&gt;{
+	
+	private final static IntWritable one = new IntWritable(1);
+	private Text word = new Text();
+	
+	public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
+		//use StringTokenizer to split a line to a serial of words
+		StringTokenizer itr = new StringTokenizer(value.toString());
+		while(itr.hasMoreTokens()){
+			word.set(itr.nextToken());
+			//the result of map: &lt;word, 1&gt;
+			context.write(word, one);
+		}
+	}
+}
+</code></pre>
+</div>
+
+<p>下面是Reducer：Reduce的输入就是Map的输出，所以输入的Key就是一个个的单词，输入的value都为1。Reduce阶段只要将key相同的都加起来就可以了。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+ * &lt;KEYIN, VALUEIN, KEYOUT, VALUEOUT&gt;
+ * The input of Reducer is the output of Mapper
+ */
+public static class MyReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;{
+	
+	private IntWritable result = new IntWritable();
+	public void reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context) throws IOException, InterruptedException{
+		int sum = 0;
+		for (IntWritable val : values) {
+			System.out.println(key.toString()+" ---&gt; "+val.get());
+			sum += val.get();
+			System.out.println("Temp sum = "+sum);
+		}
+		result.set(sum);
+		context.write(key, result);
+	}
+}
+</code></pre>
+</div>
+
+<p>最后编写主函数如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static void main(String[] args) throws Exception {
+	//Initialization
+	Configuration conf = new Configuration();
+	
+	if(args.length != 2){
+		System.err.println("Usage: wordcount &lt;input&gt; &lt;output&gt;");
+		System.exit(2);
+	}
+	
+	Job job = Job.getInstance(conf,"word count");
+	job.setJarByClass(WordCount.class);
+	
+	//map --&gt; combine --&gt; reduce
+	job.setMapperClass(MyMapper.class);
+	job.setCombinerClass(MyReducer.class);
+	job.setReducerClass(MyReducer.class);
+	
+	//set the type of result &lt;key, value&gt; == &lt;word, count&gt;
+	job.setOutputKeyClass(Text.class);
+	job.setOutputValueClass(IntWritable.class);
+	
+	FileInputFormat.addInputPath(job, new Path(args[0]));
+	FileOutputFormat.setOutputPath(job, new Path(args[1]));
+	
+	System.exit(job.waitForCompletion(true) ? 0:1);
+}
+</code></pre>
+</div>
+
+<p>总结如下，用户编写完MapReduce程序后，按照一定的规则指定程序的输入和输出目录，并提交到Hadoop集群中。Hadoop将输入数据切分成若干个输入分片（input split，后面简称split），并将每个split交给一个Map Task处理；Map Task不断地从对应的split中解析出一个个key/value，并调用map()函数处理，处理完之后根据Reduce Task个数将结果分成若干个分片（partition）写到本地磁盘；同时，每个Reduce Task从每个Map Task上读取属于自己的那个partition，然后使用基于排序的方法将key相同的数据聚集在一起，调用reduce()函数处理，并将结果输出到文件中。</p>
+
+<p><img src="/img/posts/141020-mr.PNG" alt="MapReduce" /></p>
+
+<h3 id="mapreduce-1">MapReduce的应用场景</h3>
+
+<p>MapReduce能够解决的问题有一个共同特点：任务可以被分解为多个子问题，且这些<strong><em>子问题相对独立，彼此之间不会有牵制</em></strong>，待并行处理完这些子问题后，任务便被解决。在实际应用中，这类问题非常庞大，谷歌在论文中提到了MapReduce的一些典型应用，包括分布式grep、URL访问频率统计、Web连接图反转、倒排索引构建、分布式排序等，这些均是比较简单的应用。下面介绍一些比较复杂的应用。</p>
+
+<h3 id="references">References</h3>
+
+<ol>
+  <li>http://www.ibm.com/developerworks/cn/opensource/os-cn-hadoop-yarn/</li>
+  <li>http://www.csdn.net/article/2013-12-18/2817842-bd-hadoopyarn</li>
+  <li>http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html</li>
+  <li>http://www.datascience-labs.com/mapreduce/hadoop-data-types/</li>
+  <li>http://os.51cto.com/art/201212/369564.htm</li>
+  <li>http://www.datascience-labs.com/hadoop/hdfs/</li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/hadoop-mr-post.html" data-title="Beginning MapReduce in Hadoop"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

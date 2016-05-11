@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>从零开始开发MEAN栈单页面应用</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>从零开始开发MEAN栈单页面应用</h1>
+                <p class="post-meta">Mar 9, 2015</p>
+            </header>
+            <article><p>本文主要介绍了基于<code class="highlighter-rouge">MongoDB</code>, <code class="highlighter-rouge">Express</code>, <code class="highlighter-rouge">AngularJS</code>, <code class="highlighter-rouge">Node.js</code>（也被称为MEAN栈）的单页面应用开发的前期配置工作，通过本文的介绍，我们将会创建一个MEAN应用的起始框架，以此来作为其他项目的基础。这对你构建其他MEAN应用而言，将会是一个非常好的起点。
+<!--more--></p>
+
+<p>你可能已经了解了<a href="http://mean.io/#!/">mean.io</a>和<a href="http://meanjs.org/">meanjs.org</a>，它们都是非常不错的融合了很多高级特性的MEAN应用。但是，很多时候，你还是会觉得它们太过复杂了，不太适合被用来构建一些简单的应用。因此，下面我们将重头开始来构建MEAN应用的基础框架。</p>
+
+<p>本文以[2]为基础，你可以直接阅读该文章，但更换了Angular的路由模块为<code class="highlighter-rouge">angular-ui-router</code>，以及使用了<code class="highlighter-rouge">ControllerAs</code>语法，你可以直接查看源代码[1]。</p>
+
+<h2 id="section">应用基本需求</h2>
+
+<ul>
+  <li>单页面应用SAP</li>
+  <li>Node.js作为后端，包括Express和MongoDB</li>
+  <li>AngularJS作为前端</li>
+  <li>模块化Angular组件，包括controllers, services</li>
+  <li>易于扩展的项目组织结构</li>
+</ul>
+
+<p>本项目的完整<a href="https://github.com/wwsun/starter-node-angular">源代码</a>：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/wwsun/starter-node-angular
+</code></pre>
+</div>
+
+<h2 id="section-1">项目目录结构</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- app
+    ----- models/
+    ---------- nerd.js &lt;!-- the nerd model to handle CRUD --&gt;
+----- routes.js
+- config
+    ----- db.js 
+- node_modules &lt;!-- created by npm install --&gt;
+- public &lt;!-- all frontend and angular stuff --&gt;
+----- css
+----- js
+---------- controllers &lt;!-- angular controllers --&gt;
+---------- services &lt;!-- angular services --&gt;
+---------- app.js &lt;!-- angular application --&gt;
+---------- appRoutes.js &lt;!-- angular routes --&gt;
+----- img
+----- libs &lt;!-- created by bower install --&gt;
+----- views 
+---------- home.html
+---------- nerd.html
+---------- geek.html
+----- index.html
+- .bowerrc &lt;!-- tells bower where to put files (public/libs) --&gt;
+- bower.json &lt;!-- tells bower which files we need --&gt;
+- package.json &lt;!-- tells npm which packages we need --&gt;
+- server.js &lt;!-- set up our node application --&gt;
+</code></pre>
+</div>
+
+<p>所有的后端工作都会在<code class="highlighter-rouge">server.js</code>，<code class="highlighter-rouge">app</code>和<code class="highlighter-rouge">config</code>中完成，所有的前端工作会在<code class="highlighter-rouge">public</code>中完成。</p>
+
+<h2 id="node">Node应用</h2>
+<p>所有的Node应用都会以<code class="highlighter-rouge">package.json</code>为起点，该文件如下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"starter-node-angular"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"express"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"~4.5.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mongoose"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"~3.8.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"body-parser"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"~1.4.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"method-override"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"~2.0.2"</span><span class="w">        
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>现在，应用将会知道项目会使用Express和Mongoose。</p>
+
+<p><code class="highlighter-rouge">server.js</code>文件用来启动应用。<code class="highlighter-rouge">config,js</code>用于配置数据库信息。<code class="highlighter-rouge">models</code>下存放了一个简单的文档模型，你可以根据你的需求增加更为复杂的。</p>
+
+<h2 id="section-2">前端</h2>
+<p>所有的后端工作完成后，我们可以专注于前端工作。所有访问该应用的用户，Node后端都会将<code class="highlighter-rouge">index.html</code>返回给前端，因为我们在后端路由中定义了<code class="highlighter-rouge">app.get('*')</code>。</p>
+
+<p>前端开发需要以下内容：</p>
+
+<ul>
+  <li>使用Bower做依赖管理</li>
+  <li>Angular应用结构（Controllers, services）</li>
+  <li>我们将创建三个不同的页面（Home, Nerds, Geeks）</li>
+  <li>使用<code class="highlighter-rouge">angular-ui-router</code>处理路由</li>
+  <li>使用Bootstrap</li>
+</ul>
+
+<h3 id="bower">使用Bower进行前端依赖管理</h3>
+
+<p><code class="highlighter-rouge">.bowerrc</code>文件会告诉Bower将文件下载安放到的具体位置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"directory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public/libs"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><code class="highlighter-rouge">bower.json</code>和<code class="highlighter-rouge">package.json</code>类似，会告诉Bower我们需要哪些前端依赖：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"angular"</span><span class="p">,</span><span class="w">
+	</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+	</span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		</span><span class="nt">"bootstrap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="p">,</span><span class="w">
+		</span><span class="nt">"angular"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="p">,</span><span class="w">
+		</span><span class="nt">"angular-ui-router"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="w">
+	</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>在控制台中运行<code class="highlighter-rouge">bower install</code>，bower将会下载需要的依赖库并放到<code class="highlighter-rouge">public/libs</code>文件夹中。</p>
+
+<h3 id="angular-ui-router">Angular-ui router</h3>
+
+<p>我们使用<code class="highlighter-rouge">angular-ui-router</code>进行路由管理，在<code class="highlighter-rouge">appRoutes.js</code>文件中定义路由信息，如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>angular.module('appRoutes', []).config(function($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+        .state('home', {
+            url: '/',
+            templateUrl: 'views/home.html',
+            controller: 'MainController as mainCtrl'
+        })
+
+        .state('nerds', {
+            url: '/nerds',
+            templateUrl: 'views/nerd.html',
+            controller: 'NerdController as nerdCtrl'
+        })
+
+        .state('geeks', {
+            url: '/geeks',
+            templateUrl: 'views/geek.html',
+            controller: 'GeekController as geekCtrl'
+        })
+});
+</code></pre>
+</div>
+
+<p>每个页面的控制器我们都使用了ControllerAs语法，这样可以避免<code class="highlighter-rouge">$scope</code>变量注入的各种问题。在<code class="highlighter-rouge">index.html</code>中我们可以使用<code class="highlighter-rouge">&lt;div ui-view&gt;&lt;/div&gt;</code>语句将内容动态注入到模版中。</p>
+
+<h3 id="section-3">视图内容</h3>
+<p><code class="highlighter-rouge">index.html</code>页面内容如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+
+	<span class="nt">&lt;title&gt;</span>Flapper News<span class="nt">&lt;/title&gt;</span>
+
+	<span class="c">&lt;!-- CSS --&gt;</span>
+	<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"libs/bootstrap/dist/css/bootstrap.min.css"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/style.css"</span><span class="nt">&gt;</span> <span class="c">&lt;!-- custom styles --&gt;</span>
+
+	<span class="c">&lt;!-- JS --&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/angular/angular.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/angular-ui-router/release/angular-ui-router.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+	<span class="c">&lt;!-- ANGULAR CUSTOM --&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/controllers/MainCtrl.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/controllers/NerdCtrl.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/services/NerdService.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/controllers/GeekCtrl.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/services/GeekService.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/appRoutes.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">ng-app=</span><span class="s">"sampleApp"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+	
+	<span class="c">&lt;!-- HEADER --&gt;</span>
+	<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-inverse"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"navbar-header"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"/"</span><span class="nt">&gt;</span>Flapper News<span class="nt">&lt;/a&gt;</span>
+		<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav navbar-nav"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">ui-sref=</span><span class="s">"home"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;&lt;a</span> <span class="na">ui-sref=</span><span class="s">"nerds"</span><span class="nt">&gt;</span>Nerds<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;&lt;a</span> <span class="na">ui-sref=</span><span class="s">"geeks"</span><span class="nt">&gt;</span>Geeks<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+		<span class="nt">&lt;/ul&gt;</span>
+	<span class="nt">&lt;/nav&gt;</span>
+
+	<span class="c">&lt;!-- ANGULAR DYNAMIC CONTENT --&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">ui-view</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="section-4">子页面</h3>
+
+<p>以<code class="highlighter-rouge">views/home.html</code>为例，视图内容如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="jumbotron text-center"&gt;
+	&lt;h1&gt;Home Page 4 Life&lt;/h1&gt;
+
+	&lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+</div>
+
+<p>其他子页面都是类似的，你可以查看本项目的源代码，这里不再重复。</p>
+
+<h3 id="section-5">组合</h3>
+<p>注意，要想让路由生效，你还需要在模块中注入<code class="highlighter-rouge">ui.router</code>。在<code class="highlighter-rouge">app.js</code>需要进行如下定义：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>angular.module('sampleApp', ['ui.router', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService']);
+</code></pre>
+</div>
+
+<h2 id="section-6">总结</h2>
+
+<p>通过本文，我们将能够搭建一个MEAN项目的基础框架，以Node为后端，Angular为前端，以此为基础，你可添加更多的高级功能，如认证、REST API等等。</p>
+
+<ul>
+  <li>项目的完整源代码：https://github.com/wwsun/starter-node-angular</li>
+  <li>使用Jade模版引擎的版本：https://github.com/Zemke/starter-node-angular</li>
+  <li>原文： https://scotch.io/tutorials/setting-up-a-mean-stack-single-page-application</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li>https://github.com/wwsun/starter-node-angular</li>
+  <li>https://scotch.io/tutorials/setting-up-a-mean-stack-single-page-application</li>
+  <li>https://scotch.io/bar-talk/expressjs-4-0-new-features-and-upgrading-from-3-0</li>
+  <li>https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular</li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/mean-starter.html" data-title="从零开始开发MEAN栈单页面应用"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

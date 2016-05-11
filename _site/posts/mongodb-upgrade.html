@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>升级到MongoDB 3.0</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>升级到MongoDB 3.0</h1>
+                <p class="post-meta">Mar 4, 2015</p>
+            </header>
+            <article><p>MongoDB 3.0的稳定版终于发布了，新版不仅强化了原有的MMAPv1存储引擎，还内置WiredTiger存储引擎，以及一个能减少运维人员日常例行工作的管理平台Ops Manager。MongoDB宣称，3.0新版本不只提升7到10倍的写入效率以及增加80％的数据压缩率，还能减少95％的运维成本。</p>
+
+<!--more-->
+
+<h2 id="section">下载安装</h2>
+
+<p>下面的升级过程是在单机环境下完成的，如果是集群环境，请参考官方文档。</p>
+
+<p>升级过程很简单，确保你的版本为2.6，然后关闭当前的MongoDB进程，并且安装3.0的二进制包即可，Windows版本需要更改一下环境变量（目录结构稍有变动）。</p>
+
+<h2 id="wiredtiger">切换存储引擎为 WiredTiger</h2>
+
+<p>3.0默认的存储引擎依然为MMAPv1，你需要手动的将数据导出和重新导入。</p>
+
+<h3 id="mongodb-30">1.启动MongoDB 3.0</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mongod --dbpath \data\db
+</code></pre>
+</div>
+
+<h3 id="section-1">2.导出数据</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mongodump --out \data\dump
+</code></pre>
+</div>
+
+<h3 id="wiredtiger-1">3.创建WiredTiger存储目录</h3>
+
+<p>这里我在导出数据后，直接清空了<code class="highlighter-rouge">\data\db</code>目录，然后依然使用这个目录作为<code class="highlighter-rouge">WiredTiger</code>的存储目录。</p>
+
+<h3 id="wiredtigermongod">4.使用WiredTiger引擎重启mongod</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mongod --storageEngine wiredTiger --dbpath \data\db
+</code></pre>
+</div>
+
+<h3 id="section-2">5.恢复数据</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mongorestore \data\dump
+</code></pre>
+</div>
+
+<h2 id="wiredtiger-2">WiredTiger</h2>
+
+<p>因为WiredTiger，MongoDB 3.0才能有文档级别的并行控制，即使处理频繁写入任务，数据库依然能维持效能一定的稳定度和可预测性。另外，用户可以自己选择储存数据的压缩比例，MongoDB 3.0提供最高达80％的压缩率，不过压缩率越高数据处理的时间成本也越多，用户可以自行权衡应用。</p>
+
+<p>WiredTiger 存储引擎是一项全新的技术，提供无门闩、非堵塞算法来利用先进的硬件平台(如大容量芯片缓存和线程化架构)来提升性能。通过 WiredTiger ，MongoDB 3.0 实现了文档级别的并发控制，因此大幅提升了大并发下的写负载。透明的磁盘压缩技术减少对存储的容量要求达 80%。此外 MongoDB 原先的存储引擎也得到了增强，包括集合级别并发控制以及更高效的日志，现在称为 MMAPv1。</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li>http://docs.mongodb.org/master/release-notes/3.0/</li>
+  <li>http://news.mydrivers.com/1/393/393579.htm</li>
+</ol>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/mongodb-upgrade.html" data-title="升级到MongoDB 3.0"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>

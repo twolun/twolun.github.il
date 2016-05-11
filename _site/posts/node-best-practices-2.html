@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Node.js编程建议（2）</title>
+    <meta name="description" content="">
+    <!--<link rel="stylesheet" href="/assets/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="/assets/css/font-awesome.min.css">-->
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Roboto">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax-highlight.css">
+    
+    <link rel="stylesheet" href="/assets/css/proj-layout.css">
+    <script src="/assets/js/swiftype.js"></script>
+    <!--<script src="/assets/js/jquery.js"></script>-->
+    <!--<script src="/assets/js/modernizr.min.js"></script>-->
+    <!--<script src="/assets/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <p class="site-name"><a class="navbar-brand" href="/" title="twolun">双轮行</a></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/project.html">Projects</a></li>
+                    <li><a href="/list.html">Posts</a></li>
+                    <li><a href="http://wwsun.lofter.com/" target="_blank">Lofter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- .site-navigation -->
+</header>
+    <div id="post-content" class="container">
+        <br>
+        <div class="well">
+            <header class="page-header">
+                <h1>Node.js编程建议（2）</h1>
+                <p class="post-meta">Sep 26, 2015</p>
+            </header>
+            <article><p>在<a href="http://wwsun.me/posts/node-best-practices.html">前一篇文章</a>中，我们已经探讨过关于Node.js的编程建议，
+本文将继续探讨这一话题。希望能够与大家分享更多关于Node.js开发的经验。</p>
+
+<!--more-->
+<p>## Statement</p>
+
+<blockquote>
+  <p>原文地址：https://blog.risingstack.com/node-js-best-practices-part-2/</p>
+</blockquote>
+
+<h2 id="section">一致的风格</h2>
+
+<p>当你在一个较大的团队内开发JavaScript应用时，创建一个人人都遵守的
+<a href="https://github.com/RisingStack/node-style-guide">开发规范</a>就显得非常的重要。如果你手头没有这样的
+一份开发规范，那么我建议你使用RisisngStack在使用的<a href="https://github.com/RisingStack/node-style-guide">Node.js风格指南</a>。
+中文版风格指南点击<a href="https://github.com/wwsun/node-style-guide">该链接</a>。</p>
+
+<p>但这仅仅是第一步，当你建立了一个标准后，团队中的每个成员就应该遵守这样的规范。这也是为什么
+<a href="https://github.com/jscs-dev/node-jscs">JSCS</a>这样的工具会出现的原因，它能够帮助你遵守规范。</p>
+
+<p>JSCS是一个JavaScript代码风格检查工具。在你的项目中使用JSCS非常的简单：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install jscs --save-dev
+</code></pre>
+</div>
+
+<p>下一步需要在<code class="highlighter-rouge">package.json</code>配置运行脚本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scripts: {
+	"jscs": "jscs index.js"
+}
+</code></pre>
+</div>
+
+<p>当然你也可以添加多个文件或目录用于检测。todo</p>
+
+<p>你可以在<code class="highlighter-rouge">.jscsrc</code>文件中设置你的验证规则，或者使用jscs预置的规则。查看预置规则可以在访问这个
+<a href="https://github.com/jscs-dev/node-jscs/tree/master/presets">链接</a>，然后通过使用
+<code class="highlighter-rouge">--preset=[PRESET_NAME]</code>来使用它们。</p>
+
+<h2 id="jshintjscs">实施JSHint/JSCS规则</h2>
+
+<p>你的构建管道应该包含JSHint和JSCS，但是如果能够在开发者机器上执行pre-commit验证可能是个不错的主意。</p>
+
+<p>你可以使用NPM中的<code class="highlighter-rouge">pre-commit</code>包来轻松的完成这个任务。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install --save-dev pre-commit
+</code></pre>
+</div>
+
+<p>然后在<code class="highlighter-rouge">package.json</code>中配置它：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"pre-commit": [
+	"jshint",
+	"jscs"
+]
+</code></pre>
+</div>
+
+<p>需要注意，<code class="highlighter-rouge">pre-commit</code>会在<code class="highlighter-rouge">package.json</code>中的<code class="highlighter-rouge">script</code>部分寻找执行脚本。通过使用这个，代码会在
+每次提交时执行验证。</p>
+
+<h2 id="js">使用JS来做配置管理</h2>
+
+<p>我们会在很多的项目中发现使用JSON文件来做配置管理。也许这是个非常广泛的实践，但我想JS文件会提供更多的
+便捷性。基于这一点，我们鼓励你在项目中使用<code class="highlighter-rouge">config.js</code>文件，例如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var url = require('url');
+var config = module.exports = {};
+var redisToGoConfig;
+
+config.server = {
+	host: '0.0.0.0',
+	port: process.env.PORT || 3000
+};
+
+// look, a comment in the config file! 
+// would be tricky in a JSON ;)
+config.redis = {
+	host: 'localhost',
+	port: 6379,
+	options: {
+		
+	}
+};
+
+if (process.env.REDISTOGO_URL) {
+	redisToGoConfig = url.parse(process.env.REDISTOGO_URL);
+	config.redis.port = redisToGoConfig.port;
+	config.redis.host = redisToGoConfig.hostname;
+	config.redis.options.auth_pass = redisToGoConfig.auth.split(':')[1];
+}
+</code></pre>
+</div>
+
+<h2 id="nodepath">使用NODE_PATH</h2>
+
+<p>你是否曾经遇到过下面这样的代码:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var myModule = require('../../../../lib/myModule');
+
+myModule.doSomething(function (err) {
+
+});
+</code></pre>
+</div>
+
+<p>当你的项目拥有一个非常复杂的结构时，引入模块的时候可能会变得更加混乱。有两种方法能够解决这个问题：</p>
+
+<ul>
+  <li>将你的模块符号链接到<code class="highlighter-rouge">node_module</code>文件夹</li>
+  <li>使用<code class="highlighter-rouge">NODE_PATH</code></li>
+</ul>
+
+<p>通常我们会使用<code class="highlighter-rouge">NODE_PATH</code>这个方法，因为符号链接所有的模块到<code class="highlighter-rouge">node_modules</code>文件夹可能会导致很多麻烦，
+并且在不同的操作系统上可能会遇到问题。</p>
+
+<h3 id="nodepath-1">设置NODE_PATH</h3>
+
+<p>假设你有如下的项目结构:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ lib
+	+ model
+		- Car.js
+	- index.js
+	- package.json
+</code></pre>
+</div>
+
+<p>我们使用<code class="highlighter-rouge">NODE_PATH</code>来指向<code class="highlighter-rouge">lib</code>目录，而不是使用相对路径。在我们的<code class="highlighter-rouge">package.json</code>文件中设置start脚本，
+然后我们可以使用<code class="highlighter-rouge">npm start</code>来执行这个脚本。示例代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// index.js
+var Car = require('model/Car');
+
+
+// lib/model/Car.js
+console.log('I am a Car!');
+
+
+// package.json
+{
+	"name": "node_path",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "NODE_PATH=lib node index.js"
+	},
+	"author": "",
+	"license": "ISC"
+}
+</code></pre>
+</div>
+
+<h2 id="section-1">依赖注入</h2>
+
+<blockquote>
+  <p>Dependency injection is a software design pattern in which one or more dependencies 
+(or services) are injected, or passed by reference, into a dependent object.</p>
+</blockquote>
+
+<p>使用依赖注入对于测试而言非常有帮助。因为你可以轻松的使用这种模式模拟模块需要的依赖。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// index.js
+var db = require('db');
+// do some init here, or connect
+db.init();
+
+var userModel = require('User')({
+	db: db
+});
+
+userModel.create(function (err, user) {
+	
+});
+
+
+// test.js
+var test = require('tape');
+var userModel = require('User');
+
+test('it creates a user with id', function (t) {
+	var user = {
+		id: 1
+	};
+	var fakeDb = {
+		query: function (done) {
+			done(null, user);
+		}
+	}
+	
+	userModel({
+		db: fakeDb
+	}).create(function (err, user) {
+		t.equal(user.id, 1, 'User id should match');
+		t.end();
+	})
+
+});
+
+// User.js
+function userModel (options) {
+	var db;
+	
+	if(!options.db) {
+		throw new Error('Options.db is required!');
+	}
+	
+	db = options.db;
+	
+	return {
+		create: function (done) {
+			db.query('INSERT ...', done);
+		}
+	}
+}
+
+moudule.exports = userModel;
+</code></pre>
+</div>
+
+<p>在上面的例子中，我们有两个不同的<code class="highlighter-rouge">db</code>。在<code class="highlighter-rouge">index.js</code>文件中，我们有真正的<code class="highlighter-rouge">db</code>模块，但是在<code class="highlighter-rouge">test.js</code>中
+我们创建的是一个假的<code class="highlighter-rouge">db</code>。通过这种方式，我们能够在测试中轻松的注入假的依赖。</p>
+</article>
+        </div>
+    </div><!--#post-content-->
+
+    <div id="ds-comment" class="container">
+        <div class="ds-thread" data-thread-key="/posts/node-best-practices-2.html" data-title="Node.js编程建议（2）"></div>
+        <script>
+            var duoshuoQuery = {short_name:"wwsun"};  
+            (function() {  
+                var ds = document.createElement('script');  
+                ds.type = 'text/javascript';
+                ds.async = true;  
+                ds.src = 'http://static.duoshuo.com/embed.js';  
+                ds.charset = 'UTF-8';  
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);  
+            })();
+        </script>
+    </div><!--#ds-comment-->
+
+    <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info container">
+        <div class="row">
+            <nav id="menu-social" class="social-icons">
+                <ul id="menu-social-items" class="social-menu">
+                    <li><a href="https://github.com/wwsun" title="Github" class="rss" target="_blank"><i class="social_icon fa fa-github"><span>Github</span></i></a></li>
+                    <li><a href="http://weibo.com/234170023" title="Weibo" class="youtube" target="_blank"><i class="social_icon fa fa-weibo"><span>Weibo</span></i></a></li>
+                    <li><a href="https://twitter.com/wsun38" title="Twitter" class="twitter" target="_blank"><i class="social_icon fa fa-twitter"><span>Twitter</span></i></a></li>
+                    <li><a href="https://plus.google.com/u/0/101153267739962807712/posts" title="Google+" class="googleplus" target="_blank"><i class="social_icon fa fa-googleplus"><span>GooglePlus</span></i></a></li>
+                    <li><a href="/about.html#wechatQr" title="Wechat" class="facebook" target="_blank"><i class="fa fa-weixin"><span>Wechat</span></i></a></li>
+                </ul>
+            </nav>
+            <nav role="navigation" class="col-md-6">
+                <ul id="menu-flat-footer" class="nav footer-nav clearfix">
+                    <li><a href="http://weibo.com/swwol">Weibo</a></li>
+                    <li><a href="https://github.com/wwsun">Github</a></li>
+                    <li><a href="http://www.zhihu.com/people/wwsun">Zhihu</a></li>
+                    <li><a href="http://www.youtube.com/user/bootstrapbayofficial">Lofter</a></li>
+                    <li><a href="http://wwsun.github.io/">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="copyright col-md-6">
+                <a href="http://wwsun.github.io/" title="Sparkling">Weiwei SUN</a> All rights reserved. Theme by 
+                <a href="http://colorlib.com/" target="_blank">Colorlib</a> Powered by
+                <a href="https://pages.github.com/" target="_blank">Github Pages</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            </div>
+        </div>
+    </div>
+    <!-- .site-info -->
+    <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
+    <!-- .scroll-to-top -->
+</footer><!-- #colophon -->
+
+<!-- Google Tag Manager -->
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJHNXB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KJHNXB');
+</script>
+<!-- End Google Tag Manager -->
+
+</body>
+
+</html>
