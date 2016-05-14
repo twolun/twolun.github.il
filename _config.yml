@@ -17,7 +17,7 @@ permalink: /posts/:title.html
 exclude:
   - README.md
 
-name: 双轮行
+name: 朱子
 url: twolun.github.com
 baseurl: 
 desc: 越努力 越幸运
@@ -44,7 +44,7 @@ custom:
 
 meta:
     author:
-        name: 双轮行
+        name: 朱子
         email: 2237993760@qq.com
         disqus: wwsun                               # Disqus缩略标识
         gcse: 017273734144320215856:r-n1xry8woo     # Google自定义搜索标识ID
