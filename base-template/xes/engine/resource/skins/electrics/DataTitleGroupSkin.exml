@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DataTitleGroupSkin" width="80" height="40" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image width="80" height="100%" x="0" y="0" source="pop_up_bg_png" scale9Grid="9,10,5,5"/>
+	<e:Group id="btnGp" width="0" height="0" x="0" y="0">
+		<e:layout>
+			<e:VerticalLayout gap="0"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

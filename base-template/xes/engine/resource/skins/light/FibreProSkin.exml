@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="FibreProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="79" width="266" height="150">
+		<e:Label text="形状类型" x="31" y="18" size="18" textColor="0xBEBEBE"/>
+		<ns1:EuiRadioButton id="type1Btn" label="半圆形" x="31" y="55"/>
+		<ns1:EuiRadioButton id="type2Btn" label="条形" x="31" y="99"/>
+	</e:Group>
+</e:Skin>

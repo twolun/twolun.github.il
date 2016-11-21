@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="StageView" width="1920" height="1440" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Group id="setBox" x="0" y="90" locked="true">
+		<e:Image source="element_attributes_title_bg_png" x="0" y="-2" scale9Grid="93,12,75,10" width="1920" height="50"/>
+		<e:Group id="setGp" x="0" y="2">
+			<e:layout>
+			<e:HorizontalLayout gap="0"/>
+			</e:layout>
+		</e:Group>
+	</e:Group>
+	<e:Group id="topGp" x="0" y="0" height="92" locked="true">
+		<e:Image source="top_bg_png" x="0" y="0"/>
+		<e:Group id="topGp1" width="1800" height="92" x="120" y="0">
+			<e:Group id="courseGp" height="92" x="0" y="0" touchEnabled="true"/>
+			<e:Group id="btnGp" width="1300" height="92" x="0" y="0" touchEnabled="true">
+			<ns1:EuiButton id="newBtn" x="40" y="13" label="新建文件">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image source="button_new_up_png" source.down="button_new_down_png" source.disabled="button_new_down_png" horizontalCenter="0"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="openBtn" x="135" y="13" label="打开">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_open_up_png" source.down="button_open_down_png" source.disabled="button_open_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="saveBtn" x="212" y="13" label="保存">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_save_up_png" source.down="button_save_down_png" source.disabled="button_save_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="exportBtn" x="291" y="13" label="导出">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_export_up_png" source.down="button_export_down_png" source.disabled="button_export_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="preViewBtn" x="377" y="13" label="预览">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_play_up_png" source.down="button_play_down_png" source.disabled="button_play_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="zBtn" x="479" y="16" label="撤销">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_retreat_up_png" source.down="button_retreat_down_png" source.disabled="button_retreat_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="yBtn" x="566" y="15" label="重做">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_again_up_png" source.down="button_again_down_png" source.disabled="button_again_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="groupBtn" x="662" y="13" label="成组">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_set_up_png" source.down="button_set_down_png" source.disabled="button_set_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="partBtn" x="752" y="13" label="解组">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_part_up_png" source.down="button_part_down_png" source.disabled="button_part_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="sideBtn" x="858" y="13" label="侧边栏">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_side_up_png" source.down="button_side_down_png" source.disabled="button_side_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="dataBtn" x="956" y="13" label="数据记录">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_data_up_png" source.down="button_data_down_png" source.disabled="button_data_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="styleBtn" x="1076" y="13" label="风格切换">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_style_up_png" source.down="button_style_down_png" source.disabled="button_style_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<ns1:EuiButton id="setBtn" x="1215" y="13" label="设置">
+				<ns1:skinName>
+				<e:Skin states="up,down,disabled">
+					<e:Image horizontalCenter="0" source="button_setu_up_png" source.down="button_setu_down_png" source.disabled="button_setu_down_png"/>
+					<e:Label id="labelDisplay" horizontalCenter="0" size="18" textColor="0xBEBEBE" y="48"/>
+				</e:Skin>
+				</ns1:skinName>
+			</ns1:EuiButton>
+			<e:Image source="line_dotted_png" x="12" y="15"/>
+			<e:Image source="line_dotted_png" x="450" y="15"/>
+			<e:Image source="line_dotted_png" x="830" y="19"/>
+			<e:Image source="line_dotted_png" x="1175" y="15"/>
+			</e:Group>
+			<e:layout>
+				<e:HorizontalLayout gap="0"/>
+			</e:layout>
+		</e:Group>
+		<e:Label id="courseLabel" text="光学" x="30" y="62" size="18" textColor="0xBEBEBE" width="79" textAlign="center" fontFamily="SimHei"/>
+		<ns1:TreeItem id="courseTree" x="30" y="17" skinName="TreeItemSkin" locked="true"/>
+		<e:Label text="电学" x="1741" y="62" size="18" textColor="0xBEBEBE" width="60" textAlign="center" fontFamily="SunHei" visible="false"/>
+		<e:Button id="switchBtn" x="30" y="14" visible="false">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="button_subject_up_png" source.down="button_subject_down_png" source.disabled="button_subject_down_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+
+		<e:Button id="elecXianBtn" x="1642" y="12" visible="false">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="button_subject_up_png" source.down="button_subject_down_png" source.disabled="button_subject_down_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="elecBtn" x="1732" y="14" visible="false">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="button_subject_up_png" source.down="button_subject_down_png" source.disabled="button_subject_down_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Image source="arrow_open_png" x="84" y="33" visible="false"/>
+		<e:Label text="电路图" x="1651" y="61" size="18" textColor="0xBEBEBE" width="60" textAlign="center" fontFamily="SunHei" visible="false"/>
+		<e:Button id="homeElecBtn" x="1821" y="15" visible="false">
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="button_subject_up_png" source.down="button_subject_down_png" source.disabled="button_subject_down_png"/>
+			<e:Label id="labelDisplay0" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:Button>
+		<e:Label text="家庭电路" x="1822" y="60" size="18" textColor="0xBEBEBE" width="80" textAlign="center" fontFamily="SunHei" height="31" visible="false"/>
+	</e:Group>
+	<e:Group id="tipGp" horizontalCenter="0" verticalCenter="0" touchEnabled="false" locked="true">
+		<e:Image source="icon_add_png" x="0" y="0"/>
+		<e:Label text="拖动元件到画布" x="183" y="184" textColor="0xBEBEBE"/>
+	</e:Group>
+	<ns1:ExportPanel id="exportPanel" x="15" y="110" skinName="ExportPanelSkin" visible="false"/>
+	<e:Button id="BACKBTN" label="返回" x="1782" y="19"/>
+</e:Skin>

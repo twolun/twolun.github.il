@@ -1,0 +1,67 @@
+/*
+ * 初数粘题样式表
+ */
+
+/*顶部选项卡*/
+.header{
+	padding-top: 0.5rem;
+
+}
+.tab-container_2>.tab{
+	height: 0.8rem;
+}
+
+.tab-container_2>.tab>.tab-menu{
+	color: #ffffff;
+	font-size: 0.28rem;
+	left: -0.44rem;
+	z-index: 20;
+}
+
+.tab-container_2>.tab>.tab-menu li {
+	padding: 0 0.44rem;
+ 	text-align: center;
+	margin-right: 0;
+	position: relative;
+}
+
+.tab-menu li.selected {
+	color: #ffd400;
+}
+
+.tab-menu li span {
+	color: rgba(255,255,255,0.7);
+	display: inline-block;
+	cursor: pointer;
+ 	padding-left:0.4rem ;
+	background: url(../img/lt-unselect.svg) no-repeat left center;
+	background-size: 0.3rem 0.3rem;
+}
+
+.tab-container_2>.tab>.tab-menu li.current>span {
+	font-size: 0.28rem;
+	color: #ffd400;
+	background: url(../img/lt-selected.svg) no-repeat left center;
+	background-size: 0.3rem 0.3rem;
+}
+
+.tab-menu li a {
+	font-size: 0.3rem;
+	position: absolute;
+	color: rgba(255,255,255,0.4);
+	top:-0.03rem;
+ 	right: 0;
+}
+
+.tab-container_2>.line{
+	top: 1.12rem;
+}
+/* 内容区  */
+.content {
+	padding-top: 1.32rem;
+	line-height:0.5rem;
+}
+
+.bottom-bar{
+	background: url(../img/footer-bg-story_1.svg) no-repeat;
+}

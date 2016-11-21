@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TwoSocketInfo" width="266" height="208" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="_btnMove" source="element_attributes_title_bg_png" x="0" touchEnabled="true"/>
+	<e:Label text="属性：" x="17" y="9" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Label id="proName" text="双孔插座" x="71" y="9" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Image id="_btnClose" x="244" y="14" source="close_png"/>
+	<e:Group width="266" height="173" x="0" y="34">
+		<e:Image source="element_bg_png" x="1" width="265" scale9Grid="9,10,4,4" y="0" height="172"/>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ElectromagneticSetBoxSkin" width="1920" height="48" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="magSetGp" width="1400" x="0" height="48" y="0">
+		<e:Group id="magSet_dianchangGp" width="130" height="48">
+			<e:Label id="labelDisplay0" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="电场线" textColor="0xFFFFFF"/>
+			<e:Image id="img0" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img2" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="magSet_ciganGp" width="130" height="48" x="10" y="10">
+			<e:Label id="labelDisplay1" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="磁感线" textColor="0xFFFFFF"/>
+			<e:Image id="img1" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img3" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="magSet_dengshiGp" width="130" height="48" x="20" y="20">
+			<e:Label id="labelDisplay2" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" textColor="0xFFFFFF" text="等势面"/>
+			<e:Image id="img4" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img5" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="magSet_biaozhuGp" width="130" height="48" x="30" y="30">
+			<e:Label id="labelDisplay3" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" textColor="0xFFFFFF" text="标注"/>
+			<e:Image id="img6" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img7" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="magSet_densityGp" width="180" height="48" x="40" y="40">
+			<e:Label id="labelDisplay5" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" height="30" x="6" y="8" textColor="0xFFFFFF" text="场线疏密"/>
+			<e:Group width="94" height="36" x="83" y="6">
+				<e:Button id="btn" width="94" x="0" height="36" y="0">
+					<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="Input_box_png" source.down="Input_box_png" source.disabled="Input_box_png"/>
+					<e:Label id="labelDisplay4" horizontalCenter="0" verticalCenter="0"/>
+					</e:Skin>
+				</e:Button>
+				<e:EditableText id="btnLabel" width="58" height="23" text="0" x="7" y="7" size="20" textAlign="center"/>
+				<e:Image source="input_box_up_arrow_png" x="77" y="15" touchEnabled="false"/>
+				<e:Scroller id="scroller" width="95" y="36" x="0" scrollPolicyH="off" height="0">
+					<e:Group id="btnGp0">
+					<e:Image x="0" y="0" width="94" source="pop_up_bg_png" scale9Grid="9,8,5,6" height="100%"/>
+					</e:Group>
+				</e:Scroller>
+			</e:Group>
+		</e:Group>
+		<e:Group id="magSet_chargeGp" width="299" height="48" x="50" y="50">
+			<e:Label id="labelDisplay6" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" height="30" x="6" y="8" textColor="0xFFFFFF" text="电荷电量"/>
+			<e:Group width="94" height="36" x="83" y="6">
+				<e:Button id="btn0" width="94" x="0" height="36" y="0">
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="Input_box_png" source.down="Input_box_png" source.disabled="Input_box_png"/>
+					<e:Label id="labelDisplay7" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:Button>
+				<e:EditableText id="btnLabel0" width="58" height="23" text="0" x="7" y="7" size="20" textAlign="center"/>
+				<e:Image source="input_box_up_arrow_png" x="77" y="15" touchEnabled="false"/>
+				<e:Scroller id="scroller0" width="95" y="36" x="0" scrollPolicyH="off" height="0">
+				<e:Group id="btnGp1">
+					<e:Image x="0" y="0" width="94" source="pop_up_bg_png" scale9Grid="9,8,5,6" height="100%"/>
+				</e:Group>
+				</e:Scroller>
+			</e:Group>
+			<e:Label id="labelDisplay8" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" height="30" x="181" y="10" textColor="0xFFFFFF" text="*"/>
+			<e:Group width="94" height="36" x="196" y="6">
+				<e:Button id="btn1" width="94" x="0" height="36" y="0">
+				<e:Skin states="up,down,disabled">
+					<e:Image width="100%" height="100%" source="Input_box_png" source.down="Input_box_png" source.disabled="Input_box_png"/>
+					<e:Label id="labelDisplay9" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+				</e:Button>
+				<e:EditableText id="btnLabel1" width="58" height="23" text="0" x="7" y="7" size="20" textAlign="center"/>
+				<e:Image source="input_box_up_arrow_png" x="77" y="15" touchEnabled="false"/>
+				<e:Scroller id="scroller1" width="95" y="36" x="0" scrollPolicyH="off" height="0">
+				<e:Group id="btnGp2">
+					<e:Image x="0" y="0" width="94" source="pop_up_bg_png" scale9Grid="9,8,5,6" height="100%"/>
+				</e:Group>
+				</e:Scroller>
+			</e:Group>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="magSetGp1" width="520" height="48" x="1400" y="0">
+		<e:Group id="magSet_wanggeGp" width="130" height="48" x="0" y="0">
+			<e:Label id="labelDisplay10" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="58" height="30" x="57" y="8" textColor="0xFFFFFF" text="网格"/>
+			<e:Image id="img8" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img9" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="magSet_scaleGp" width="215" height="48" x="189" y="10">
+			<e:Label id="labelDisplay11" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="65" height="30" x="4" y="8" textColor="0xFFFFFF" text="比例尺"/>
+			<e:Image id="scale_bg" source="scale_bg_png" x="71" y="10"/>
+			<e:Image id="scale_button_plus" source="scale_button_plus_down_png" x="71" y="10"/>
+			<e:Image id="scale_button_less" source="scale_button_less_down_png" x="177" y="10"/>
+			<e:Label id="labelScale" size="18" textAlign="center" verticalAlign="middle" fontFamily="Tahoma" width="78" height="30" x="100" y="9" textColor="0xFFFFFF" text="5cm"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout horizontalAlign="right"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,189 @@
+/*  */
+
+.animaController {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 7.2rem;
+	height: 4.5rem;
+	border: 1px solid #00BFFF;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+
+/**
+ * opacity: 0;
+    -moz-opacity:0;  
+    -khtml-opacity: 0;  
+    filter:alpha(opacity=0); 
+ * 
+ */
+
+.animaController .contrlBar {
+	position: absolute;
+	/*display: none;*/
+	/*opacity: 0;*/
+	top: 3.9rem;
+	width: inherit;
+	height: 0.6rem;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.animaController .btn {
+	cursor: pointer;
+	position: absolute;
+	top: 0.16rem;
+	display: inline-block;
+	width: 0.3rem;
+	height: 0.3rem;
+}
+
+.animaController .playBtn {
+	/*left: 0.3rem;*/
+	left: 4.2%;
+	background: url(../img/play1.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .playBtnPress {
+	background: url(../img/play2.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .pauseBtn {
+	/*left: 0.3rem;*/
+	left: 4.2%;
+	background: url(../img/pause1.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .pauseBtnPress {
+	background: url(../img/pause2.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .prevStepBtn {
+	/*left: 5.3rem;*/
+	left: 73.6%;
+	background: url(../img/prevStepBtn1.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .prevStepBtnPress {
+	background: url(../img/prevStepBtn2.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .nextStepBtn {
+	/*left: 5.9rem;*/
+	left: 82%;
+	background: url(../img/nextStepBtn1.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .nextStepBtnPress {
+	background: url(../img/nextStepBtn2.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .line {
+	position: absolute;
+	line-height: 0.25rem;
+	top: 0.16rem;
+	/*left: 6.4rem;*/
+	left: 89%;
+}
+
+.fullAnima {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+/* 
+  	outline: 1px solid #00BFFF; 
+ 	filter: alpha(opacity=20);
+	-moz-opacity: 0.2;
+	-khtml-opacity: 0.2;
+	opacity: 0.2;
+ */
+
+.animaController .fullBtn {
+	/*left: 6.7rem;*/
+	
+	left: 93%;
+	background: url(../img/fullBtn1.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+.animaController .fullBtnPress {
+	background: url(../img/fullBtn2.svg) no-repeat;
+	background-size: 0.3rem;
+}
+
+
+/* border: 1px solid #1729A9; */
+
+.canvasBeFull {
+	position: relative;
+	top: 0;
+	width: inherit;
+}
+
+.animaContrl {
+	width: 7.2rem;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #00BFFF;
+	border-radius: 5px;
+}
+
+.animaContrl .playBtn {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1rem;
+	height: 1rem;
+	background: url(../img/playBtn.png) no-repeat;
+	background-size: 1rem;
+}
+
+/* 演示动画  */
+.demon_Btn {
+	font-size: 0.28rem;
+	color: #fff336;
+	
+}
+/* border: 1px solid #00DEFF; */
+.arrowRight{
+	position: relative;
+	top: -0.03rem;
+	left:0.05rem;
+	vertical-align: middle;
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.25rem;
+	
+	background: url(../img/primary-hide-btn.svg) no-repeat right;
+	background-size: 0.3rem 0.26rem;
+}
+.arrowRight_cur {
+	transform:rotate(90deg);
+	-ms-transform:rotate(90deg); 	/* IE 9 */
+	-moz-transform:rotate(90deg); 	/* Firefox */
+	-webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+	-o-transform:rotate(90deg); 	/* Opera */
+}
+.demonstration {
+	display: none;
+}
+/* border: 1px solid #00BFFF; */
+.demon_origin {
+	display: block;
+	width: 7.3rem;
+	
+}

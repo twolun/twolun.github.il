@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="HElectronicInfo" width="266" height="208" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="_btnMove" source="element_attributes_title_bg_png" x="0" touchEnabled="true"/>
+	<e:Label text="属性：" x="17" y="9" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Label id="_proName" text="电器名" x="71" y="9" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Image id="_btnClose" x="244" y="14" source="close_png"/>
+	<e:Group id="infoGroup" width="266" height="173" x="0" y="34">
+		<e:Image source="element_bg_png" x="1" width="265" scale9Grid="9,10,4,4" y="0" height="172"/>
+		<e:Label id="_volLab" text="额定电压" x="29" y="29" size="18" textColor="0xBEBEBE" width="87" textAlign="center" verticalAlign="middle"/>
+		<e:Label id="_ratedVolLab" text="220V" x="116" y="29" size="18" textColor="0xBEBEBE" width="87" textAlign="left" verticalAlign="middle"/>
+		<e:Label id="_ratedWorkLab" text="100W" x="116" y="61" size="18" textColor="0xBEBEBE" width="87" textAlign="left" verticalAlign="middle"/>
+		<e:Label id="_workLab" text="额定功率" x="29" y="61" size="18" textColor="0xBEBEBE" width="87" textAlign="center" verticalAlign="middle"/>
+	</e:Group>
+</e:Skin>

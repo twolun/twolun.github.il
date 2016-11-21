@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="WireInfo" width="266" height="517" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel" x="0" y="0"/>
+	<e:Group id="group1" width="266" height="182" x="0" y="78">
+		<e:Label text="导线颜色" x="39" y="39" size="18" textColor="0xBEBEBE"/>
+		<e:Button id="_btnDelete0" label="删除" x="83" y="116"/>
+		<ns1:DropDownList id="_dropListColor" x="133" y="30"/>
+	</e:Group>
+</e:Skin>

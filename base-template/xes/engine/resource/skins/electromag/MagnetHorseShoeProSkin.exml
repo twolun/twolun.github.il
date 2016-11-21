@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="NewFile" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing" width="265">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="77" width="266" height="200">
+		<e:Label text="旋转角度" x="24" y="138" size="18" textColor="0xBEBEBE"/>
+		<e:Group y="29" x="53">
+			<e:RadioButton id="showBtn" label="显示磁感线" x="0" y="37"/>
+			<e:RadioButton id="disBtn" label="隐藏磁感线" x="1" y="1"/>
+		</e:Group>
+		<ns1:DropDownList id="dropDownList" x="133" y="129"/>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TemperatureLampInfo" width="202" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Button id="_btnDelete" label="删除" x="2" y="2"/>
+	<e:Button id="_btnInvert" label="倒置" x="102" y="2"/>
+	<e:Label text="名称：" x="36" y="80" size="14" bold="true"/>
+	<e:Label text="额定功率：" x="6" y="153" size="14" bold="true"/>
+	<e:Label text="额定电压：" x="6" y="117" size="14" bold="true"/>
+	<e:Label text="随温度变化灯泡" x="92" y="81" size="14"/>
+</e:Skin>

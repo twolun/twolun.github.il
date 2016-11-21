@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LightSetBoxSkin" width="1920" height="48" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="lightSetGp" width="1920" x="0" height="48" y="0">
+		<e:Group id="light_guangluGp" width="139" height="48">
+			<e:Label id="labelDisplay0" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="光路方向" textColor="0xFFFFFF"/>
+			<e:Image id="img0" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img2" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="light_fansheGp" width="108" height="48" x="10" y="10">
+			<e:Label id="labelDisplay1" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="反射" textColor="0xFFFFFF"/>
+			<e:Image id="img1" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img3" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="light_jiaoduGp" width="108" height="48" x="20" y="20">
+			<e:Label id="labelDisplay2" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="角度" textColor="0xFFFFFF"/>
+			<e:Image id="img4" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img5" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="light_chengxiangGp" width="108" height="48" x="30" y="30">
+			<e:Label id="labelDisplay3" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="成像" textColor="0xFFFFFF"/>
+			<e:Image id="img6" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img7" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:Group id="light_guangxianGp" width="126" height="48" x="40" y="40">
+			<e:Label id="labelDisplay4" size="18" textAlign="left" verticalAlign="middle" fontFamily="Tahoma" width="100" height="30" x="57" y="8" text="光线图" textColor="0xFFFFFF"/>
+			<e:Image id="img8" source="check_box_down_png" x="17" y="11"/>
+			<e:Image id="img9" source="check_box_bg_png" x="17" y="11"/>
+		</e:Group>
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

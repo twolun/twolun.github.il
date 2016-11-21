@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MagnetNeedleSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="MagnetNeedleBG" x="0" y="0" source="MagnetNeedle_bg_png"/>
+	<e:Image id="needle" source="MagnetNeedle_needle_png" x="25" y="9"/>
+	<e:Image id="MagnetNeedleCover" source="MagnetNeedle_cover_png" y="5" x="5"/>
+</e:Skin>

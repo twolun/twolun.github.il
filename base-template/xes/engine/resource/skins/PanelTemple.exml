@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PanelTemple" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="dragBit" source="element_attributes_title_bg_png" x="0"/>
+	<e:Label text="属性：" x="17" y="9" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Label id="proName" text="蜡烛" x="71" y="9" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Image id="closeBtn" x="244" y="14" source="close_png"/>
+	<e:Group id="infoGroup" width="265" height="100%" y="33" x="0">
+		<ns1:PanelPart id="panel2" skinName="PanelPartSkin" touchEnabled="false" y="243"/>
+		<ns1:PanelPart id="panel1" skinName="PanelPartSkin"/>
+	</e:Group>
+</e:Skin>

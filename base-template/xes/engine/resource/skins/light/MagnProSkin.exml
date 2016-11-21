@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MagnProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="77" width="266" height="168">
+		<e:Label text="显示光路" y="14" x="30" size="18" textColor="0xBEBEBE"/>
+		<e:ToggleSwitch id="showBtn" label="切换按钮" x="160" y="10"/>
+		<e:Label text="遮挡放大镜" y="66" x="30" size="18" textColor="0xBEBEBE"/>
+		<e:ToggleSwitch id="shadeBtn" label="切换按钮" x="160" y="55"/>
+		<e:Label text="焦距" x="30" y="117" size="18" textColor="0xBEBEBE"/>
+		<ns1:DropDownList id="dropDownList" x="142" y="108"/>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="WhiteProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="79" width="267" height="134">
+		<e:Label text="旋转角度" x="33" y="74" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="光线粗细" x="33" y="25" size="18" textColor="0xBEBEBE"/>
+		<ns1:EuiHSlider id="numRoll" x="138" y="19" width="100"/>
+		<ns1:DropDownList id="dropDownList2" x="138" y="66"/>
+	</e:Group>
+</e:Skin>

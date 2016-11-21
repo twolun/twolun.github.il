@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="CircuitDiagramPanel" width="900" height="700" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" minWidth="900" minHeight="700">
+	<e:Image id="_bgForm" source="circuit_form_bg_png" top="0" bottom="0" left="0" right="0" scale9Grid="31,44,419,238"/>
+	<e:Image id="_btnMove" source="element_attributes_title_bg_png" touchEnabled="true" height="97" left="0" right="0"/>
+	<e:Image id="_btnClosed" width="20" height="20" y="34" source="close_png" right="35"/>
+	<e:Label id="_title" text="电路图" y="32" size="39" width="126" height="34" textColor="0xBEBEBE" touchEnabled="false" horizontalCenter="0"/>
+	<ns1:DianluTuView id="_dianlutuView" skinName="DianlutuViewSkin" height="604" left="0" right="0" y="96"/>
+	<e:Button id="big_btn" label="放大" width="66" height="35" right="10" bottom="85"/>
+	<e:Button id="small_btn" label="缩小" width="66" height="35" right="10" bottom="45"/>
+	<e:Button id="delete_btn" label="删除" width="66" height="35" right="10" bottom="5"/>
+	<e:Image id="box3" source="box_png" x="165" y="94" anchorOffsetY="3.5" anchorOffsetX="3.5"/>
+	<e:Image id="box4" source="box_png" x="175" y="104" anchorOffsetY="3.5" anchorOffsetX="3.5"/>
+	<e:Image id="box1" source="box_png" x="185" y="114" anchorOffsetY="3.5" anchorOffsetX="3.5"/>
+	<e:Image id="box2" source="box_png" x="195" y="124" anchorOffsetY="3.5" anchorOffsetX="3.5"/>
+</e:Skin>

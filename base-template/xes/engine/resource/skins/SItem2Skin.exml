@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SItem2Skin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="140" height="110">
+	<e:Button x="0" y="0" width="140" height="111">
+		<e:Skin states="up,down,disabled">
+		<e:Image width="100%" height="100%" source="element_box_normal_png" source.down="element_box_press_png" source.disabled="element_box_normal_png"/>
+		<e:Label id="labelDisplay0" horizontalCenter="0" verticalCenter="0"/>
+		</e:Skin>
+	</e:Button>
+	<e:Label id="txt" size="18" width="142" textAlign="center" textColor="0xBEBEBE" fontFamily="SimHei" x="-1" y="86"/>
+	<e:Image id="bitMap" width="100" height="70" x="21" y="7"/>
+	<e:Image id="delBtn" source="close_png" x="116" y="8" width="18" height="18"/>
+</e:Skin>

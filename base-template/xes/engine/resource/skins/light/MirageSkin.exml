@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MirageSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="hair_png" y="-3" horizontalCenter="0"/>
+	<e:Image id="xian2" source="hxian2_png" y="384" horizontalCenter="282"/>
+	<e:Image source="hearth_png" y="485" horizontalCenter="0"/>
+	<e:Image id="xian" source="hxian_png" y="385" horizontalCenter="275"/>
+	<e:Image source="hpic_png" y="515" horizontalCenter="568"/>
+	<e:Image source="hpic2_png" y="322" horizontalCenter="620.5"/>
+	<e:Image source="hrole_png" y="371" horizontalCenter="0"/>
+	<e:Button id="showBtn" label="原理" y="614" horizontalCenter="0"/>
+	<e:Rect id="maskF" width="528" height="176" y="382" x="1936"/>
+	<e:Rect id="maskT" width="530" height="168" y="224" x="700"/>
+</e:Skin>

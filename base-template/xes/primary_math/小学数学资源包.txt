@@ -1,0 +1,16 @@
+﻿font
+-- msyh.ttf 微软雅黑字体
+
+css
+-- edge_common.css edge专用样式
+-- preload.min.css 通用css
+
+js
+-- edge_common.js edge专用js 备用
+-- edge_init.js edge初始化js,每个项目均引用，放置于项目的js文件中
+-- edge_loader.js edge资源加载器
+-- jquery.min.js 版本号1.10.2
+-- preload.min.js 通用js
+
+img
+-- 

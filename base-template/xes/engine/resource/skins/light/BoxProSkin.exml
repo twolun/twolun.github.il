@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BoxProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="78" width="266" height="198">
+		<e:Label text="折射率" x="32" y="116" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="旋转" x="32" y="163" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="高度" x="32" y="70" size="18" textColor="0xBEBEBE"/>
+		<ns1:EuiHSlider id="heightRoll" x="94" y="64" width="163" skinName="skins.HSliderSkin"/>
+		<e:Label text="宽度" x="32" y="21" size="18" textColor="0xBEBEBE"/>
+		<ns1:EuiHSlider id="widthRoll" x="94" y="18" width="163"/>
+		<ns1:DropDownList id="dropDownList1" x="113" y="154"/>
+		<ns1:DropDownList id="dropDownList" x="113" y="107"/>
+	</e:Group>
+</e:Skin>

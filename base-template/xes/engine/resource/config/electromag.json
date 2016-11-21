@@ -1,0 +1,26 @@
+{
+  "1": {
+    "id": 1,
+    "type": 5001,
+    "img": "uMagnets0_png",
+    "cls": "MagnetHorseShoe",
+    "infoCls": "MagnetHorseShoePanel",
+    "name": "蹄形磁铁"
+  },
+  "2": {
+    "id": 2,
+    "type": 5002,
+    "img": "MagnetNeedle_bg_png",
+    "cls": "MagnetNeedle",
+    "infoCls": "EyeItemPanel",
+    "name": "磁针"
+  },
+  "3": {
+    "id": 25,
+    "type": 1007,
+    "img": "iconcardM_png",
+    "cls": "CardItem",
+    "infoCls": "",
+    "name": "三线共面"
+  }
+}

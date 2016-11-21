@@ -1,0 +1,150 @@
+{
+    "12": {
+        "id": 12,
+        "type": 4013,
+        "img": "shuangkongchazuo_png",
+        "cls": "TwoSocket",
+        "infoCls": "TwoSocketInfoPanel",
+        "name": "双孔插座"
+    },
+    "13": {
+        "id": 13,
+        "type": 4012,
+        "img": "sankouchazuo_png",
+        "cls": "ThreeSocket",
+        "infoCls": "ThreeSocketInfoPanel",
+        "name": "三孔插座"
+    },
+
+
+    "14": {
+        "id": 14,
+        "type": 4014,
+        "img": "kaiguan_png",
+        "cls": "Power",
+        "infoCls": "PowerInfoPanel",
+        "name": "开关"
+    },
+    "15": {
+        "id": 14,
+        "type": 4019,
+        "img": "kaiguan_png",
+        "cls": "DoubleControlSwitch",
+        "infoCls": "DoubleControlSwitchInfoPanel",
+        "name": "双控开关"
+    },
+    "16": {
+        "id": 15,
+        "type": 4015,
+        "img": "kaiguanA_png",
+        "cls": "Switch",
+        "infoCls": "SwitchInfoPanel",
+        "name": "开关A"
+    },
+    "17": {
+        "id": 16,
+        "type": 4016,
+        "img": "dengzuo_png",
+        "cls": "LampHolder",
+        "infoCls": "LampHolderInfoPanel",
+        "name": "灯座"
+    },
+    "18": {
+        "id": 17,
+        "type": 4017,
+        "img": "luokoudnegpao_png",
+        "cls": "Bulb",
+        "infoCls": "BulbInfoPanel",
+        "name": "白炽灯"
+    },
+    "19": {
+        "id": 18,
+        "type": 4018,
+        "img": "yandianbi_png",
+        "cls": "Electroprobe",
+        "infoCls": "ElectroprobeInfoPanel",
+        "name": "测电笔"
+    },
+
+    "20": {
+        "id": 19,
+        "type": 4001,
+        "img": "dianfengshan_png",
+        "cls": "Fan",
+        "infoCls": "FanInfoPanel",
+        "name": "电风扇"
+    },
+    "21": {
+        "id": 20,
+        "type": 4002,
+        "img": "dianshiji_png",
+        "cls": "Television",
+        "infoCls": "TelevisionInfoPanel",
+        "name": "电视机"
+    },
+    "22": {
+        "id": 21,
+        "type": 4003,
+        "img": "weibolu_png",
+        "cls": "Wicroblog",
+        "infoCls": "WicroblogInfoPanel",
+        "name": "微波炉"
+    },
+    "23": {
+        "id": 22,
+        "type": 4004,
+        "img": "dianbingxiang_png",
+        "cls": "Refrigerator",
+        "infoCls": "RefrigeratorInfoPanel",
+        "name": "冰箱"
+    },
+    "24": {
+        "id": 23,
+        "type": 4005,
+        "img": "xiyiji_png",
+        "cls": "Washer",
+        "infoCls": "WasherInfoPanel",
+        "name": "洗衣机"
+    },
+    "25": {
+        "id": 24,
+        "type": 4006,
+        "img": "kongtiao_png",
+        "cls": "AirCondition",
+        "infoCls": "AirConditionInfoPanel",
+        "name": "空调"
+    },
+    "26": {
+        "id": 25,
+        "type": 4008,
+        "img": "dianluanqi_png",
+        "cls": "Radiator",
+        "infoCls": "RadiatorInfoPanel",
+        "name": "电暖气"
+    },
+    "27": {
+        "id": 26,
+        "type": 4009,
+        "img": "dianluzi_png",
+        "cls": "Stove",
+        "infoCls": "StoveInfoPanel",
+        "name": "电炉子"
+    },
+    "28": {
+        "id": 27,
+        "type": 4010,
+        "img": "dianchahu_png",
+        "cls": "Kettle",
+        "infoCls": "KettleInfoPanel",
+        "name": "电水壶"
+    },
+    "29": {
+        "id": 28,
+        "type": 4011,
+        "img": "dianfanbao_png",
+        "cls": "Cooker",
+        "infoCls": "CookerInfoPanel",
+        "name": "电饭煲"
+    }
+}
+ 

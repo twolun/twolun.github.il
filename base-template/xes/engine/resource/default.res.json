@@ -1,0 +1,1934 @@
+{
+	"groups": [
+		{
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,light_png,circle_png,desk_png,bicircle_png,jiguangbi_png,rect_png,tri_png,arrow_png,3d_png,amir_png,vmir_png,candle_png,mirr_png,card0_png,card1_png,card2_png,di0_png,di30_png,di90_png,di60_png,mirrp_png,candle0_png,mainlight_png,vmir2_png,vmir3_png,amir1_png,amir2_png,amir3_png,vmir1_png,candler_png,gjz1_png,kong1_png,kong2_png,kong3_png,gp2_png,kong20_png,fire_png,kong10_png,kong30_png,magn1_png,magn10_png,gpoint_png,fsamirr_png,fspmirr_png,fsvmirr_png,fsman_png,fibre_png,water_png,waterbool_png,img_asset5_png,fibre1_png,fibre2_png,hair_png,hearth_png,harr_png,hrole_png,hxian_png,hpic_png,hxian2_png,hpic2_png,hpic22_png,hxian3_png,hearth2_png,hxian22_png,harr2_png,hrole2_png,hair2_png,hpic3_png,xkuaizi_png,xkuaizi2_png,xren_png,xren2_png,xshu_png,xshu2_png,xyu_png,xyu2_png,xamir_png,xbicircle_png,xcandle_png,xfsamirr_png,xfspmirr_png,xfsvmirr_png,xparall_png,xrect_png,xtri_png,xvmir_png,eye_png,circuit_form_bg_png,circuit_close_png,data_form_bg_png,data_form_lattice_png,data_form_lattice2_png,circuit_form_bg2_png,data_form_bg2_png,data_form_lattice3_png,data_form_lattice22_png,jiguangbi_off_btn_png,jiguangbi_on_btn_png,jiguangbi_off_btn2_png,jiguangbi_on_btn2_png,kz1_png,kz2_png,kz3_png,kz4_png,kz5_png,kz12_png,kz22_png,kz32_png,kz42_png,kz52_png,eyein_png,eyeout_png,vmir4_png,parall_png,parall1_png,parall2_png,parall3_png,parall4_png,parall12_png,parall22_png,parall32_png,parall42_png,vmir42_png,dlt_dc_png,dlt_ddp_png,dlt_dlb_png,dlt_dyb_png,dlt_dz_png,dlt_kg_png,dzdz2_png,electricItems_swf_json,electricItems_json,arrow_down_png,arrow_left_png,arrow_lelt_png,arrow_open_png,arrow_right_png,arrow_up_png,box_png,button_again_down_png,button_again_over_png,button_again_up_png,button_all_bg_down_png,button_all_bg_up_png,button_all_bule_bg_down_png,button_all_bule_bg_up_png,button_close_down_png,button_close_over_png,button_close_up_png,button_data_down_png,button_data_over_png,button_data_up_png,button_delete_down_png,button_delete_up_png,button_element_down_png,button_element_up_png,button_export_down_png,button_export_over_png,button_export_up_png,button_group_down_png,button_group_up_png,button_new_down_png,button_new_over_png,button_new_up_png,button_open_down_png,button_open_over_png,button_open_up_png,button_part_down_png,button_part_over_png,button_part_up_png,button_play_down_png,button_play_over_png,button_play_up_png,button_retreat_down_png,button_retreat_over_png,button_retreat_up_png,button_rotation_down_png,button_rotation_up_png,button_save_down_png,button_save_over_png,button_save_up_png,button_set_down_png,button_set_over_png,button_set_up_png,button_setu_down_png,button_setu_over_png,button_setu_up_png,button_side_down_png,button_side_over_png,button_side_up_png,button_star_down_png,button_star_over_png,button_star_up_png,button_stop_down_png,button_stop_over_png,button_stop_up_png,button_style_down_png,button_style_over_png,button_style_up_png,button_subject_down_png,button_subject_over_png,button_subject_up_png,check_box_bg_png,check_box_down_png,close_png,element_attributes_title_bg_png,element_bg_png,element_bottom_bg_png,element_box_normal_png,element_box_press_png,element_tab_select_png,element_title_collapse_bg_png,element_title_expansion_bg_png,icon_acoustics_over_png,icon_acoustics_png,icon_add_png,icon_close_png,icon_dynamics_over_png,icon_dynamics_png,icon_editor_png,icon_electric_over_png,icon_electric_png,icon_heat_over_png,icon_heat_png,icon_light_over_png,icon_light_png,icon_magnetism_over_png,icon_magnetism_png,icon_pack_png,icon_search_png,icon_succ_png,Input_box_plus_press_png,Input_box_plus_png,input_box_up_arrow_png,input_box_up_arrow2_png,Input_box_up_less_press_png,Input_box_up_less_png,Input_box_png,line_bule_png,line_dark_png,line_dotted_png,line_white_png,pop_up_bg_png,pop_up_select_png,prompt_bg_png,rotation_png,round_png,search_bg_png,select_box_png,single_box_sel_png,single_box_png,slide_bg_png,slide_blue_png,switch_left_png,switch_right_png,top_bg_png,chargeN_png,chargeP_png,elecArrow_png,elecArrow2_png,iconparall2_png,chargeN2_png,chargeP2_png,elecArrow3_png,elecArrow22_png,scale_button_less_down_png,scale_button_plus_down_png,scale_bg_png,electriscope_png,electriscope_glass_png,electriscope_gold_png,fur_png,rod_glass_png,rod_rubber_png,silk_png,stripMagbets_png,uMagnets0_png,uMagnets1_png,uMagnets2_png,electriscope2_png,silk2_png,uMagnets02_png,stripMagbets2_png,uMagnets12_png,rod_rubber2_png,uMagnets22_png,electriscope_gold2_png,electriscope_glass2_png,fur2_png,rod_glass2_png,electromag2_json,MagnetNeedle_bg_png,MagnetNeedle_cover_png,MagnetNeedle_needle_png,magLine1_png,magLine2_png,magLine12_png,magLine22_png,MagnetNeedle_cover2_png,MagnetNeedle_bg2_png,MagnetNeedle_needle2_png,MagnetNeedle_bg3_png,MagnetNeedle_needle3_png,MagnetNeedle_cover3_png,magLine13_png,magLine23_png",
+			"name": "preload"
+		},
+		{
+			"keys": "iconA_png,iconA2_png,iconAM_png,iconCol_png,iconCol2_png,iconEye_png,iconF_png,iconKM_png,iconKz_png,iconMa_png,iconMan_png,iconP_png,iconV_png,iconV2_png,iconWater_png,dc_png,dcz_png,dddzkg_png,ddszkg_png,dlb_png,dp_png,dx_png,dyb_png,dzx_png,hdbzq_png,xsdy_png,dengzuo_png,dianbingxiang_png,dianchahu_png,dianfanbao_png,dianfengshan_png,dianluanqi_png,dianluzi_png,dianshiji_png,kaiguan_png,kaiguanA_png,kakoudengpao_png,kongtiao_png,luokoudnegpao_png,sankouchazuo_png,shuangkongchazuo_png,weibolu_png,xiyiji_png,yandianbi_png,iconEye2_png,iconMir_png,iconcardM_png,dlt_kg_png,dlt_dz_png,dlt_dyb_png,dlt_dlb_png,dlt_ddp_png,dlt_dc_png,dzdz_png,iconparall_png",
+			"name": "icons"
+		},
+		{
+			"keys": "electricField_json,light_json,electric_json,homeElectric_json,electromag_json",
+			"name": "config"
+		}
+	],
+	"resources": [
+		{
+			"name": "checkbox_select_disabled_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_select_disabled.png"
+		},
+		{
+			"name": "checkbox_select_down_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_select_down.png"
+		},
+		{
+			"name": "checkbox_select_up_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_select_up.png"
+		},
+		{
+			"name": "checkbox_unselect_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_unselect.png"
+		},
+		{
+			"name": "selected_png",
+			"type": "image",
+			"url": "assets/ItemRenderer/selected.png"
+		},
+		{
+			"name": "border_png",
+			"type": "image",
+			"url": "assets/Panel/border.png"
+		},
+		{
+			"name": "header_png",
+			"type": "image",
+			"url": "assets/Panel/header.png"
+		},
+		{
+			"name": "radiobutton_select_disabled_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_select_disabled.png"
+		},
+		{
+			"name": "radiobutton_select_down_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_select_down.png"
+		},
+		{
+			"name": "radiobutton_select_up_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_select_up.png"
+		},
+		{
+			"name": "radiobutton_unselect_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_unselect.png"
+		},
+		{
+			"name": "roundthumb_png",
+			"type": "image",
+			"url": "assets/ScrollBar/roundthumb.png"
+		},
+		{
+			"name": "thumb_png",
+			"type": "image",
+			"url": "assets/Slider/thumb.png"
+		},
+		{
+			"name": "track_png",
+			"type": "image",
+			"url": "assets/Slider/track.png"
+		},
+		{
+			"name": "tracklight_png",
+			"type": "image",
+			"url": "assets/Slider/tracklight.png"
+		},
+		{
+			"name": "handle_png",
+			"type": "image",
+			"url": "assets/ToggleSwitch/handle.png"
+		},
+		{
+			"name": "off_png",
+			"type": "image",
+			"url": "assets/ToggleSwitch/off.png"
+		},
+		{
+			"name": "on_png",
+			"type": "image",
+			"url": "assets/ToggleSwitch/on.png"
+		},
+		{
+			"name": "button_down_png",
+			"type": "image",
+			"url": "assets/Button/button_down.png"
+		},
+		{
+			"name": "button_up_png",
+			"type": "image",
+			"url": "assets/Button/button_up.png"
+		},
+		{
+			"name": "thumb_pb_png",
+			"type": "image",
+			"url": "assets/ProgressBar/thumb_pb.png"
+		},
+		{
+			"name": "track_pb_png",
+			"type": "image",
+			"url": "assets/ProgressBar/track_pb.png"
+		},
+		{
+			"name": "track_sb_png",
+			"type": "image",
+			"url": "assets/ScrollBar/track_sb.png"
+		},
+		{
+			"name": "light_png",
+			"type": "image",
+			"url": "assets/light.png"
+		},
+		{
+			"name": "circle_png",
+			"type": "image",
+			"url": "assets/circle.png"
+		},
+		{
+			"name": "desk_png",
+			"type": "image",
+			"url": "assets/desk.png"
+		},
+		{
+			"name": "bicircle_png",
+			"type": "image",
+			"url": "assets/items/bicircle.png"
+		},
+		{
+			"name": "jiguangbi_png",
+			"type": "image",
+			"url": "assets/items/jiguangbi.png"
+		},
+		{
+			"name": "rect_png",
+			"type": "image",
+			"url": "assets/items/rect.png"
+		},
+		{
+			"name": "tri_png",
+			"type": "image",
+			"url": "assets/items/tri.png"
+		},
+		{
+			"name": "arrow_png",
+			"type": "image",
+			"url": "assets/arrow.png"
+		},
+		{
+			"name": "3d_png",
+			"type": "image",
+			"url": "assets/3d.png"
+		},
+		{
+			"name": "amir_png",
+			"type": "image",
+			"url": "assets/items/amir.png"
+		},
+		{
+			"name": "vmir_png",
+			"type": "image",
+			"url": "assets/items/vmir.png"
+		},
+		{
+			"name": "candle_png",
+			"type": "image",
+			"url": "assets/items/candle.png"
+		},
+		{
+			"name": "mirr_png",
+			"type": "image",
+			"url": "assets/items/mirr.png"
+		},
+		{
+			"name": "card0_png",
+			"type": "image",
+			"url": "assets/items/card0.png"
+		},
+		{
+			"name": "card1_png",
+			"type": "image",
+			"url": "assets/items/card1.png"
+		},
+		{
+			"name": "card2_png",
+			"type": "image",
+			"url": "assets/items/card2.png"
+		},
+		{
+			"name": "di0_png",
+			"type": "image",
+			"url": "assets/items/di0.png"
+		},
+		{
+			"name": "di30_png",
+			"type": "image",
+			"url": "assets/items/di30.png"
+		},
+		{
+			"name": "di90_png",
+			"type": "image",
+			"url": "assets/items/di90.png"
+		},
+		{
+			"name": "di60_png",
+			"type": "image",
+			"url": "assets/items/di60.png"
+		},
+		{
+			"name": "mirrp_png",
+			"type": "image",
+			"url": "assets/items/mirrp.png"
+		},
+		{
+			"name": "candle0_png",
+			"type": "image",
+			"url": "assets/items/candle0.png"
+		},
+		{
+			"name": "mainlight_png",
+			"type": "image",
+			"url": "assets/items/mainlight.png"
+		},
+		{
+			"name": "vmir2_png",
+			"type": "image",
+			"url": "assets/items/vmir2.png"
+		},
+		{
+			"name": "vmir3_png",
+			"type": "image",
+			"url": "assets/items/vmir3.png"
+		},
+		{
+			"name": "amir1_png",
+			"type": "image",
+			"url": "assets/items/amir1.png"
+		},
+		{
+			"name": "amir2_png",
+			"type": "image",
+			"url": "assets/items/amir2.png"
+		},
+		{
+			"name": "amir3_png",
+			"type": "image",
+			"url": "assets/items/amir3.png"
+		},
+		{
+			"name": "vmir1_png",
+			"type": "image",
+			"url": "assets/items/vmir1.png"
+		},
+		{
+			"name": "candler_png",
+			"type": "image",
+			"url": "assets/items/candler.png"
+		},
+		{
+			"name": "gjz1_png",
+			"type": "image",
+			"url": "assets/items/gjz1.png"
+		},
+		{
+			"name": "kong1_png",
+			"type": "image",
+			"url": "assets/items/kong1.png"
+		},
+		{
+			"name": "kong2_png",
+			"type": "image",
+			"url": "assets/items/kong2.png"
+		},
+		{
+			"name": "kong3_png",
+			"type": "image",
+			"url": "assets/items/kong3.png"
+		},
+		{
+			"name": "gp2_png",
+			"type": "image",
+			"url": "assets/items/gp2.png"
+		},
+		{
+			"name": "kong20_png",
+			"type": "image",
+			"url": "assets/items/kong20.png"
+		},
+		{
+			"name": "fire_png",
+			"type": "image",
+			"url": "assets/items/fire.png"
+		},
+		{
+			"name": "kong10_png",
+			"type": "image",
+			"url": "assets/items/kong10.png"
+		},
+		{
+			"name": "kong30_png",
+			"type": "image",
+			"url": "assets/items/kong30.png"
+		},
+		{
+			"name": "magn1_png",
+			"type": "image",
+			"url": "assets/items/magn1.png"
+		},
+		{
+			"name": "magn10_png",
+			"type": "image",
+			"url": "assets/items/magn10.png"
+		},
+		{
+			"name": "gpoint_png",
+			"type": "image",
+			"url": "assets/items/gpoint.png"
+		},
+		{
+			"name": "fsamirr_png",
+			"type": "image",
+			"url": "assets/items/fsamirr.png"
+		},
+		{
+			"name": "fspmirr_png",
+			"type": "image",
+			"url": "assets/items/fspmirr.png"
+		},
+		{
+			"name": "fsvmirr_png",
+			"type": "image",
+			"url": "assets/items/fsvmirr.png"
+		},
+		{
+			"name": "fsman_png",
+			"type": "image",
+			"url": "assets/items/fsman.png"
+		},
+		{
+			"name": "light_json",
+			"type": "json",
+			"url": "config/light.json"
+		},
+		{
+			"name": "fibre_png",
+			"type": "image",
+			"url": "assets/items/fibre.png"
+		},
+		{
+			"name": "water_png",
+			"type": "image",
+			"url": "assets/items/water.png"
+		},
+		{
+			"name": "waterbool_png",
+			"type": "image",
+			"url": "assets/items/waterbool.png"
+		},
+		{
+			"name": "electric_json",
+			"type": "json",
+			"url": "config/electric.json"
+		},
+		{
+			"name": "img_asset5_png",
+			"type": "image",
+			"url": "assets/electricItems/big_images/img_asset5.png"
+		},
+		{
+			"name": "fibre1_png",
+			"type": "image",
+			"url": "assets/items/fibre1.png"
+		},
+		{
+			"name": "fibre2_png",
+			"type": "image",
+			"url": "assets/items/fibre2.png"
+		},
+		{
+			"name": "hair_png",
+			"type": "image",
+			"url": "assets/items/hair.png"
+		},
+		{
+			"name": "hearth_png",
+			"type": "image",
+			"url": "assets/items/hearth.png"
+		},
+		{
+			"name": "harr_png",
+			"type": "image",
+			"url": "assets/items/harr.png"
+		},
+		{
+			"name": "hrole_png",
+			"type": "image",
+			"url": "assets/items/hrole.png"
+		},
+		{
+			"name": "hxian_png",
+			"type": "image",
+			"url": "assets/items/hxian.png"
+		},
+		{
+			"name": "hpic_png",
+			"type": "image",
+			"url": "assets/items/hpic.png"
+		},
+		{
+			"name": "hxian2_png",
+			"type": "image",
+			"url": "assets/items/hxian2.png"
+		},
+		{
+			"name": "hpic2_png",
+			"type": "image",
+			"url": "assets/items/hpic2.png"
+		},
+		{
+			"name": "hpic22_png",
+			"type": "image",
+			"url": "assets/items/hpic2.png"
+		},
+		{
+			"name": "hxian3_png",
+			"type": "image",
+			"url": "assets/items/hxian.png"
+		},
+		{
+			"name": "hearth2_png",
+			"type": "image",
+			"url": "assets/items/hearth.png"
+		},
+		{
+			"name": "hxian22_png",
+			"type": "image",
+			"url": "assets/items/hxian2.png"
+		},
+		{
+			"name": "harr2_png",
+			"type": "image",
+			"url": "assets/items/harr.png"
+		},
+		{
+			"name": "hrole2_png",
+			"type": "image",
+			"url": "assets/items/hrole.png"
+		},
+		{
+			"name": "hair2_png",
+			"type": "image",
+			"url": "assets/items/hair.png"
+		},
+		{
+			"name": "hpic3_png",
+			"type": "image",
+			"url": "assets/items/hpic.png"
+		},
+		{
+			"name": "xkuaizi_png",
+			"type": "image",
+			"url": "assets/items/xkuaizi.png"
+		},
+		{
+			"name": "xkuaizi2_png",
+			"type": "image",
+			"url": "assets/items/xkuaizi2.png"
+		},
+		{
+			"name": "xren_png",
+			"type": "image",
+			"url": "assets/items/xren.png"
+		},
+		{
+			"name": "xren2_png",
+			"type": "image",
+			"url": "assets/items/xren2.png"
+		},
+		{
+			"name": "xshu_png",
+			"type": "image",
+			"url": "assets/items/xshu.png"
+		},
+		{
+			"name": "xshu2_png",
+			"type": "image",
+			"url": "assets/items/xshu2.png"
+		},
+		{
+			"name": "xyu_png",
+			"type": "image",
+			"url": "assets/items/xyu.png"
+		},
+		{
+			"name": "xyu2_png",
+			"type": "image",
+			"url": "assets/items/xyu2.png"
+		},
+		{
+			"name": "xamir_png",
+			"type": "image",
+			"url": "assets/items/xian/xamir.png"
+		},
+		{
+			"name": "xbicircle_png",
+			"type": "image",
+			"url": "assets/items/xian/xbicircle.png"
+		},
+		{
+			"name": "xcandle_png",
+			"type": "image",
+			"url": "assets/items/xian/xcandle.png"
+		},
+		{
+			"name": "xfsamirr_png",
+			"type": "image",
+			"url": "assets/items/xian/xfsamirr.png"
+		},
+		{
+			"name": "xfspmirr_png",
+			"type": "image",
+			"url": "assets/items/xian/xfspmirr.png"
+		},
+		{
+			"name": "xfsvmirr_png",
+			"type": "image",
+			"url": "assets/items/xian/xfsvmirr.png"
+		},
+		{
+			"name": "xparall_png",
+			"type": "image",
+			"url": "assets/items/xian/xparall.png"
+		},
+		{
+			"name": "xrect_png",
+			"type": "image",
+			"url": "assets/items/xian/xrect.png"
+		},
+		{
+			"name": "xtri_png",
+			"type": "image",
+			"url": "assets/items/xian/xtri.png"
+		},
+		{
+			"name": "xvmir_png",
+			"type": "image",
+			"url": "assets/items/xian/xvmir.png"
+		},
+		{
+			"name": "eye_png",
+			"type": "image",
+			"url": "assets/items/eye.png"
+		},
+		{
+			"name": "homeElectric_json",
+			"type": "json",
+			"url": "config/homeElectric.json"
+		},
+		{
+			"name": "circuit_form_bg_png",
+			"type": "image",
+			"url": "assets/CircuitUI/circuit_form_bg.png"
+		},
+		{
+			"name": "circuit_close_png",
+			"type": "image",
+			"url": "assets/CircuitUI/circuit_close.png"
+		},
+		{
+			"name": "data_form_bg_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/data_form_bg.png"
+		},
+		{
+			"name": "data_form_lattice_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/data_form_lattice.png"
+		},
+		{
+			"name": "data_form_lattice2_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/data_form_lattice2.png"
+		},
+		{
+			"name": "circuit_form_bg2_png",
+			"type": "image",
+			"url": "assets/CircuitUI/circuit_form_bg.png"
+		},
+		{
+			"name": "data_form_bg2_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/data_form_bg.png"
+		},
+		{
+			"name": "data_form_lattice3_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/data_form_lattice.png"
+		},
+		{
+			"name": "data_form_lattice22_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/data_form_lattice2.png"
+		},
+		{
+			"name": "jiguangbi_off_btn_png",
+			"type": "image",
+			"url": "assets/items/jiguangbi_off_btn.png"
+		},
+		{
+			"name": "jiguangbi_on_btn_png",
+			"type": "image",
+			"url": "assets/items/jiguangbi_on_btn.png"
+		},
+		{
+			"name": "jiguangbi_off_btn2_png",
+			"type": "image",
+			"url": "assets/items/jiguangbi_off_btn.png"
+		},
+		{
+			"name": "jiguangbi_on_btn2_png",
+			"type": "image",
+			"url": "assets/items/jiguangbi_on_btn.png"
+		},
+		{
+			"name": "kz1_png",
+			"type": "image",
+			"url": "assets/items/kz1.png"
+		},
+		{
+			"name": "kz2_png",
+			"type": "image",
+			"url": "assets/items/kz2.png"
+		},
+		{
+			"name": "kz3_png",
+			"type": "image",
+			"url": "assets/items/kz3.png"
+		},
+		{
+			"name": "kz4_png",
+			"type": "image",
+			"url": "assets/items/kz4.png"
+		},
+		{
+			"name": "kz5_png",
+			"type": "image",
+			"url": "assets/items/kz5.png"
+		},
+		{
+			"name": "kz12_png",
+			"type": "image",
+			"url": "assets/items/kz1.png"
+		},
+		{
+			"name": "kz22_png",
+			"type": "image",
+			"url": "assets/items/kz2.png"
+		},
+		{
+			"name": "kz32_png",
+			"type": "image",
+			"url": "assets/items/kz3.png"
+		},
+		{
+			"name": "kz42_png",
+			"type": "image",
+			"url": "assets/items/kz4.png"
+		},
+		{
+			"name": "kz52_png",
+			"type": "image",
+			"url": "assets/items/kz5.png"
+		},
+		{
+			"name": "eyein_png",
+			"type": "image",
+			"url": "assets/items/eyein.png"
+		},
+		{
+			"name": "eyeout_png",
+			"type": "image",
+			"url": "assets/items/eyeout.png"
+		},
+		{
+			"name": "iconA_png",
+			"type": "image",
+			"url": "assets/icons/light/iconA.png"
+		},
+		{
+			"name": "iconA2_png",
+			"type": "image",
+			"url": "assets/icons/light/iconA2.png"
+		},
+		{
+			"name": "iconAM_png",
+			"type": "image",
+			"url": "assets/icons/light/iconAM.png"
+		},
+		{
+			"name": "iconCol_png",
+			"type": "image",
+			"url": "assets/icons/light/iconCol.png"
+		},
+		{
+			"name": "iconCol2_png",
+			"type": "image",
+			"url": "assets/icons/light/iconCol2.png"
+		},
+		{
+			"name": "iconEye_png",
+			"type": "image",
+			"url": "assets/icons/light/iconEye.png"
+		},
+		{
+			"name": "iconF_png",
+			"type": "image",
+			"url": "assets/icons/light/iconF.png"
+		},
+		{
+			"name": "iconKM_png",
+			"type": "image",
+			"url": "assets/icons/light/iconKM.png"
+		},
+		{
+			"name": "iconKz_png",
+			"type": "image",
+			"url": "assets/icons/light/iconKz.png"
+		},
+		{
+			"name": "iconMa_png",
+			"type": "image",
+			"url": "assets/icons/light/iconMa.png"
+		},
+		{
+			"name": "iconMan_png",
+			"type": "image",
+			"url": "assets/icons/light/iconMan.png"
+		},
+		{
+			"name": "iconP_png",
+			"type": "image",
+			"url": "assets/icons/light/iconP.png"
+		},
+		{
+			"name": "iconV_png",
+			"type": "image",
+			"url": "assets/icons/light/iconV.png"
+		},
+		{
+			"name": "iconV2_png",
+			"type": "image",
+			"url": "assets/icons/light/iconV2.png"
+		},
+		{
+			"name": "iconWater_png",
+			"type": "image",
+			"url": "assets/icons/light/iconWater.png"
+		},
+		{
+			"name": "dc_png",
+			"type": "image",
+			"url": "assets/icons/elect/dc.png"
+		},
+		{
+			"name": "dcz_png",
+			"type": "image",
+			"url": "assets/icons/elect/dcz.png"
+		},
+		{
+			"name": "dddzkg_png",
+			"type": "image",
+			"url": "assets/icons/elect/dddzkg.png"
+		},
+		{
+			"name": "ddszkg_png",
+			"type": "image",
+			"url": "assets/icons/elect/ddszkg.png"
+		},
+		{
+			"name": "dlb_png",
+			"type": "image",
+			"url": "assets/icons/elect/dlb.png"
+		},
+		{
+			"name": "dp_png",
+			"type": "image",
+			"url": "assets/icons/elect/dp.png"
+		},
+		{
+			"name": "dx_png",
+			"type": "image",
+			"url": "assets/icons/elect/dx.png"
+		},
+		{
+			"name": "dyb_png",
+			"type": "image",
+			"url": "assets/icons/elect/dyb.png"
+		},
+		{
+			"name": "dzx_png",
+			"type": "image",
+			"url": "assets/icons/elect/dzx.png"
+		},
+		{
+			"name": "hdbzq_png",
+			"type": "image",
+			"url": "assets/icons/elect/hdbzq.png"
+		},
+		{
+			"name": "xsdy_png",
+			"type": "image",
+			"url": "assets/icons/elect/xsdy.png"
+		},
+		{
+			"name": "dengzuo_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dengzuo.png"
+		},
+		{
+			"name": "dianbingxiang_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianbingxiang.png"
+		},
+		{
+			"name": "dianchahu_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianchahu.png"
+		},
+		{
+			"name": "dianfanbao_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianfanbao.png"
+		},
+		{
+			"name": "dianfengshan_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianfengshan.png"
+		},
+		{
+			"name": "dianluanqi_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianluanqi.png"
+		},
+		{
+			"name": "dianluzi_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianluzi.png"
+		},
+		{
+			"name": "dianshiji_png",
+			"type": "image",
+			"url": "assets/icons/elhome/dianshiji.png"
+		},
+		{
+			"name": "kaiguan_png",
+			"type": "image",
+			"url": "assets/icons/elhome/kaiguan.png"
+		},
+		{
+			"name": "kaiguanA_png",
+			"type": "image",
+			"url": "assets/icons/elhome/kaiguanA.png"
+		},
+		{
+			"name": "kakoudengpao_png",
+			"type": "image",
+			"url": "assets/icons/elhome/kakoudengpao.png"
+		},
+		{
+			"name": "kongtiao_png",
+			"type": "image",
+			"url": "assets/icons/elhome/kongtiao.png"
+		},
+		{
+			"name": "luokoudnegpao_png",
+			"type": "image",
+			"url": "assets/icons/elhome/luokoudnegpao.png"
+		},
+		{
+			"name": "sankouchazuo_png",
+			"type": "image",
+			"url": "assets/icons/elhome/sankouchazuo.png"
+		},
+		{
+			"name": "shuangkongchazuo_png",
+			"type": "image",
+			"url": "assets/icons/elhome/shuangkongchazuo.png"
+		},
+		{
+			"name": "weibolu_png",
+			"type": "image",
+			"url": "assets/icons/elhome/weibolu.png"
+		},
+		{
+			"name": "xiyiji_png",
+			"type": "image",
+			"url": "assets/icons/elhome/xiyiji.png"
+		},
+		{
+			"name": "yandianbi_png",
+			"type": "image",
+			"url": "assets/icons/elhome/yandianbi.png"
+		},
+		{
+			"name": "iconEye2_png",
+			"type": "image",
+			"url": "assets/icons/light/iconEye2.png"
+		},
+		{
+			"name": "iconMir_png",
+			"type": "image",
+			"url": "assets/icons/light/iconMir.png"
+		},
+		{
+			"name": "vmir4_png",
+			"type": "image",
+			"url": "assets/items/vmir4.png"
+		},
+		{
+			"name": "parall_png",
+			"type": "image",
+			"url": "assets/items/parall.png"
+		},
+		{
+			"name": "parall1_png",
+			"type": "image",
+			"url": "assets/items/parall1.png"
+		},
+		{
+			"name": "parall2_png",
+			"type": "image",
+			"url": "assets/items/parall2.png"
+		},
+		{
+			"name": "parall3_png",
+			"type": "image",
+			"url": "assets/items/parall3.png"
+		},
+		{
+			"name": "parall4_png",
+			"type": "image",
+			"url": "assets/items/parall4.png"
+		},
+		{
+			"name": "parall12_png",
+			"type": "image",
+			"url": "assets/items/parall1.png"
+		},
+		{
+			"name": "parall22_png",
+			"type": "image",
+			"url": "assets/items/parall2.png"
+		},
+		{
+			"name": "parall32_png",
+			"type": "image",
+			"url": "assets/items/parall3.png"
+		},
+		{
+			"name": "parall42_png",
+			"type": "image",
+			"url": "assets/items/parall4.png"
+		},
+		{
+			"name": "vmir42_png",
+			"type": "image",
+			"url": "assets/items/vmir4.png"
+		},
+		{
+			"name": "iconcardM_png",
+			"type": "image",
+			"url": "assets/icons/light/iconcardM.png"
+		},
+		{
+			"name": "dlt_dc_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/dlt_dc.png"
+		},
+		{
+			"name": "dlt_ddp_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/dlt_ddp.png"
+		},
+		{
+			"name": "dlt_dlb_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/dlt_dlb.png"
+		},
+		{
+			"name": "dlt_dyb_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/dlt_dyb.png"
+		},
+		{
+			"name": "dlt_dz_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/dlt_dz.png"
+		},
+		{
+			"name": "dlt_kg_png",
+			"type": "image",
+			"url": "assets/ElectricsDataUI/dlt_kg.png"
+		},
+		{
+			"name": "dzdz_png",
+			"type": "image",
+			"url": "assets/icons/elect/dzdz.png"
+		},
+		{
+			"name": "dzdz2_png",
+			"type": "image",
+			"url": "assets/icons/elect/dzdz.png"
+		},
+		{
+			"name": "electricItems_swf_json",
+			"type": "json",
+			"url": "assets/electricItems/electricItems_swf.json"
+		},
+		{
+			"name": "electricItems_json",
+			"subkeys": "img_DRGDF,img_ESDFSD,img_FGHFG,img_RTGDF,img_a68,img_asset1,img_asset100,img_asset101,img_asset102,img_asset103,img_asset104,img_asset105,img_asset106,img_asset108,img_asset11,img_asset110,img_asset111,img_asset112,img_asset113,img_asset115,img_asset18,img_asset19,img_asset2,img_asset20,img_asset21,img_asset22,img_asset23,img_asset24,img_asset25,img_asset26,img_asset27,img_asset3,img_asset30,img_asset32,img_asset33,img_asset48,img_asset5,img_asset50,img_asset51,img_asset52,img_asset53,img_asset55,img_asset56,img_asset6,img_asset61,img_asset62,img_asset63,img_asset64,img_asset66,img_asset67,img_asset68,img_asset69,img_asset7,img_asset70,img_asset72,img_asset74,img_asset76,img_asset78,img_asset8,img_asset81,img_asset83,img_asset84,img_asset85,img_asset88,img_asset89,img_asset9,img_asset90,img_asset91,img_asset92,img_asset93,img_asset94,img_asset95,img_asset96,img_asset97,img_asset98,img_asset99,img_dd,img_dfgdf,img_fgdfcb,img_fhfgh,img_fjht,img_gfgh,img_gh,img_hfhf,img_htrhfg,img_jtyj,img_nhjhv,img_sadfs,img_temp,img_thfht,img_yjf",
+			"type": "sheet",
+			"url": "assets/electricItems/electricItems.json"
+		},
+		{
+			"name": "arrow_down_png",
+			"type": "image",
+			"url": "assets/ui2/arrow_down.png"
+		},
+		{
+			"name": "arrow_left_png",
+			"type": "image",
+			"url": "assets/ui2/arrow_left.png"
+		},
+		{
+			"name": "arrow_lelt_png",
+			"type": "image",
+			"url": "assets/ui2/arrow_lelt.png"
+		},
+		{
+			"name": "arrow_open_png",
+			"type": "image",
+			"url": "assets/ui2/arrow_open.png"
+		},
+		{
+			"name": "arrow_right_png",
+			"type": "image",
+			"url": "assets/ui2/arrow_right.png"
+		},
+		{
+			"name": "arrow_up_png",
+			"type": "image",
+			"url": "assets/ui2/arrow_up.png"
+		},
+		{
+			"name": "box_png",
+			"type": "image",
+			"url": "assets/ui2/box.png"
+		},
+		{
+			"name": "button_again_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_again_down.png"
+		},
+		{
+			"name": "button_again_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_again_over.png"
+		},
+		{
+			"name": "button_again_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_again_up.png"
+		},
+		{
+			"name": "button_all_bg_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_all_bg_down.png"
+		},
+		{
+			"name": "button_all_bg_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_all_bg_up.png"
+		},
+		{
+			"name": "button_all_bule_bg_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_all_bule_bg_down.png"
+		},
+		{
+			"name": "button_all_bule_bg_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_all_bule_bg_up.png"
+		},
+		{
+			"name": "button_close_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_close_down.png"
+		},
+		{
+			"name": "button_close_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_close_over.png"
+		},
+		{
+			"name": "button_close_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_close_up.png"
+		},
+		{
+			"name": "button_data_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_data_down.png"
+		},
+		{
+			"name": "button_data_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_data_over.png"
+		},
+		{
+			"name": "button_data_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_data_up.png"
+		},
+		{
+			"name": "button_delete_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_delete_down.png"
+		},
+		{
+			"name": "button_delete_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_delete_up.png"
+		},
+		{
+			"name": "button_element_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_element_down.png"
+		},
+		{
+			"name": "button_element_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_element_up.png"
+		},
+		{
+			"name": "button_export_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_export_down.png"
+		},
+		{
+			"name": "button_export_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_export_over.png"
+		},
+		{
+			"name": "button_export_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_export_up.png"
+		},
+		{
+			"name": "button_group_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_group_down.png"
+		},
+		{
+			"name": "button_group_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_group_up.png"
+		},
+		{
+			"name": "button_new_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_new_down.png"
+		},
+		{
+			"name": "button_new_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_new_over.png"
+		},
+		{
+			"name": "button_new_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_new_up.png"
+		},
+		{
+			"name": "button_open_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_open_down.png"
+		},
+		{
+			"name": "button_open_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_open_over.png"
+		},
+		{
+			"name": "button_open_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_open_up.png"
+		},
+		{
+			"name": "button_part_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_part_down.png"
+		},
+		{
+			"name": "button_part_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_part_over.png"
+		},
+		{
+			"name": "button_part_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_part_up.png"
+		},
+		{
+			"name": "button_play_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_play_down.png"
+		},
+		{
+			"name": "button_play_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_play_over.png"
+		},
+		{
+			"name": "button_play_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_play_up.png"
+		},
+		{
+			"name": "button_retreat_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_retreat_down.png"
+		},
+		{
+			"name": "button_retreat_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_retreat_over.png"
+		},
+		{
+			"name": "button_retreat_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_retreat_up.png"
+		},
+		{
+			"name": "button_rotation_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_rotation_down.png"
+		},
+		{
+			"name": "button_rotation_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_rotation_up.png"
+		},
+		{
+			"name": "button_save_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_save_down.png"
+		},
+		{
+			"name": "button_save_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_save_over.png"
+		},
+		{
+			"name": "button_save_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_save_up.png"
+		},
+		{
+			"name": "button_set_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_set_down.png"
+		},
+		{
+			"name": "button_set_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_set_over.png"
+		},
+		{
+			"name": "button_set_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_set_up.png"
+		},
+		{
+			"name": "button_setu_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_setup_down.png"
+		},
+		{
+			"name": "button_setu_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_setup_over.png"
+		},
+		{
+			"name": "button_setu_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_setup_up.png"
+		},
+		{
+			"name": "button_side_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_side_down.png"
+		},
+		{
+			"name": "button_side_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_side_over.png"
+		},
+		{
+			"name": "button_side_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_side_up.png"
+		},
+		{
+			"name": "button_star_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_star_down.png"
+		},
+		{
+			"name": "button_star_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_star_over.png"
+		},
+		{
+			"name": "button_star_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_star_up.png"
+		},
+		{
+			"name": "button_stop_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_stop_down.png"
+		},
+		{
+			"name": "button_stop_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_stop_over.png"
+		},
+		{
+			"name": "button_stop_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_stop_up.png"
+		},
+		{
+			"name": "button_style_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_style_down.png"
+		},
+		{
+			"name": "button_style_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_style_over.png"
+		},
+		{
+			"name": "button_style_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_style_up.png"
+		},
+		{
+			"name": "button_subject_down_png",
+			"type": "image",
+			"url": "assets/ui2/button_subject_down.png"
+		},
+		{
+			"name": "button_subject_over_png",
+			"type": "image",
+			"url": "assets/ui2/button_subject_over.png"
+		},
+		{
+			"name": "button_subject_up_png",
+			"type": "image",
+			"url": "assets/ui2/button_subject_up.png"
+		},
+		{
+			"name": "check_box_bg_png",
+			"type": "image",
+			"url": "assets/ui2/check_box_bg.png"
+		},
+		{
+			"name": "check_box_down_png",
+			"type": "image",
+			"url": "assets/ui2/check_box_down.png"
+		},
+		{
+			"name": "close_png",
+			"type": "image",
+			"url": "assets/ui2/close.png"
+		},
+		{
+			"name": "element_attributes_title_bg_png",
+			"type": "image",
+			"url": "assets/ui2/element_attributes_title_bg.png"
+		},
+		{
+			"name": "element_bg_png",
+			"type": "image",
+			"url": "assets/ui2/element_bg.png"
+		},
+		{
+			"name": "element_bottom_bg_png",
+			"type": "image",
+			"url": "assets/ui2/element_bottom_bg.png"
+		},
+		{
+			"name": "element_box_normal_png",
+			"type": "image",
+			"url": "assets/ui2/element_box_normal.png"
+		},
+		{
+			"name": "element_box_press_png",
+			"type": "image",
+			"url": "assets/ui2/element_box_press.png"
+		},
+		{
+			"name": "element_tab_select_png",
+			"type": "image",
+			"url": "assets/ui2/element_tab_select.png"
+		},
+		{
+			"name": "element_title_collapse_bg_png",
+			"type": "image",
+			"url": "assets/ui2/element_title_collapse_bg.png"
+		},
+		{
+			"name": "element_title_expansion_bg_png",
+			"type": "image",
+			"url": "assets/ui2/element_title_expansion_bg.png"
+		},
+		{
+			"name": "icon_acoustics_over_png",
+			"type": "image",
+			"url": "assets/ui2/icon_acoustics_over.png"
+		},
+		{
+			"name": "icon_acoustics_png",
+			"type": "image",
+			"url": "assets/ui2/icon_acoustics.png"
+		},
+		{
+			"name": "icon_add_png",
+			"type": "image",
+			"url": "assets/ui2/icon_add.png"
+		},
+		{
+			"name": "icon_close_png",
+			"type": "image",
+			"url": "assets/ui2/icon_close.png"
+		},
+		{
+			"name": "icon_dynamics_over_png",
+			"type": "image",
+			"url": "assets/ui2/icon_dynamics_over.png"
+		},
+		{
+			"name": "icon_dynamics_png",
+			"type": "image",
+			"url": "assets/ui2/icon_dynamics.png"
+		},
+		{
+			"name": "icon_editor_png",
+			"type": "image",
+			"url": "assets/ui2/icon_editor.png"
+		},
+		{
+			"name": "icon_electric_over_png",
+			"type": "image",
+			"url": "assets/ui2/icon_electric_over.png"
+		},
+		{
+			"name": "icon_electric_png",
+			"type": "image",
+			"url": "assets/ui2/icon_electric.png"
+		},
+		{
+			"name": "icon_heat_over_png",
+			"type": "image",
+			"url": "assets/ui2/icon_heat_over.png"
+		},
+		{
+			"name": "icon_heat_png",
+			"type": "image",
+			"url": "assets/ui2/icon_heat.png"
+		},
+		{
+			"name": "icon_light_over_png",
+			"type": "image",
+			"url": "assets/ui2/icon_light_over.png"
+		},
+		{
+			"name": "icon_light_png",
+			"type": "image",
+			"url": "assets/ui2/icon_light.png"
+		},
+		{
+			"name": "icon_magnetism_over_png",
+			"type": "image",
+			"url": "assets/ui2/icon_magnetism_over.png"
+		},
+		{
+			"name": "icon_magnetism_png",
+			"type": "image",
+			"url": "assets/ui2/icon_magnetism.png"
+		},
+		{
+			"name": "icon_pack_png",
+			"type": "image",
+			"url": "assets/ui2/icon_pack.png"
+		},
+		{
+			"name": "icon_search_png",
+			"type": "image",
+			"url": "assets/ui2/icon_search.png"
+		},
+		{
+			"name": "icon_succ_png",
+			"type": "image",
+			"url": "assets/ui2/icon_succ.png"
+		},
+		{
+			"name": "Input_box_plus_press_png",
+			"type": "image",
+			"url": "assets/ui2/Input_box_plus_press.png"
+		},
+		{
+			"name": "Input_box_plus_png",
+			"type": "image",
+			"url": "assets/ui2/Input_box_plus.png"
+		},
+		{
+			"name": "input_box_up_arrow_png",
+			"type": "image",
+			"url": "assets/ui2/input_box_up_arrow.png"
+		},
+		{
+			"name": "input_box_up_arrow2_png",
+			"type": "image",
+			"url": "assets/ui2/input_box_up_arrow2.png"
+		},
+		{
+			"name": "Input_box_up_less_press_png",
+			"type": "image",
+			"url": "assets/ui2/Input_box_up_less_press.png"
+		},
+		{
+			"name": "Input_box_up_less_png",
+			"type": "image",
+			"url": "assets/ui2/Input_box_up_less.png"
+		},
+		{
+			"name": "Input_box_png",
+			"type": "image",
+			"url": "assets/ui2/Input_box.png"
+		},
+		{
+			"name": "line_bule_png",
+			"type": "image",
+			"url": "assets/ui2/line_bule.png"
+		},
+		{
+			"name": "line_dark_png",
+			"type": "image",
+			"url": "assets/ui2/line_dark.png"
+		},
+		{
+			"name": "line_dotted_png",
+			"type": "image",
+			"url": "assets/ui2/line_dotted.png"
+		},
+		{
+			"name": "line_white_png",
+			"type": "image",
+			"url": "assets/ui2/line_white.png"
+		},
+		{
+			"name": "pop_up_bg_png",
+			"type": "image",
+			"url": "assets/ui2/pop_up_bg.png"
+		},
+		{
+			"name": "pop_up_select_png",
+			"type": "image",
+			"url": "assets/ui2/pop_up_select.png"
+		},
+		{
+			"name": "prompt_bg_png",
+			"type": "image",
+			"url": "assets/ui2/prompt_bg.png"
+		},
+		{
+			"name": "rotation_png",
+			"type": "image",
+			"url": "assets/ui2/rotation.png"
+		},
+		{
+			"name": "round_png",
+			"type": "image",
+			"url": "assets/ui2/round.png"
+		},
+		{
+			"name": "search_bg_png",
+			"type": "image",
+			"url": "assets/ui2/search_bg.png"
+		},
+		{
+			"name": "select_box_png",
+			"type": "image",
+			"url": "assets/ui2/select_box.png"
+		},
+		{
+			"name": "single_box_sel_png",
+			"type": "image",
+			"url": "assets/ui2/single_box_sel.png"
+		},
+		{
+			"name": "single_box_png",
+			"type": "image",
+			"url": "assets/ui2/single_box.png"
+		},
+		{
+			"name": "slide_bg_png",
+			"type": "image",
+			"url": "assets/ui2/slide_bg.png"
+		},
+		{
+			"name": "slide_blue_png",
+			"type": "image",
+			"url": "assets/ui2/slide_blue.png"
+		},
+		{
+			"name": "switch_left_png",
+			"type": "image",
+			"url": "assets/ui2/switch_left.png"
+		},
+		{
+			"name": "switch_right_png",
+			"type": "image",
+			"url": "assets/ui2/switch_right.png"
+		},
+		{
+			"name": "top_bg_png",
+			"type": "image",
+			"url": "assets/ui2/top_bg.png"
+		},
+		{
+			"name": "electricField_json",
+			"type": "json",
+			"url": "config/electricField.json"
+		},
+		{
+			"name": "iconparall_png",
+			"type": "image",
+			"url": "assets/icons/light/iconparall.png"
+		},
+		{
+			"name": "chargeN_png",
+			"type": "image",
+			"url": "assets/items/elecfield/chargeN.png"
+		},
+		{
+			"name": "chargeP_png",
+			"type": "image",
+			"url": "assets/items/elecfield/chargeP.png"
+		},
+		{
+			"name": "elecArrow_png",
+			"type": "image",
+			"url": "assets/items/elecfield/elecArrow.png"
+		},
+		{
+			"name": "elecArrow2_png",
+			"type": "image",
+			"url": "assets/items/elecfield/elecArrow2.png"
+		},
+		{
+			"name": "iconparall2_png",
+			"type": "image",
+			"url": "assets/icons/light/iconparall.png"
+		},
+		{
+			"name": "chargeN2_png",
+			"type": "image",
+			"url": "assets/items/elecfield/chargeN.png"
+		},
+		{
+			"name": "chargeP2_png",
+			"type": "image",
+			"url": "assets/items/elecfield/chargeP.png"
+		},
+		{
+			"name": "elecArrow3_png",
+			"type": "image",
+			"url": "assets/items/elecfield/elecArrow.png"
+		},
+		{
+			"name": "elecArrow22_png",
+			"type": "image",
+			"url": "assets/items/elecfield/elecArrow2.png"
+		},
+		{
+			"name": "scale_button_less_down_png",
+			"type": "image",
+			"url": "assets/ui2/scale_button_less_down.png"
+		},
+		{
+			"name": "scale_button_plus_down_png",
+			"type": "image",
+			"url": "assets/ui2/scale_button_plus_down.png"
+		},
+		{
+			"name": "scale_bg_png",
+			"type": "image",
+			"url": "assets/ui2/scale_bg.png"
+		},
+		{
+			"name": "electriscope_png",
+			"type": "image",
+			"url": "assets/items/elecmag/electriscope.png"
+		},
+		{
+			"name": "electriscope_glass_png",
+			"type": "image",
+			"url": "assets/items/elecmag/electriscope_glass.png"
+		},
+		{
+			"name": "electriscope_gold_png",
+			"type": "image",
+			"url": "assets/items/elecmag/electriscope_gold.png"
+		},
+		{
+			"name": "fur_png",
+			"type": "image",
+			"url": "assets/items/elecmag/fur.png"
+		},
+		{
+			"name": "rod_glass_png",
+			"type": "image",
+			"url": "assets/items/elecmag/rod_glass.png"
+		},
+		{
+			"name": "rod_rubber_png",
+			"type": "image",
+			"url": "assets/items/elecmag/rod_rubber.png"
+		},
+		{
+			"name": "silk_png",
+			"type": "image",
+			"url": "assets/items/elecmag/silk.png"
+		},
+		{
+			"name": "stripMagbets_png",
+			"type": "image",
+			"url": "assets/items/elecmag/stripMagbets.png"
+		},
+		{
+			"name": "uMagnets0_png",
+			"type": "image",
+			"url": "assets/items/elecmag/uMagnets0.png"
+		},
+		{
+			"name": "uMagnets1_png",
+			"type": "image",
+			"url": "assets/items/elecmag/uMagnets1.png"
+		},
+		{
+			"name": "uMagnets2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/uMagnets2.png"
+		},
+		{
+			"name": "electromag_json",
+			"type": "json",
+			"url": "config/electromag.json"
+		},
+		{
+			"name": "electriscope2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/electriscope.png"
+		},
+		{
+			"name": "silk2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/silk.png"
+		},
+		{
+			"name": "uMagnets02_png",
+			"type": "image",
+			"url": "assets/items/elecmag/uMagnets0.png"
+		},
+		{
+			"name": "stripMagbets2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/stripMagbets.png"
+		},
+		{
+			"name": "uMagnets12_png",
+			"type": "image",
+			"url": "assets/items/elecmag/uMagnets1.png"
+		},
+		{
+			"name": "rod_rubber2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/rod_rubber.png"
+		},
+		{
+			"name": "uMagnets22_png",
+			"type": "image",
+			"url": "assets/items/elecmag/uMagnets2.png"
+		},
+		{
+			"name": "electriscope_gold2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/electriscope_gold.png"
+		},
+		{
+			"name": "electriscope_glass2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/electriscope_glass.png"
+		},
+		{
+			"name": "fur2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/fur.png"
+		},
+		{
+			"name": "rod_glass2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/rod_glass.png"
+		},
+		{
+			"name": "electromag2_json",
+			"type": "json",
+			"url": "config/electromag.json"
+		},
+		{
+			"name": "MagnetNeedle_bg_png",
+			"type": "image",
+			"url": "assets/items/elecmag/MagnetNeedle_bg.png"
+		},
+		{
+			"name": "MagnetNeedle_cover_png",
+			"type": "image",
+			"url": "assets/items/elecmag/MagnetNeedle_cover.png"
+		},
+		{
+			"name": "MagnetNeedle_needle_png",
+			"type": "image",
+			"url": "assets/items/elecmag/MagnetNeedle_needle.png"
+		},
+		{
+			"name": "magLine1_png",
+			"type": "image",
+			"url": "assets/items/elecmag/magLine1.png"
+		},
+		{
+			"name": "magLine2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/magLine2.png"
+		},
+		{
+			"name": "magLine12_png",
+			"type": "image",
+			"url": "assets/items/elecmag/magLine1.png"
+		},
+		{
+			"name": "magLine22_png",
+			"type": "image",
+			"url": "assets/items/elecmag/magLine2.png"
+		},
+		{
+			"name": "MagnetNeedle_cover2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/MagnetNeedle_cover.png"
+		},
+		{
+			"name": "MagnetNeedle_bg2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/MagnetNeedle_bg.png"
+		},
+		{
+			"name": "MagnetNeedle_needle2_png",
+			"type": "image",
+			"url": "assets/items/elecmag/MagnetNeedle_needle.png"
+		},
+		{
+			"name": "MagnetNeedle_bg3_png",
+			"type": "image",
+			"url": "assets/MagnetNeedle_bg.png"
+		},
+		{
+			"name": "MagnetNeedle_needle3_png",
+			"type": "image",
+			"url": "assets/MagnetNeedle_needle.png"
+		},
+		{
+			"name": "MagnetNeedle_cover3_png",
+			"type": "image",
+			"url": "assets/MagnetNeedle_cover.png"
+		},
+		{
+			"name": "magLine13_png",
+			"type": "image",
+			"url": "assets/items/elecmag/magLine1.png"
+		},
+		{
+			"name": "magLine23_png",
+			"type": "image",
+			"url": "assets/items/elecmag/magLine2.png"
+		}
+	]
+}

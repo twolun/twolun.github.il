@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DataGraphicSkin" width="512" height="480" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image width="512" height="480" x="0" y="0" source="data_form_bg_png" scale9Grid="0,83,514,239"/>
+	<e:Button id="_btnModifyData" label="编辑数据引用" x="182" y="426" height="40" width="148" visible="false">
+	</e:Button>
+	<e:Image id="_btnMove" source="element_attributes_title_bg_png" x="0" touchEnabled="true" width="512" height="42"/>
+	<e:Label text="数据图像" x="224" y="15" size="16" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Label text="拟合图像" x="10" y="60" size="16" textColor="0xBEBEBE"/>
+	<e:Image id="_btnClose" width="10" height="10" x="485" y="15" source="circuit_close_png"/>
+	<e:Scroller width="495" height="300" x="9" y="111">
+		<e:Group id="_graphicsGroup" width="495" height="300">
+			<e:Rect fillColor="0x3a3738" left="0" top="0" bottom="0" right="0"/>
+		</e:Group>
+	</e:Scroller>
+	<e:Button id="_btnStraightL" label="直线" x="85" y="53" height="30" width="69" visible="false"/>
+	<e:Button id="_btnInverse" label="反比例函数" x="172" y="53" height="30" width="125" visible="false"/>
+	<e:Button id="_btnConic" label="二次曲线" x="315" y="53" height="30" width="101" visible="false"/>
+	<e:Button id="_btnBrokenL" label="折线" x="433" y="53" height="30" width="69" visible="false"/>
+</e:Skin>

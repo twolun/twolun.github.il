@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="FishItemSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="waterImg" source="water_png" x="0" y="0" width="790" height="413" scale9Grid="112,52,74,61"/>
+	<e:Image id="yu" source="xyu_png" x="111" y="76"/>
+	<e:Image id="yu2" source="xyu2_png" x="359" y="242"/>
+	<e:Image id="eyeVirtual" x="618" y="-166" source="eye_png" width="100" height="100" scaleX="-1"/>
+	<e:Image id="eye" x="741" y="-147" source="eye_png" width="100" height="100" scaleX="-1"/>
+</e:Skin>

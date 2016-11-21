@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LasterProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel" skinName="PanelTemple"/>
+	<e:Group id="group1" x="0" y="79" width="266" height="181">
+		<e:Label text="旋转角度" x="33" y="127" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="光源颜色" x="33" y="22" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="光线粗细" x="33" y="75" size="18" textColor="0xBEBEBE"/>
+		<ns1:EuiHSlider id="numRoll" x="131" y="72" width="100"/>
+		<ns1:DropDownList id="dropDownList2" x="136" y="118" skinName="DropDownListSkin"/>
+		<ns1:DropDownList id="dropDownList" x="136" y="13" skinName="DropDownListSkin"/>
+	</e:Group>
+</e:Skin>

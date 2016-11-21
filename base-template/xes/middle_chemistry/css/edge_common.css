@@ -1,0 +1,36 @@
+/**
+ * 初中化学
+ * edge通用css
+ * @thinlong
+ * v1.0 2016.9.18 
+ * 功能: 
+ * 1.通用背景
+ * 2.字体方正准圆、方正幼圆
+ */
+
+#Stage{
+	background-image: url("../img/bg.jpg");
+	background-repeat: repeat-y;
+}
+ 
+/*嵌入字体方正准圆简体*/
+@font-face
+{
+font-family: FZZY;
+src: url('../../common/font/FZY3JW.TTF');
+}
+.fzzyFont {
+font-family: FZZY;
+}
+
+
+/*嵌入字体方正粗圆简体*/
+@font-face
+{
+font-family: FZCY;
+src: url('../../common/font/FZY4JW.TTF');
+}
+
+.fzcyFont {
+font-family: FZCY;
+}

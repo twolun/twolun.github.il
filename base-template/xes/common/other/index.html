@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>title</title>
+		<!--<link rel="stylesheet" type="text/css" href="css/first.css" />-->
+		<style type="text/css">
+			html {
+				background-color: #000000;
+
+				animation: fadeIn 1s linear;
+				-moz-animation: fadeIn 1s linear;   	/* Firefox */
+				-webkit-animation: fadeIn 1s linear;	/* Safari 和 Chrome */
+				-o-animation: fadeIn 1s linear;	        /* Opera */
+			}
+
+			@keyframes fadeIn
+			{
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+
+			.content-image{
+				width: 100%;
+			}
+		</style>
+		<script type="text/javascript">
+			var loader_common = (function(){
+				function loader_common(){
+					var index = 0;
+					var files = [];
+					var filePath;
+
+					var tempCommonFile = [];
+					var tempPrivateFile = [];
+
+					var isReady = false;
+					var canLoad = false;
+					var isLoad = false;
+
+					filePath = '../../xes/primary_math/';
+					var XMLHTTP;
+					if (window.XMLHttpRequest) {
+						XMLHTTP = new XMLHttpRequest();
+					} else {
+						XMLHTTP = new ActiveXObject("Microsoft.XMLHTTP");
+					};
+					XMLHTTP.open("GET",filePath + "js/flag.js",true);
+					XMLHTTP.send(null);
+
+					XMLHTTP.onreadystatechange=function(){
+						if(XMLHTTP.readyState==4){
+							if(XMLHTTP.status==200){
+								console.log("资源包js");
+
+							}else{
+								console.log("网络js");
+								filePath = 'http://kjds2.speiyou.com/courseware/xes/primary_math/';
+							};
+
+							console.log('文件夹地址:' + filePath);
+
+							if(canLoad == true)
+							{
+								if(isLoad == false)
+								{
+									isLoad = true;
+									composeFiles();
+									checkProcess();
+								};
+							};
+
+							isReady = true;
+						};
+					};
+
+					function addSingleFile(fPath)
+					{
+						var index = fPath.indexOf('.js');
+						if(fPath.indexOf('.js') == fPath.length - 3)
+						{
+							console.log('加载js:' + fPath);
+							addJs(fPath);
+						}
+						else if(fPath.indexOf('.css') == fPath.length - 4)
+						{
+							console.log('加载css:' + fPath);
+							addCss(fPath);
+						};
+					};
+
+					function addJs(jsPath)
+					{
+						var j1 = document.createElement('script');
+						j1.src = jsPath;
+						document.body.appendChild(j1);
+						j1.onload = function(){
+							index++;
+							checkProcess();
+						};
+					};
+
+					function addCss(cssPath)
+					{
+						var c1 = document.createElement('link');
+						c1.type = "text/css";
+						c1.rel = "stylesheet";
+						c1.href = cssPath;
+						document.body.appendChild(c1);
+
+						index++;
+						checkProcess();
+					};
+
+					function checkProcess(){
+						if(index >= files.length)
+						{
+							console.log("资源全部加载完毕");
+						}
+						else
+						{
+							var filePath = files[index];
+							addSingleFile(filePath);
+						};
+					};
+
+
+					this.addCommonFiles = function(fs){
+						for(var i = 0; i < fs.length; i++)
+						{
+							var tempFile = fs[i];
+							tempCommonFile.push(tempFile);
+						};
+						console.log("通用文件:" + tempCommonFile);
+					};
+
+					this.addPrivateFiles = function(fs){
+						tempPrivateFile = fs;
+						console.log("自用文件:" + tempPrivateFile);
+					};
+
+					composeFiles = function(){
+						for(var i = 0; i < tempCommonFile.length; i++)
+						{
+							var tempFileA = tempCommonFile[i];
+							files.push(filePath + tempFileA);
+						};
+
+						for(var j = 0; j < tempPrivateFile.length; j++)
+						{
+							var tempFileB = tempPrivateFile[j];
+							files.push(tempFileB);
+						};
+					};
+
+					this.load = function(){
+						console.log("开始加载");
+
+						if(isReady == true)
+						{
+							if(isLoad == false)
+							{
+								isLoad = true;
+								composeFiles();
+								checkProcess();
+							};
+						};
+
+						canLoad = true;
+					};
+
+				};
+
+				return loader_common;
+			})();
+
+			var cfiles = [
+				'css/preload.min.css',
+				'css/primary_math.css',
+				'js/jquery.min.js',
+				'js/preload.min.js',
+
+				'js/primary_math.js'
+
+			];
+			var pfiles = [];
+			var loader = new loader_common();
+			loader.addCommonFiles(cfiles);
+			loader.addPrivateFiles(pfiles);
+			loader.load();
+		</script>
+	</head>
+
+	<body class="body">
+		<!--居中空div-->
+		<div class="margin-auto">
+			<!--容器-->
+			<div class="wrap">
+				<!-- 公用头部-->
+				<header class="header">
+					<!--标题-->
+					<div class="header-text">
+						$$$$header
+					</div>
+					<!--logo位置-->
+					<div class="logo"></div>
+
+				</header>
+				<!-- 内容容器-->
+				<div class="content">
+					<div class="content-text">
+						$$$$content-image
+						<!--<img class="content-image" src="psb.jpg"/>-->
+					</div>
+					
+					<div class="bottom-bar-empty"></div>
+				</div>
+				<footer class="bottom-bar">
+					<div class="animation1">
+						<div class="bottom-bar-earth"></div>
+						<div class="flag1"></div>
+						<div class="rocket1"></div>
+						<div class="ufo1"></div>
+					</div>
+					<div class="animation2">
+						<div class="bottom-bar-earth2"></div>
+						<div class="astronaut1"></div>
+						<div class="alien1"></div>
+					</div>
+					<div class="animation3">
+						<div class="bottom-bar-earth3"></div>
+						<div class="rocket2"></div>
+						<div class="astronauts"></div>
+					</div>
+					<div class="top-btn"></div>
+				</footer>
+			</div>
+		</div>
+		<!--<script src="js/loader_common_primary_math.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/my_init_primary_math.js" type="text/javascript" charset="utf-8"></script>-->
+	</body>
+
+</html>

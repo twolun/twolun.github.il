@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SavePopSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="element_bg_png" x="0" y="30" scale9Grid="9,9,6,6" width="306" height="196"/>
+	<e:Button id="okBtn" label="确定" x="31" y="173" height="36" width="80"/>
+	<e:Button id="cancelBtn" label="取消" x="171" y="173" height="36" width="80"/>
+	<e:Image id="dragBit" source="element_attributes_title_bg_png" x="0" height="42" width="305"/>
+	<e:Label text="保存" x="12" y="14" size="16" width="69" height="19" textAlign="left" touchEnabled="false"/>
+	<e:Image id="closeBtn" x="283" y="17" source="close_png"/>
+	<e:Label text="请输入文件名称：" x="11" y="71" size="16" width="142" height="19" textAlign="left" touchEnabled="false"/>
+	<e:TextInput id="nameTxt" x="25" y="110" width="246" height="37"/>
+</e:Skin>

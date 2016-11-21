@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ParalleProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="77" width="266" height="200">
+		<e:Label text="旋转角度" x="31" y="156" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="光线条数" x="31" y="84" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="光源颜色" x="31" y="32" size="18" textColor="0xBEBEBE"/>
+		<e:Group x="35" y="115">
+			<e:RadioButton id="line2" label="2" x="0" y="0"/>
+			<e:RadioButton id="line3" label="3" x="50" y="0"/>
+			<e:RadioButton id="line4" label="4" x="100" y="0"/>
+			<e:RadioButton id="line5" label="5" x="150" y="0" selected="true"/>
+		</e:Group>
+		<ns1:DropDownList id="dropDownList2" x="137" y="147"/>
+		<ns1:DropDownList id="dropDownList" x="137" y="23"/>
+	</e:Group>
+</e:Skin>

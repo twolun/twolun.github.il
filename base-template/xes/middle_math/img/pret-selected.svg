@@ -1,0 +1,53 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30">
+<defs>
+<path id="Layer0_0_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M 30.25 22.85
+L 30.25 25.2
+Q 30.25 29.2 26.25 29.2
+L 10.25 29.2
+Q 6.25 29.2 6.25 25.2
+L 6.25 5.2
+Q 6.25 1.2 10.25 1.2
+L 26.25 1.2
+Q 29.9 1.2 30.25 4.55
+M 29.9 8.4
+L 34.2 12.6 23.2 24 18.9 19.8 29.9 8.4 Z"/>
+
+<path id="Layer0_0_MEMBER_0_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="butt" fill="none" d="
+M 4.6867614746093835 8.950000000000001
+L 20.686413574218754 8.950000000000001"/>
+
+<path id="Layer0_0_MEMBER_1_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="butt" fill="none" d="
+M 4.718380737304692 14.950000000000001
+L 12.718206787109377 14.950000000000001"/>
+
+<path id="Layer0_0_MEMBER_2_MEMBER_0_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M -58.15 4.85
+L -59.1 10.15"/>
+
+<path id="Layer0_0_MEMBER_2_MEMBER_1_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M -53.85 9.05
+L -59.1 10.15"/>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, -5.2,-0.2) ">
+<use xlink:href="#Layer0_0_1_STROKES"/>
+</g>
+
+<g transform="matrix( 1.1807861328125, 0, 0, 1, 83.15,14.8) ">
+<use xlink:href="#Layer0_0_MEMBER_0_1_STROKES" transform="matrix( 0.846893310546875, 0, 0, 1, -70.4,-14.8) "/>
+</g>
+
+<g transform="matrix( 0.59039306640625, 0, 0, 1, 43.95,20.8) ">
+<use xlink:href="#Layer0_0_MEMBER_1_1_STROKES" transform="matrix( 1.69378662109375, 0, 0, 1, -74.45,-20.8) "/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 71.85,14.75) ">
+<use xlink:href="#Layer0_0_MEMBER_2_MEMBER_0_1_STROKES"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 71.85,14.75) ">
+<use xlink:href="#Layer0_0_MEMBER_2_MEMBER_1_1_STROKES"/>
+</g>
+</svg>

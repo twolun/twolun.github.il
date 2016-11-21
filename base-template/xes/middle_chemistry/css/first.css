@@ -1,0 +1,26 @@
+ /**
+  * 页面head最先加载的css
+  *
+  * @thinlong
+  * 2016.9.21
+  * v1.0
+  * 功能:页面淡入效果 
+  */
+html {
+	background-color: #000000;
+	
+    animation: fadeIn 1s linear;
+    -moz-animation: fadeIn 1s linear;   	/* Firefox */
+    -webkit-animation: fadeIn 1s linear;	/* Safari 和 Chrome */
+    -o-animation: fadeIn 1s linear;	        /* Opera */
+}
+
+@keyframes fadeIn
+{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

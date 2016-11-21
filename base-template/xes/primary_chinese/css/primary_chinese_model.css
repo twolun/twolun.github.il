@@ -1,0 +1,124 @@
+ul,ol,li{
+	list-style: decimal;
+}
+sub,
+sup {
+	position: relative;
+	font-size: 60%;
+	line-height: 0;
+	font-weight: bold;
+}
+/*sup {
+	top: -.5em
+}*/
+sub {
+	bottom: .25em
+}
+/*.modal-dialog label{
+	display: none;
+}*/
+/*填空答案*/
+.line{
+	font-style: normal;
+	border-bottom: 1px solid #fff;
+	background: url(../img/fangda.svg) no-repeat right center;
+}
+.answer{
+	opacity: 1;
+	color: #FFF336;
+	cursor: pointer;
+}
+/*表格整体样式*/
+/*.table-content table {
+	font-size: 20px;
+    width: 865px;
+    border-collapse: collapse;
+    line-height: 30px;
+    margin: auto;
+    margin-left: -2px;
+    margin-top: -3px;
+    margin-right: -2px;
+    margin-bottom: -1px;
+    color: #fff;
+}*/
+/*表头样式*/
+/*.table-content table tr:first-child {
+	background: rgba(0, 221, 255, 0.2);
+	color: #fff336;
+}*/
+/*表格内容样式*/
+/*.table-content {*/
+	/*width: 862px;*/
+	/*margin: auto;
+	border: 1px solid rgba(0, 221, 255, 0.5);
+	border-radius: 5px;
+	overflow: hidden;
+}*/
+/*表格边框以及行,列样式*/
+/*.table-content table td,
+.table-content table th {
+	text-align: center;
+	padding: 20px;
+	border: 1px solid rgba(0, 221, 255, 0.5);
+	background: rgba(0, 221, 255, 0.1);
+}*/
+/*点击图片放大出现的半透明背景*/
+.black-mark{
+	width: 100%;
+	/*height: 100%;*/
+	background: #000;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	opacity: 0.8;
+	display: none;
+}
+/*点击放大图片的容器*/
+#bg-img{
+	width: 100%;
+	/*height: 100%;*/
+	position: absolute;
+	z-index: 3;
+	text-align: center;
+	/*margin-top: 80px;*/
+	display: none;
+}
+/*点击放大的大图*/
+.bg-img{
+	border:1px solid #00DEFF;
+	border-radius: 5px;
+}
+/*图片版式*/
+.one{
+	display: block;
+	width: 50%;
+	height: 2.0rem;
+	text-align: center;
+	line-height: 1.8rem;
+	padding: 0.1rem;
+	margin: 0 auto;
+}
+.two{
+	display: inline-block;
+	width: 50%;
+	height: 2.0rem;
+	text-align: center;
+	line-height: 1.8rem;
+	padding: 0.1rem;
+	box-sizing: border-box;
+}
+.three{
+	display: inline-block;
+	width: 33.33%;
+	height: 1.6rem;
+	text-align: center;
+	line-height: 1.4rem;
+	padding: 0.1rem 0.11rem;
+	box-sizing: border-box;
+}
+/*图片不要边框*/
+/*.one img,.two img,.three img{
+	border:1px solid #00DEFF;
+	border-radius: 5px;
+}*/

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="HWireInfo" width="266" height="517" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:PanelBase id="panel" x="0" y="0" locked="true"/>
+	<e:Group id="group1" width="266" height="119" x="0" y="78">
+		<e:Button id="_btnDelete0" label="删除" x="83" y="41"/>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AMirrProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="78" width="266" height="182">
+		<e:Label text="主光轴" x="42" y="21" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="焦距" x="42" y="77" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="旋转" x="42" y="133" size="18" textColor="0xBEBEBE"/>
+		<e:ToggleSwitch id="showBtn" label="切换按钮" x="137" y="17"/>
+		<ns1:DropDownList id="dropDownList2" x="126" y="124"/>
+		<ns1:DropDownList id="dropDownList" x="126" y="69"/>
+	</e:Group>
+	<e:Group id="group2" x="0" y="318" width="266" height="180">
+		<e:Label text="凸镜类型" x="43" y="12" size="18" textColor="0xBEBEBE"/>
+		<ns1:EuiRadioButton id="typeBtn1" label="类型1" x="43" y="49"/>
+		<ns1:EuiRadioButton id="typeBtn2" label="类型2" x="43" y="90"/>
+		<ns1:EuiRadioButton id="typeBtn3" label="类型3" x="43" y="130"/>
+	</e:Group>
+</e:Skin>

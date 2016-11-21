@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.75;fill:none;stroke:url(#XMLID_2_);stroke-width:2;stroke-miterlimit:10;}
+	.st1{opacity:0.75;fill:none;stroke:url(#XMLID_3_);stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<linearGradient id="XMLID_2_" gradientUnits="userSpaceOnUse" x1="976.3521" y1="-783.6465" x2="1006.3521" y2="-783.6465" gradientTransform="matrix(4.489659e-11 -1 1 4.489659e-11 798.6465 1006.3521)">
+	<stop  offset="0" style="stop-color:#39C5E4"/>
+	<stop  offset="1" style="stop-color:#39E4D6"/>
+</linearGradient>
+<circle id="XMLID_38_" class="st0" cx="15" cy="15" r="14"/>
+<linearGradient id="XMLID_3_" gradientUnits="userSpaceOnUse" x1="159.3527" y1="-746.1653" x2="169.2314" y2="-746.1653" gradientTransform="matrix(0.7071 -0.7071 0.7071 0.7071 428.2994 658.7906)">
+	<stop  offset="0" style="stop-color:#39C5E4"/>
+	<stop  offset="1" style="stop-color:#39E4D6"/>
+</linearGradient>
+<polyline id="XMLID_43_" class="st1" points="16.9,20.6 11.3,15 16.9,9.4 "/>
+</svg>

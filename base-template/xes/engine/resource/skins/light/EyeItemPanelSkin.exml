@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="EyeItemPanelSkin" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:PanelBase id="panel"/>
+	<e:Group id="group1" x="0" y="78" width="266" height="82">
+		<e:Group x="-1" y="24" width="262" height="35">
+			<ns1:EuiRadioButton id="disBtn" label="远视眼" x="132" y="1"/>
+			<ns1:EuiRadioButton id="showBtn" label="近视眼" x="6" y="1"/>
+		</e:Group>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="KuaiziSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" width="765">
+	<e:Group y="0" height="500" x="0" width="766">
+		<e:Image id="eye" source="eye_png" x="560" y="0" scaleX="-1" width="100" height="100"/>
+		<e:Image source="kz5_png" x="225" y="154" width="429"/>
+		<e:Group id="rGp" x="290" y="457" height="477" anchorOffsetX="45" anchorOffsetY="470">
+			<e:Rect id="maskZ" width="483" height="127" x="80" y="200" rotation="-30" touchEnabled="false" alpha="0.001"/>
+			<e:Image id="kzImg" source="kz2_png" x="57" y="457" anchorOffsetY="456"/>
+			<e:Image id="kziX" source="kz1_png" x="253" y="223" anchorOffsetX="260"/>
+		</e:Group>
+		<e:Image source="kz3_png" x="232" y="214" width="417"/>
+		<e:Image id="waterImg" x="224" y="165" source="kz4_png" width="431"/>
+		<e:Rect id="point1" width="4" height="4" x="40" y="79" fillColor="0xC81233" visible="false"/>
+		<e:Rect id="point2" width="4" height="4" x="336" y="210" fillColor="0xC81233" anchorOffsetX="2" anchorOffsetY="2" visible="false"/>
+		<e:Rect id="point0" width="4" height="4" x="371" y="210" fillColor="0xC81233" anchorOffsetX="2" anchorOffsetY="2" visible="false"/>
+		<e:Rect id="point3" width="4" height="4" x="60" y="155" fillColor="0xC81233" visible="false"/>
+		<e:Rect id="point4" width="2" height="2" x="297" y="442" visible="false"/>
+	</e:Group>
+</e:Skin>

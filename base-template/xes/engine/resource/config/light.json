@@ -1,0 +1,207 @@
+{
+    "1": {
+        "id": 1,
+        "type": 2001,
+        "img": "jiguangbi_png",
+        "cls": "LasterLight",
+        "infoCls": "LasterProPanel",
+        "name": "激光笔"
+    },
+    "2": {
+        "id": 2,
+        "type": 2002,
+        "img": "iconparall_png",
+        "cls": "ParalleLight",
+        "infoCls": "ParalleProPanel",
+        "name": "平行光"
+    },
+    "3": {
+        "id": 3,
+        "type": 2003,
+        "img": "jiguangbi_png",
+        "cls": "WhiteLight",
+        "infoCls": "WhiteProPanel",
+        "name": "白光"
+    },
+
+    "4": {
+        "id": 4,
+        "type": 1012,
+        "img": "iconP_png",
+        "cls": "MirrPItem2",
+        "infoCls": "",
+        "name": "平面镜"
+    },
+    "5": {
+        "id": 5,
+        "type": 1013,
+        "img": "iconA_png",
+        "cls": "AMirrItem2",
+        "infoCls": "",
+        "name": "凸面镜"
+    },
+    "6": {
+        "id": 6,
+        "type": 1014,
+        "img": "iconV_png",
+        "cls": "VMirrItem2",
+        "infoCls": "",
+        "name": "凹面镜"
+    },
+    "7": {
+        "id": 7,
+        "type": 1015,
+        "img": "iconMan_png",
+        "cls": "HighFieldItem",
+        "infoCls": "",
+        "name": "漫反射"
+    },
+    "8": {
+        "id": 8,
+        "type": 1001,
+        "img": "rect_png",
+        "cls": "BoxItem",
+        "infoCls": "BoxProPanel",
+        "name": "玻璃砖"
+    },
+    "9": {
+        "id": 9,
+        "type": 1004,
+        "img": "tri_png",
+        "cls": "TriItem",
+        "infoCls": "TriProPanel",
+        "name": "三棱镜"
+    },
+    "10": {
+        "id": 10,
+        "type": 1003,
+        "img": "bicircle_png",
+        "cls": "SemiCircleItem",
+        "infoCls": "SemiProPanel",
+        "name": "半圆镜"
+    },
+    "11": {
+        "id": 11,
+        "type": 1005,
+        "img": "iconA2_png",
+        "cls": "AMirrItem",
+        "infoCls": "AMirrProPanel",
+        "name": "凸透镜"
+    },
+    "12": {
+        "id": 12,
+        "type": 1006,
+        "img": "iconV2_png",
+        "cls": "VMirrItem",
+        "infoCls": "VMirrProPanel",
+        "name": "凹透镜"
+    },
+    "13": {
+        "id": 13,
+        "type": 1017,
+        "img": "iconF_png",
+        "cls": "FibreItem",
+        "infoCls": "FibreProPanel",
+        "name": "光导纤维"
+    },
+    "14": {
+        "id": 14,
+        "type": 1018,
+        "img": "iconWater_png",
+        "cls": "WaterItem",
+        "infoCls": "WaterProPanel",
+        "name": "水槽"
+    },
+    "15": {
+        "id": 15,
+        "type": 1016,
+        "img": "iconCol_png",
+        "cls": "ColorItem",
+        "infoCls": "",
+        "name": "光的三原色"
+    },
+    "16": {
+        "id": 16,
+        "type": 1021,
+        "img": "iconCol2_png",
+        "cls": "ColorItem2",
+        "infoCls": "",
+        "name": "颜料三原色"
+    },
+    "17": {
+        "id": 17,
+        "type": 2004,
+        "img": "candle_png",
+        "cls": "CandleLight",
+        "infoCls": "CandleProPanel",
+        "name": "蜡烛"
+    },
+    "18": {
+        "id": 18,
+        "type": 1009,
+        "img": "iconMir_png",
+        "cls": "MirrItem",
+        "infoCls": "",
+        "name": "平面镜成像"
+    },
+
+    "19": {
+        "id": 19,
+        "type": 1010,
+        "img": "iconKM_png",
+        "cls": "KongItem",
+        "infoCls": "KongProPanel",
+        "name": "小孔成像"
+    },
+    "20": {
+        "id": 20,
+        "type": 1011,
+        "img": "iconAM_png",
+        "cls": "MagnItem",
+        "infoCls": "MagnProPanel",
+        "name": "透镜成像"
+    },
+
+
+    "21": {
+        "id": 21,
+        "type": 1019,
+        "img": "iconMa_png",
+        "cls": "MiragesItem",
+        "infoCls": "",
+        "name": "海市蜃楼"
+    },
+    "22": {
+        "id": 22,
+        "type": 1020,
+        "img": "iconEye_png",
+        "cls": "FishItem",
+        "infoCls": "FishItemPanel",
+        "name": "鱼成像"
+    },
+
+    "23": {
+        "id": 23,
+        "type": 1022,
+        "img": "iconKz_png",
+        "cls": "KuaiziItem",
+        "infoCls": "KuaiItemPanel",
+        "name": "筷子成像"
+    },
+    "24": {
+        "id": 24,
+        "type": 1023,
+        "img": "iconEye2_png",
+        "cls": "EyeItem",
+        "infoCls": "EyeItemPanel",
+        "name": "眼睛"
+    },
+    "25": {
+        "id": 25,
+        "type": 1007,
+        "img": "iconcardM_png",
+        "cls": "CardItem",
+        "infoCls": "",
+        "name": "三线共面"
+    }
+}

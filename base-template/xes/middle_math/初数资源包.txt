@@ -1,0 +1,38 @@
+/*初数资源包*/
+
+--js
+
+//第3方 edge相关(暂时未用)
+edge.6.0.0.min.js
+edge_init_middle_math.js
+edge_loader.js
+edge_common.js
+
+//第3方 createjs相关(不使用createjs则不需要引用)
+preloadjs-0.6.1.min.js
+easeljs-0.8.1.min.js
+tweenjs-0.6.1.min.js
+movieclip-0.8.1.min.js
+
+//使用于引入createjs动画
+animaCreateJs.js
+
+//资源包
+flag.js
+jquery.min.js
+preload.min.js
+middle_math.js
+middle_math_model.js
+
+//备份 使用于每个课件中 
+loader_common_middle_math.js
+my_init_middle_math.js
+
+//使用于贴题模版
+lt-pasteQue.js
+pret-pasteQue.js
+
+
+
+
+

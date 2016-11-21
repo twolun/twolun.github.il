@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="NewFile" width="321" height="433" xmlns:e="http://ns.egret.com/eui">
+	<e:Image y="0" source="element_bg_png" scale9Grid="133,174,40,45" width="321" height="433" x="0"/>
+	<e:Group width="257" height="329" x="32" y="73"/>
+	<e:Label text="标签:" x="48" y="40" size="18" textColor="0xBEBEBE"/>
+	<e:Button id="_btnMove" x="28" y="30" height="41" width="267" alpha="0"/>
+	<e:Image id="_btnDelete" source="close_png" x="263" y="43"/>
+</e:Skin>

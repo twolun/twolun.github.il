@@ -1,0 +1,32 @@
+font
+-- FZY3JW.TTF 方正幼圆简体字体
+-- FZY4JW.TTF 方正粗圆简体字体
+
+css
+-- edge_common.css edge专用样式
+-- enter_animation.css 淡入样式
+-- middle_chemistry.css 初中化学css
+-- preload.min.css 通用css
+
+js
+
+-- easeljs-0.8.1.min.js createjs自带
+-- movieclip-0.8.1.min.js createjs自带
+-- preloadjs-0.6.1.min.js createjs自带
+-- tweenjs-0.6.1.min.js createjs自带
+
+-- edge.6.0.0.min.js edge自带
+
+-- jquery.min.js 版本号1.10.2
+
+-- edge_common.js edge专用js 备用
+-- edge_init.js edge初始化js,每个项目均引用，放置于项目的js文件中
+-- edge_loader.js edge资源加载器
+
+
+-- middle_chemistry.js
+-- preload.min.js 通用js
+-- processVideo.js 处理视频
+
+img
+-- 

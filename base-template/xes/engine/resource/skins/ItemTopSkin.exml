@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ItemTopSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="topGroup" x="0" y="0">
+		<e:Button id="delBtn" x="90" y="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="button_delete_up_png" source.down="button_delete_down_png" source.disabled="button_delete_down_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="rotaBtn" x="0" y="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="button_rotation_up_png" source.down="button_rotation_down_png" source.disabled="button_rotation_down_png"/>
+				<e:Label id="labelDisplay0" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="copyBtn" x="180" y="0">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="button_group_up_png" source.down="button_group_down_png" source.disabled="button_group_down_png"/>
+				<e:Label id="labelDisplay1" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Rect width="2" height="70" y="80" fillColor="0xBEBEBE" x="119"/>
+		<e:Image source="round_png" y="80" x="113"/>
+	</e:Group>
+	<e:Image id="box1" source="box_png" x="166" y="73" anchorOffsetX="3.5" anchorOffsetY="3.5"/>
+	<e:Image id="box2" source="box_png" x="201" y="71" anchorOffsetX="3.5" anchorOffsetY="3.5"/>
+	<e:Image id="box3" source="box_png" x="165" y="94" anchorOffsetY="3.5" anchorOffsetX="3.5"/>
+	<e:Image id="box4" source="box_png" x="199" y="95" anchorOffsetX="4" anchorOffsetY="4"/>
+</e:Skin>

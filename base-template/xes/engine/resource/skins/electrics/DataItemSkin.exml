@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DataItemSkin" width="128" height="40" xmlns:e="http://ns.egret.com/eui">
+	<e:Image width="128" height="40" x="0" y="0" source="data_form_lattice2_png"/>
+</e:Skin>

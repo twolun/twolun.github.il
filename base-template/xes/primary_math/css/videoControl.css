@@ -1,0 +1,279 @@
+﻿.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+/*清浮动*/
+
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+
+/*视频播放器容器*/
+.video-container,.canvas-container{
+    width: 7.2rem;
+    /*height: 2.75rem;*/    /* 被王靖铭注释掉 */
+    margin: 0 auto;
+    border: 1px solid #1eb6df;   /* 王靖铭增加 */
+    position: relative;
+    background-color: #000;
+}
+
+video {
+    width: 100%;
+    height: 4rem;
+    display:block;    /* 王靖铭增加 */
+    /*border: 1px solid #00deff;*/    /* 王靖铭注释掉 */
+}
+
+
+/*自定义视频控件容器*/
+.media-controls{
+    width: 100%;
+    height: 0.3rem;
+    border-bottom:1px solid #1eb6df;    /* 王靖铭增加 */
+    border-top: 1px solid #1eb6df;
+    background-color: rgba(0,0,0,.7);
+    -ms-filter: Alpha(Opacity=70);
+    filter: Alpha(Opacity=70);
+    padding: 0.15rem 0;
+    position: absolute;
+    bottom: -1px;    /* 王靖铭修改 0 -->-1px */
+    /*left: 0.01rem;*/    /* 王靖铭注释掉 */
+}
+
+
+/*控件上的按钮样式*/
+.switch,
+.expand,
+.prev,
+.next {
+    width: 0.3rem;
+    height: 0.3rem;
+    cursor: pointer;
+    background-clip: content-box;
+    -webkit-background-size: 0.3rem 0.3rem;
+    background-size: 0.3rem 0.3rem;
+}
+
+
+/*播放/暂停按钮*/
+
+.switch {
+    /*margin-left: 0.2rem;*/
+    margin-left: 0.3rem;
+    background-image: url("../img/playBtn.svg");
+}
+
+.switch2 {
+    /*margin-left: 0.2rem;*/
+    margin-left: 0.3rem;
+    background-image: url("../img/pauseBtn.svg");
+}
+
+
+/*全屏按钮*/
+
+.expand {
+    /*margin: 0 0.2rem;*/
+    margin-right:0.3rem;    /* 王靖铭修改 margin: 0 0.2rem --> margin-right:0.3rem; */
+    background-image: url("../img/expandBtn.svg");
+}
+.cancleScreen{
+    background-image: url("../img/expandedBtn.svg");
+}
+
+/*翻页切换按钮*/
+
+.prev {
+    background-image: url("../img/prevBtn_enable.svg");
+    margin-right: 0.3rem;
+}
+.prev_unClick{
+    background-image: url("../img/prevBtn_disable.svg");
+    margin-right: 0.3rem;
+}
+.next {
+    background-image: url("../img/nextBtn_enable.svg");
+
+}
+.next_unClick{
+    background-image: url("../img/nextBtn_disable.svg");
+}
+.hide{
+    visibility: hidden;
+}
+
+/*播放进度条*/
+
+.progressBar {
+    /*width: 46%;*/
+    width: 2.85rem;
+    height: 0.06rem;
+    border-radius: 0.06rem;
+    margin-top: 0.12rem;
+    /*margin-left: 0.2rem;*/
+    margin-left:0.3rem;
+    background-color: #333;
+}
+
+.bufferBar{
+    width: 0;
+    height: 100%;
+    border-radius: 0.06rem;
+    background-color: rgba(0, 221, 255, 0.2);;
+}
+
+.timeBar {
+    position: relative;
+    width: 0;
+    height: 100%;
+    border-radius: 6px;
+    background-color: #00deff;
+}
+
+.circle {
+    width: 0.16rem;
+    height: 0.16rem;
+    background: url("../img/circle.svg");
+    -webkit-background-size: 0.16rem 0.16rem;
+    background-size: 0.16rem 0.16rem;
+    position: absolute;
+    top: -0.05rem;
+    right: -0.08rem;
+    cursor: pointer;
+}
+.circle:active {
+    background-image: url("../img/progressDrag.svg");    /* 王靖铭增加 */
+}
+/* 王靖铭增加的样式 开始 */
+    /* 音量控制面板 */
+    .volume {
+        margin-right:0.3rem;
+        float:right;
+        text-align:center;
+        position:relative;
+        cursor:pointer;
+    }
+    .volume-panel {
+        width:0.28rem;
+        height:0.85rem;
+        -webkit-border-radius:0.03rem;
+        -moz-border-radius:0.03rem;
+        border-radius:0.03rem;
+        position:absolute;
+        left:-0.03rem;
+        top:-0.9rem;
+        display:none;
+        background:url("../img/volumePanel.svg") no-repeat 0 0;
+        background-size:0.28rem 0.85rem;
+    }
+    .max-volume {
+        width:0.02rem;
+        height:0.58rem;
+        -webkit-border-radius:1rem;
+        -moz-border-radius:1rem;
+        border-radius:1rem;
+        background-color:#000;
+        position:absolute;
+        top:0.13rem;
+        left:0.14rem;
+        margin-left:-0.01rem;
+        
+    }
+    .current-volume {
+        width:100%;
+        height:0.5rem;
+        -webkit-border-radius:1rem;
+        -moz-border-radius:1rem;
+        border-radius:1rem;
+        background-color:#00deff;
+        position:absolute;
+        left:0;
+        bottom:0;
+    }
+    .volume-icon {
+        width:0.3rem;
+        height:0.3rem;
+        display:block;
+        background:url("../img/volumePressed.svg") no-repeat 0 0;
+        background-size:0.3rem;
+    }
+    /*.volume-icon:active {*/
+        /*background-image:url("../img/volumePressed.svg");*/
+    /*}*/
+
+/* 王靖铭增加的样式 结束 */
+
+/*播放时间/视频总时长*/
+.progressTime {
+    margin-right: 0.3rem;   /*margin-left:0.2rem; --> margin-right: 0.3rem; */
+    font-family: 'MicrosoftYaHeiGB';    /* 王靖铭增加 */
+}
+/*分割线*/
+.splitters1 {
+    display: inline-block;
+    width: 0;
+    height: 0.2rem;
+    border-right: 0.01rem solid #FFFFFF;
+    margin-top: 0.05rem;
+    margin-right:0.2rem;
+
+}
+.current,.duration{
+    display: inline-block;
+    width: 0.52rem;
+    min-width:32px;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #39d1de;
+}
+
+.current{
+      margin-right: 0.2rem
+}
+
+.duration{
+    color: #fff;
+}
+
+/*分割线*/
+.splitters2 {
+    width: 0.01rem;
+    height: 0.2rem;
+    background-color: #fff;
+    margin: 0.05rem 0.2rem 0 0.2rem;
+}
+
+/*禁用播放器控制栏的样式*/
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+:-webkit-full-screen{}
+
+/*全屏后视频控制条样式*/
+ .fullControll {
+    position: absolute;
+    z-index: 2147483650;
+    width: 100%;
+    height: 0.3rem;
+    left: 0;    /* 王靖铭修改 0.01rem --> 0 */
+    bottom: 0;    /* 王靖铭添加 */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.fullControll .progressBar {
+    width:6.3rem;    /* 王靖铭增加 */
+}

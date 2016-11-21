@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="FishProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:PanelBase id="panel" skinName="PanelTemple"/>
+	<e:Group id="group1" x="0" y="79" width="266" height="115">
+		<e:Label text="光路显示" x="33" y="22" size="18" textColor="0xBEBEBE"/>
+		<e:RadioButton id="type1Btn" label="人看鱼" x="31" y="59"/>
+		<e:RadioButton id="type2Btn" label="鱼看人" x="147" y="59"/>
+	</e:Group>
+</e:Skin>

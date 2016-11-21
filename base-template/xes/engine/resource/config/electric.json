@@ -1,0 +1,98 @@
+{
+  "1": {
+    "id": 1,
+    "type": 3001,
+    "img": "dc_png",
+    "cls": "BatteryElec",
+    "infoCls":"BatteryElecInfoPanel",
+    "name": "电池"
+  },
+  "2": {
+    "id": 2,
+    "type": 3002,
+    "img": "dcz_png",
+    "cls": "BatteryGroupElec",
+    "infoCls":"BatteryGroupElecInfoPanel",
+    "name": "电池组"
+  },
+  "3": {
+    "id": 3,
+    "type": 3003,
+    "img": "xsdy_png",
+    "cls": "StudentPower",
+    "infoCls":"StudentPowerInfoPanel",
+    "name": "学生电源"
+  },
+  "4": {
+    "id": 4,
+    "type": 3004,
+    "img": "dddzkg_png",
+    "cls": "SPSTSwitch",
+    "infoCls":"SPSTSwitchInfoPanel",
+    "name": "单刀单掷开关"
+  },
+  "5": {
+    "id": 5,
+    "type": 3005,
+    "img": "ddszkg_png",
+    "cls": "SPDTSwitch",
+    "infoCls":"SPDTSwitchInfoPanel",
+    "name": "单刀双掷开关"
+  },
+  "6": {
+    "id": 6,
+    "type": 3006,
+    "img": "dlb_png",
+    "cls": "Ammeter",
+    "infoCls":"AmmeterInfoPanel",
+    "name": "标准电流表"
+  },
+  "7": {
+    "id": 7,
+    "type": 3007,
+    "img": "dyb_png",
+    "cls": "Voltmeter",
+    "infoCls":"VoltmeterInfoPanel",
+    "name": "标准电压表"
+  },
+  "8": {
+    "id": 8,
+    "type": 3008,
+    "img": "hdbzq_png",
+    "cls": "SlideRheostat",
+    "infoCls":"SlideRheostatInfoPanel",
+    "name": "滑动变阻器"
+  },
+  "9": {
+    "id": 9,
+    "type": 3009,
+    "img": "dzx_png",
+    "cls": "ResistanceBox",
+    "infoCls":"ResistanceBoxInfoPanel",
+    "name": "电阻箱"
+  },
+  "10": {
+    "id": 10,
+    "type": 3010,
+    "img": "dp_png",
+    "cls": "LampBulb",
+    "infoCls":"LampBulbInfoPanel",
+    "name": "标准灯泡"
+  },
+  "11": {
+    "id": 11,
+    "type": 3011,
+    "img": "dx_png",
+    "cls": "Wire",
+    "infoCls":"WireInfoPanel",
+    "name": "导线"
+  },
+  "12": {
+    "id": 12,
+    "type": 3012,
+    "img": "dzdz_png",
+    "cls": "Resistance",
+    "infoCls":"ResistanceInfoPanel",
+    "name": "定值电阻"
+  }
+}

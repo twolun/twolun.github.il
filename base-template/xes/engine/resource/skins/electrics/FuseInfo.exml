@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="FuseInfo" width="266" height="517" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<ns1:PanelBase id="panel" x="0" y="0"/>
+	<e:Group id="group1" width="266" height="126" x="0" y="77">
+		<e:Label text="保险丝" x="43" y="27" size="18" textColor="0xBEBEBE"/>
+		<e:Button id="_btnRepair" label="修复" x="85" y="72" height="37" width="96"/>
+		<ns1:DropDownList id="_dropDownListAmm" x="133" y="18"/>
+	</e:Group>
+</e:Skin>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DataSheetHeaderSkin" width="128" height="40" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image width="128" height="40" x="0" y="0" source="data_form_lattice2_png"/>
+	<e:Label id="_titleLabel" text="属性名" x="0" y="0" width="128" height="40" textAlign="center" verticalAlign="middle" size="16" textColor="0xbebebe" bold="true"/>
+	<e:Image id="_btnArrow" source="input_box_up_arrow_png" x="107" y="16" touchEnabled="false"/>
+	<e:CheckBox id="_sbtn" label="" x="3" y="2" width="24" height="21"/>
+</e:Skin>

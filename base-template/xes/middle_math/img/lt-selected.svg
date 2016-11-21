@@ -1,0 +1,43 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30">
+<defs>
+<path id="Layer0_0_MEMBER_0_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M 164.55 409.4
+L 184.55 409.4
+Q 188.55 409.4 188.55 413.4
+L 188.55 433.4
+Q 188.55 437.4 184.55 437.4
+L 164.55 437.4
+Q 160.55 437.4 160.55 433.4
+L 160.55 413.4
+Q 160.55 409.4 164.55 409.4 Z"/>
+
+<path id="Layer0_0_MEMBER_1_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="butt" fill="none" d="
+M 5.004885864257801 8.949999999999989
+L 25.00480957031249 8.949999999999989"/>
+
+<path id="Layer0_0_MEMBER_2_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="butt" fill="none" d="
+M 5.004885864257801 15
+L 25.00480957031249 15"/>
+
+<path id="Layer0_0_MEMBER_3_1_STROKES" stroke="#FFD400" stroke-width="2" stroke-linejoin="round" stroke-linecap="butt" fill="none" d="
+M 5.0481201171875085 21
+L 17.049804687500014 21"/>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, -159.55,-408.4) ">
+<use xlink:href="#Layer0_0_MEMBER_0_1_STROKES"/>
+</g>
+
+<g transform="matrix( 1.058197021484375, 0, 0, 1, -170.55,-409.1) ">
+<use xlink:href="#Layer0_0_MEMBER_1_1_STROKES" transform="matrix( 0.94500732421875, 0, 0, 1, 161.15,409.1) "/>
+</g>
+
+<g transform="matrix( 1.058197021484375, 0, 0, 1, -170.55,-403.05) ">
+<use xlink:href="#Layer0_0_MEMBER_2_1_STROKES" transform="matrix( 0.94500732421875, 0, 0, 1, 161.15,403.05) "/>
+</g>
+
+<g transform="matrix( 0.635009765625, 0, 0, 1, -100.3,-397.05) ">
+<use xlink:href="#Layer0_0_MEMBER_3_1_STROKES" transform="matrix( 1.5747833251953125, 0, 0, 1, 157.95,397.05) "/>
+</g>
+</svg>

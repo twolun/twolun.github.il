@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TriProSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:PanelBase id="panel"/>
+	<e:Group x="30" y="98" locked="true" visible="false">
+		<e:Label text="缩放" x="0" y="0"/>
+		<ns1:EuiHSlider id="scaleRoll" x="78" y="4" width="158"/>
+	</e:Group>
+	<e:Group id="group1" x="0" y="77" width="266" height="183">
+		<e:Label text="折射率" x="38" y="20" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="顶角" x="38" y="78" size="18" textColor="0xBEBEBE"/>
+		<e:Label text="旋转" x="38" y="133" size="18" textColor="0xBEBEBE"/>
+		<ns1:DropDownList id="dropDownList2" x="127" y="124"/>
+		<ns1:DropDownList id="dropDownList3" x="127" y="69"/>
+		<ns1:DropDownList id="dropDownList" x="127" y="13"/>
+	</e:Group>
+</e:Skin>

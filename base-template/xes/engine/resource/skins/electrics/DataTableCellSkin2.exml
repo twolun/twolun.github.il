@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DataTableCellSkin2" width="128" height="40" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image width="128" height="40" x="0" y="0" source="data_form_lattice2_png"/>
+	<e:EditableText id="_editText" width="128" height="40" text="" x="0" y="0" size="16" verticalAlign="middle" textAlign="center" restrict="0123456789." maxChars="8"/>
+</e:Skin>

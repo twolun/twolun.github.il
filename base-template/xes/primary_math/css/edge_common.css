@@ -1,0 +1,58 @@
+/**
+ * 小学数学
+ * edge通用css
+ * @thinlong
+ * v1.0 2016.9.18 
+ * 功能: 
+ * 1.通用背景
+ * 2.微软雅黑字体 
+ * 
+ * v1.1
+ * 2016.10.12
+ * 修改新罗马粗体
+ * 增加新罗马粗体斜体
+ */
+
+
+#Stage{
+	background-image: url("../img/bg.png");
+	background-repeat: repeat-y;
+}
+
+/*嵌入字体微软雅黑*/
+@font-face
+{
+font-family: msyh;
+src: url('../../common/font/MicrosoftYaHeiGB.ttf');
+}
+
+.msyhFont {
+font-family: msyh;
+}
+
+/*嵌入字体新罗马加粗*/
+@font-face
+{
+font-family: tnrb;
+src: url('../../common/font/TIMESB.TTF');
+}
+
+.tnrbFont {
+font-family: tnrb;
+}
+
+/*嵌入字体新罗马加粗斜体*/
+@font-face
+{
+font-family: tnrbi;
+src: url('../../common/font/TIMESBI.TTF');
+}
+
+.tnrbiFont {
+font-family: tnrbi;
+}
+
+#Stage_popPanel{
+    animate-duration: 2s;    //动画持续时间
+    animate-delay: 1s;    //动画延迟时间
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ExportPanelSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Image source="element_bg_png" x="0" y="30" scale9Grid="9,9,6,6" width="306" height="441"/>
+	<e:Image id="dragBit" source="element_attributes_title_bg_png" x="0" height="42" width="305"/>
+	<e:Label text="控制面板" x="12" y="14" size="16" width="69" height="19" textAlign="left" touchEnabled="false"/>
+	<e:Image id="closeBtn" x="283" y="17" source="close_png"/>
+	<e:Group id="_contentGroup" width="281" height="333" x="12" y="53">
+		<ns1:SItem2 id="item_0" x="107" y="78" skinName="SItem2Skin"/>
+		<ns1:SItem2 id="item_1" x="117" y="88" skinName="SItem2Skin"/>
+		<ns1:SItem2 id="item_2" x="127" y="98" skinName="SItem2Skin"/>
+		<ns1:SItem2 id="item_3" x="137" y="108" skinName="SItem2Skin"/>
+		<ns1:SItem2 id="item_4" x="147" y="118" skinName="SItem2Skin"/>
+		<ns1:SItem2 id="item_5" x="157" y="128" skinName="SItem2Skin"/>
+		<e:layout>
+			<e:TileLayout horizontalGap="0" verticalGap="0" paddingLeft="1" paddingTop="1"/>
+		</e:layout>
+	</e:Group>
+	<e:Label text="从元件库拖动元件到上方方框内" x="12" y="408" size="16" width="283" height="19" textAlign="center"/>
+	<e:Label text="（最多可拖动6个）" x="12" y="432" size="16" width="283" height="19" textAlign="center"/>
+</e:Skin>

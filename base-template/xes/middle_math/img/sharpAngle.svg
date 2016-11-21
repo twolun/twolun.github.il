@@ -1,0 +1,30 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="25px" height="17px" viewBox="0 0 25 17">
+<defs>
+<image id="___1" x="0" y="0" width="772" height="538" xlink:href="./图像/___1.png"/>
+
+<g id="___1_0_Layer0_0_FILL">
+<path fill="#0C1843" stroke="none" d="
+M 702.25 -66.85
+L 53.95 -66.85 53.95 95 159.5 181.45 68.15 98.65 159.5 181.45 384.15 365.55 556.7 218.75 688.35 99.45 556.7 218.75 702.25 95 702.25 -66.85 Z"/>
+</g>
+
+<path id="___1_0_Layer0_0_1_STROKES" stroke="#154394" stroke-width="58.15" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M 556.725 218.775
+L 378.65 380.2 159.5 181.475 68.15 98.65
+M 556.725 218.775
+L 688.35 99.45"/>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 1103.9,-187.8) ">
+<use xlink:href="#___1"/>
+</g>
+
+<g transform="matrix( 0.0348663330078125, 0, 0, 0.0344390869140625, 12.55,8.15) ">
+<g transform="matrix( 1, 0, 0, 1, -378.1,-156.65) ">
+<use xlink:href="#___1_0_Layer0_0_FILL"/>
+
+<use xlink:href="#___1_0_Layer0_0_1_STROKES"/>
+</g>
+</g>
+</svg>

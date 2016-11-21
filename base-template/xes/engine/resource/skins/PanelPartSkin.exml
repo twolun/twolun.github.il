@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PanelPartSkin" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:ToggleButton id="togBtn" x="0" y="0">
+		<e:skinName>
+		<e:Skin states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected">
+			<e:Image width="100%" height="100%" source="element_title_expansion_bg_png" includeIn="up,down"/>
+			<e:Image width="100%" height="100%" source="element_title_collapse_bg_png" includeIn="upAndSelected,downAndSelected"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+		</e:Skin>
+		</e:skinName>
+	</e:ToggleButton>
+	<e:Label id="tite" text="其他设置" x="36" y="14" size="18" textColor="0xBEBEBE" touchEnabled="false"/>
+	<e:Group id="proGroup" x="0" y="43" height="200">
+		<e:Image source="element_bg_png" x="0" width="265" scale9Grid="9,10,4,4" y="0" height="100%"/>
+	</e:Group>
+</e:Skin>

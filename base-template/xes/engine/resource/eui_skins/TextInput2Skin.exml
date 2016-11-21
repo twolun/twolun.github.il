@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TextInput2Skin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group x="0" y="0">
+		<e:Image source="Input_box_png" x="0" y="0"/>
+		<e:EditableText id="numTxt" width="91" height="34" x="4" y="0" textAlign="left" size="24" verticalAlign="middle" textColor="0xFFFFFF"/>
+		<e:Button id="downBtn" x="77" y="25">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Input_box_up_less_png" source.down="Input_box_up_less_press_png" source.disabled="Input_box_up_less_press_png"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="upBtn" x="77" y="7">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Input_box_plus_png" source.down="Input_box_plus_press_png" source.disabled="Input_box_plus_press_png"/>
+				<e:Label id="labelDisplay0" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
+</e:Skin>

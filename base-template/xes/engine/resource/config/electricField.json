@@ -1,0 +1,26 @@
+{
+    "1": {
+        "id": 1,
+        "type": 4001,
+        "img": "3d_png",
+        "cls": "ChargedParticleNode",
+        "infoCls": "",
+        "name": "正电荷"
+    },
+    "2": {
+        "id": 2,
+        "type": 4002,
+        "img": "3d_png",
+        "cls": "ChargedParticleNode2",
+        "infoCls": "",
+        "name": "负电荷"
+    },
+    "3": {
+        "id": 3,
+        "type": 4003,
+        "img": "3d_png",
+        "cls": "ElectricFieldSensorNode",
+        "infoCls": "",
+        "name": "探测点"
+    }
+}

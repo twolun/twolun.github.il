@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.75;fill:none;stroke:url(#XMLID_4_);stroke-width:2;stroke-miterlimit:10;}
+	.st1{opacity:0.75;fill:none;stroke:url(#XMLID_5_);stroke-width:2;stroke-miterlimit:10;}
+	.st2{opacity:0.75;fill:none;stroke:url(#XMLID_6_);stroke-width:1.5;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{opacity:0.75;fill:none;stroke:url(#XMLID_7_);stroke-width:2;stroke-miterlimit:10;}
+</style>
+<linearGradient id="XMLID_4_" gradientUnits="userSpaceOnUse" x1="5.4428" y1="23.4793" x2="5.4428" y2="8.2169">
+	<stop  offset="0" style="stop-color:#39C5E4"/>
+	<stop  offset="1" style="stop-color:#39E4D6"/>
+</linearGradient>
+<path id="XMLID_2_" class="st0" d="M7.9,22.5H4.8c-0.4,0-0.8-0.4-0.8-1V10.2c0-0.6,0.4-1,0.8-1h3.1"/>
+<linearGradient id="XMLID_5_" gradientUnits="userSpaceOnUse" x1="13.6667" y1="29.0932" x2="13.6667" y2="2.2126">
+	<stop  offset="0" style="stop-color:#39C5E4"/>
+	<stop  offset="1" style="stop-color:#39E4D6"/>
+</linearGradient>
+<polygon id="XMLID_45_" class="st1" points="8.8,8.8 18.5,3.9 18.5,27.5 8.8,22.8 "/>
+<linearGradient id="XMLID_6_" gradientUnits="userSpaceOnUse" x1="23.5278" y1="21.8135" x2="23.5278" y2="9.5393">
+	<stop  offset="0" style="stop-color:#39C5E4"/>
+	<stop  offset="1" style="stop-color:#39E4D6"/>
+</linearGradient>
+<path id="XMLID_46_" class="st2" d="M21.7,21.1c2.2-0.8,3.7-2.9,3.7-5.4s-1.5-4.5-3.7-5.4"/>
+<linearGradient id="XMLID_7_" gradientUnits="userSpaceOnUse" x1="8.7941" y1="15.2654" x2="8.7941" y2="15.2654">
+	<stop  offset="0" style="stop-color:#39C5E4"/>
+	<stop  offset="1" style="stop-color:#39E4D6"/>
+</linearGradient>
+<path id="XMLID_1_" class="st3" d="M8.8,15.3"/>
+</svg>

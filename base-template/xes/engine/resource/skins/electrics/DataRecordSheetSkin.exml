@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DataRecordSheetSkin" width="512" height="200" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Scroller id="_scroller" width="512" height="200" x="0" y="0">
+		<e:Group>
+			<e:Rect id="_scrollerRect" width="20" height="20" x="0" y="0" fillAlpha="0.01"/>
+			<e:Group id="_itemGroup" width="512" height="160" x="0" y="40"/>
+			<e:Group id="_titleGroup" width="512" height="40" x="0" y="0"/>
+		</e:Group>
+	</e:Scroller>
+</e:Skin>

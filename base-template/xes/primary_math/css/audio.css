@@ -1,0 +1,66 @@
+
+/*科学驿站弹出框页面*/
+.daan_page{
+	display: none;
+	width:8.7rem;
+	min-height:20%;
+	background:#142C68;
+	position:absolute;
+	left:50%;
+	top:0.46rem;
+	margin-left:-4.4rem;
+	z-index: 1000;
+	border:solid 0.01rem #376cbb;
+	border-radius: 0.08rem;
+	overflow: hidden;
+}
+.daan_page .daan_page_top{
+	width:8.7rem;
+	height:0.73rem;
+	background:#1c3477;
+	border-bottom:solid 0.01rem #165996;
+}
+.daan_page .daan_page_top h1{
+	font-size:0.32rem;
+	text-align: center;
+	color:#00deff;
+	line-height: 0.73rem;
+	font-weight: 500;
+}
+/*关闭科学驿站弹框按钮*/
+.daan_page .page_remove{
+	display: block;
+	position:absolute;
+	top:0.15rem;
+	right:0.2rem;
+	height:0.4rem;
+	width:0.4rem;
+	cursor: pointer;
+	background: url(../img/closeBtn.svg) no-repeat;
+	background-size: 0.4rem;
+}
+/*内容部分*/
+.daan_page .page_content{
+	width:7.2rem;
+	margin-top:0.4rem;
+	margin-left: 0.7rem;
+	margin-bottom:0.4rem;
+}
+/*答案按钮*/
+.daan_btn{
+	width:1.7rem;
+	height:0.5rem;
+	margin-bottom:0.4rem;
+	margin:0.25rem auto;
+	background:#07428A;
+	font-family: "微软雅黑";
+	color:#fff;
+	font-size:0.24rem;
+	text-align: center;
+	line-height: 0.5rem;
+	border:solid #4991fc 0.02rem;
+	border-radius: 0.1rem;
+	clear:both;
+	cursor:pointer;
+}
+
