@@ -8,12 +8,8 @@ export default {
     return {
       projects: projects  
     }
-  },
-  methods: {
-    changeLimit () {
-      
-    }
-  }}
+  }
+}
 </script>
 
 <template>
@@ -29,7 +25,7 @@ export default {
     </Menu>
   </div>
   <Row>
-    <Col :xs="12" :sm="8" :md="6" :lg="4"
+    <Col :xs="12" :sm="12" :md="8" :lg="6"
       v-for="(project, key) in projects" :key="`project${key}`"
     >
       <Card style="width:100%">
@@ -41,11 +37,11 @@ export default {
           <img :src="project.viewimg" height="auto" width="100%">
         </div>
         <div>
-          <a :href="project.github" slot="extra" @click.prevent="changeLimit">
-              Github地址
-          </a>
-          <a :href="project.demourl" slot="extra" @click.prevent="changeLimit">
+          <a :href="project.demourl" slot="extra">
               查看demo
+          </a>
+          <a :href="project.github" slot="extra" style="float: right;">
+              Github地址
           </a>
         </div>
       </Card>
@@ -106,6 +102,6 @@ export default {
     color: #9ea7b4;
 }
 .ivu-col {padding: 10px;}
-.img-wrap { height: 50%; overflow: hidden;  }
+.img-wrap { height: 200px; overflow: hidden;  }
 .ivu-card-head {}
 </style>
